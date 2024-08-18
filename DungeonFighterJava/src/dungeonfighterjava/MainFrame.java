@@ -24,9 +24,9 @@ public class MainFrame extends JFrame {
         this.add(mainPanel);
         mainPanel.setLayout(null);
         
-        JButton button1 = new JButton("Jogar");
-        button1.setBounds(175, 50, 150, 50);
-        mainPanel.add(button1);
+        JButton buttonJogar = new JButton("Jogar");
+        buttonJogar.setBounds(175, 50, 150, 50);
+        mainPanel.add(buttonJogar);
         
         JButton button2 = new JButton("DEBUG");
         button2.setBounds(175, 110, 150, 50);
@@ -36,10 +36,16 @@ public class MainFrame extends JFrame {
         buttonSair.setBounds(175, 170, 150, 50);
         mainPanel.add(buttonSair);
         
+        buttonJogar.addActionListener(this::jogar);
+        
         buttonSair.addActionListener(this::sair);
     }
     
     private void sair(ActionEvent actionEventSair){
         this.dispose();
+    }
+    
+    private void jogar(ActionEvent actionEventJogar){
+        HeroesFrame heroesScreen = new HeroesFrame("Heroes");
     }
 }
