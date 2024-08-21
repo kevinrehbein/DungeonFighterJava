@@ -3,12 +3,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dungeonfighterjava;
-
+    
 /**
  *
  * @author kevin
  */
 public abstract class Armadilha {
+    String nome;
+    
+    public Armadilha(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
     
     public abstract void aplicarEfeito(Heroi heroi);
 }

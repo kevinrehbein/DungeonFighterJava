@@ -12,8 +12,9 @@ package dungeonfighterjava;
 public class ArmadilhaPerdaAleatoria extends Armadilha {
     private final int perdaMaxima;
 
-    public ArmadilhaPerdaAleatoria(int perdaMaxima) {
-        this.perdaMaxima = perdaMaxima;
+    public ArmadilhaPerdaAleatoria() {
+        super("ArmadilhaPA");
+        this.perdaMaxima = 10;
     }
 
     @Override

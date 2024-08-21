@@ -8,16 +8,14 @@ package dungeonfighterjava;
  *
  * @author kevin
  */
-public class ArmadilhaPerdaFixa extends Armadilha {
-    private final int perdaFixa;
+public class MonstroMenor extends Monstro {
     
-    public ArmadilhaPerdaFixa() {
-        super("ArmadilhaPF");
-        this.perdaFixa = 1;
+    public MonstroMenor() {
+        super("Monstrinho", 7, 6, 50);
     }
     
     @Override
-    public void aplicarEfeito(Heroi heroi) {
-        heroi.receberDano(perdaFixa);
+    public void usarHabilidadeEspecial() {
+        // Implementar habilidade especial do monstro, se houver
     }
 }

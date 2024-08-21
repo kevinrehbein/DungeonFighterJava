@@ -12,7 +12,7 @@ import javax.swing.*;
  * @author kevin
  */
 public class HeroesFrame extends JFrame {
-    private String tipoHeroi = null;
+    private static String tipoHeroi = null;
     
     public HeroesFrame(String name){
         this.setSize(500, 300);
@@ -42,13 +42,6 @@ public class HeroesFrame extends JFrame {
         buttonPaladino.setBounds(175, 170, 150, 50);
         heroesPanel.add(buttonPaladino);
         buttonPaladino.addActionListener(this::paladinoSelected);
-    }
-    
-    public String getTipoHeroi (){
-        if (tipoHeroi != null) {
-            return tipoHeroi;
-        }
-        return null;
     }
     
     private void barbaroSelected(ActionEvent barbaro){

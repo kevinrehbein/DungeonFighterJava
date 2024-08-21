@@ -11,109 +11,77 @@ import java.util.Random;
  * @author kevin
  */
 public class Tabuleiro {
-        private String tipoHeroi;
-        private int ataque, defesa, saude;
-        private final int linhas = 5;
-        private final int colunas = 10;
-        private final Celula[][] tabuleiro = new Celula[linhas][colunas];
-        private final int numeroMonstros = linhas - 1;
-        private final int numeroPerdaFixa = 5;
-        private final int numeroPerdaAleatoria = 5;
         
-        // mapa vazio
-        private char[][] mapaTabuleiro = {
-        {'*', '*', '*', '*', '*', '*', '*', '*', '*', '*'},
-        {'*', '*', '*', '*', '*', '*', '*', '*', '*', '*'},
-        {'*', '*', '*', '*', '*', '*', '*', '*', '*', '*'},
-        {'*', '*', '*', '*', '*', '*', '*', '*', '*', '*'},
-        {'*', '*', '*', '*', '*', '*', '*', '*', '*', '*'}
-        };
-        
-    // Construtor 
-    public Tabuleiro(String tipoHeroi, int ataque, int defesa, int saude) {
+        private int linhas;
+        private int colunas;
+        private Celula[][] tabuleiro;
         int i, j, count;
-        
-        this.tipoHeroi = tipoHeroi;
-        this.ataque = ataque;
-        this.defesa = defesa;
-        this.saude = saude;
-        
-        Random geradorAleatorio = new Random();
-        
-        // posiciona Heroi
-        mapaTabuleiro[0][geradorAleatorio.nextInt(9)] = 'H';
-        
-        // posiciona Chefão
-        mapaTabuleiro[linhas-1][geradorAleatorio.nextInt(9)] = 'C';
-        
-        // posiciona Monstros Menores
-        count = numeroMonstros;
-        while (count != 0){
-            i = geradorAleatorio.nextInt(5);
-            j = geradorAleatorio.nextInt(9);
-            if (mapaTabuleiro[i][j] == '*') {
-                mapaTabuleiro[i][j] = 'M';
-                count--;
+              
+        // Construtor 
+        public Tabuleiro(int linhas, int colunas) {
+        this.linhas = linhas;
+        this.colunas = colunas;
+        this.tabuleiro = new Celula[linhas][colunas];
+        criarTabuleiro();
+        }
+
+        private void criarTabuleiro() {
+            for (i = 0; i < linhas; i++) {
+                for (j = 0; j < colunas; j++) {
+                    tabuleiro[i][j] = new Celula(null, null, i, j);
+                }
             }
         }
         
-        // posiciona armadilhas de perda fixa
-        count = numeroPerdaFixa;
-        while (count != 0){
-            i = geradorAleatorio.nextInt(5);
-            j = geradorAleatorio.nextInt(9);
-            if (mapaTabuleiro[i][j] == '*') {
-                mapaTabuleiro[i][j] = 'F';
-                count--;
+        public void adicionarPersonagem (Personagem personagem, int posX, int posY){
+            Celula celula = getCelula(posX, posY);
+            celula.setPersonagem(personagem);
+        }
+        
+        public void removerPersonagem (Personagem personagem, int posX, int posY){
+            Celula celula = getCelula(posX, posY);
+            celula.setPersonagem(null);
+        }
+        
+        public void moverPersonagem (int origemX, int origemY, int destinoX, int destinoY){
+            Celula celulaOrigem = getCelula(origemX, origemY);
+            Celula celulaDestino = getCelula(destinoX, destinoY);
+            
+            if (celulaOrigem.getPersonagem() != null){
+                Personagem p = celulaOrigem.getPersonagem();
+                this.removerPersonagem(p, origemX, origemY);
+                this.adicionarPersonagem(p, destinoX, destinoY);
             }
         }
         
-        // posiciona armadilhas de perda aleatoria
-        count = numeroPerdaAleatoria;
-        while (count != 0){
-            i = geradorAleatorio.nextInt(5);
-            j = geradorAleatorio.nextInt(9);
-            if (mapaTabuleiro[i][j] == '*') {
-                mapaTabuleiro[i][j] = 'A';
-                count--;
-            }
+        public void adicionarArmadilha(Armadilha armadilha, int posX, int posY){
+            Celula celula = getCelula(posX, posY);
+            celula.setArmadilha(armadilha);
         }
         
-        // Cria células com base no mapa
-        for (i = 0; i < linhas; i++) {
-            for (j = 0; j < colunas; j++) {
-                tabuleiro[i][j] = new Celula(mapaTabuleiro[i][j]);
-            }
+        public void removerArmadilha(Armadilha armadilha, int posX, int posY){
+            Celula celula = getCelula(posX, posY);
+            celula.setArmadilha(null);
         }
         
-    }   
-      
+    public Celula getCelula (int x, int y){
+        return tabuleiro[x][y];
+    }
+    
     public Celula getTabuleiro(int linha, int coluna){
         return tabuleiro[linha][coluna];
-    }
-    
-    public String getTipoHeroi(){
-        return tipoHeroi;
-    }
-    
-    public int getAtaque(){
-        return ataque;
-    }
-    
-    public int getDefesa(){
-        return defesa;
-    }
-    
-    public int getSaude(){
-        return saude;
     }
     
     public void printTabuleiro() {
         for (int i = 0; i < linhas; i++) {
             for (int j = 0; j < colunas; j++) {
-                System.out.printf("%c ", mapaTabuleiro[i][j]);
+                if (tabuleiro[i][j].getPersonagem() != null){
+                    System.out.printf("%s ", tabuleiro[i][j].getPersonagem().getNome());
+                } else if (tabuleiro[i][j].getArmadilha() != null) {
+                    System.out.printf("%s ", tabuleiro[i][j].getArmadilha().getNome());
+                } else System.out.printf("X "); // X representa célula vazia
             }
-            System.out.println();
+            System.out.println();     
         }
     }
 }

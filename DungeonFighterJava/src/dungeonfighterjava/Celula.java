@@ -14,7 +14,9 @@ import javax.swing.*;
  */
 public class Celula {
     
-    private final char tipo;  
+    private Armadilha armadilha = null;
+    private Personagem personagem = null;
+    private int posX, posY;
     /*
     H: Heroi
     C: Chefão
@@ -25,34 +27,26 @@ public class Celula {
     */
 
     // Construtor
-    public Celula(char tipo) {
-        this.tipo = tipo;
-        
-        
-        switch (tipo){
-            case 'H':
-                switch ()
-            break;
-            case 'C':
-                
-            break;
-            case 'M':
-                
-            break;
-            case 'F':
-                
-            break;
-            case 'A':
-                
-            break;
-            case '*':
-                
-            break;    
-        }
+    public Celula(Personagem personagem, Armadilha armadilha, int x, int y) {
+        this.personagem = personagem;
+        this.armadilha = armadilha;
+        this.posX = x;
+        this.posY = y;
     }
 
-    public char getTipo() {
-        return tipo;
+    public void setPersonagem(Personagem personagem) {
+        this.personagem = personagem;
+    }
+    public Personagem getPersonagem() {
+        return personagem;
+    }
+    
+    public void setArmadilha(Armadilha armadilha) {
+        this.armadilha = armadilha;
+    }
+    
+    public Armadilha getArmadilha() {
+        return armadilha;
     }
     
 }
