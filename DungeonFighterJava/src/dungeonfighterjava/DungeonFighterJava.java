@@ -1,10 +1,14 @@
 package dungeonfighterjava;
 
+import javax.swing.*;
+
 public class DungeonFighterJava {
 
     public static void main(String[] args) {
-        
-        MainFrame mainScreen = new MainFrame("Dungeon_Fighter");
+        start();
     }
     
+    public static void start(){
+        MainFrame telaPrincipal = new MainFrame("Dungeon_Fighter");
+    }
 }

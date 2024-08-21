@@ -12,9 +12,9 @@ import javax.swing.*;
  * @author kevin
  */
 public class HeroesFrame extends JFrame {
+    private String tipoHeroi = null;
     
     public HeroesFrame(String name){
-        super(name);
         this.setSize(500, 300);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,19 +42,29 @@ public class HeroesFrame extends JFrame {
         buttonPaladino.setBounds(175, 170, 150, 50);
         heroesPanel.add(buttonPaladino);
         buttonPaladino.addActionListener(this::paladinoSelected);
-        
+    }
+    
+    public String getTipoHeroi (){
+        if (tipoHeroi != null) {
+            return tipoHeroi;
+        }
+        return null;
     }
     
     private void barbaroSelected(ActionEvent barbaro){
         AttributesFrame attributesScreen = new AttributesFrame("Atributos");
+        this.tipoHeroi = "Barbaro";
     }
         
     private void guerreiroSelected(ActionEvent actionEventGuerreiro){
-        System.out.println("Teste");
+        AttributesFrame attributesScreen = new AttributesFrame("Atributos");
+        this.tipoHeroi = "Guerreiro";
     }
     
     private void paladinoSelected(ActionEvent actionEventPaladino){
-        
+        AttributesFrame attributesScreen = new AttributesFrame("Atributos");
+        this.tipoHeroi = "Paladino";
     }
+    
 }
 
