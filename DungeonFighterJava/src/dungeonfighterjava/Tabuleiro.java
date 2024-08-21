@@ -67,9 +67,13 @@ public class Tabuleiro {
     public Celula getCelula (int x, int y){
         return tabuleiro[x][y];
     }
-    
-    public Celula getTabuleiro(int linha, int coluna){
-        return tabuleiro[linha][coluna];
+
+    public int getLinhas() {
+        return linhas;
+    }
+
+    public int getColunas() {
+        return colunas;
     }
     
     public void printTabuleiro() {

@@ -60,45 +60,9 @@ public class DungeonFighterJava {
                 count--;
             }
         }
-        /*
         
-        
-        // posiciona Chefão
-        mapaTabuleiro[linhas-1][geradorAleatorio.nextInt(9)] = 'C';
-        
-        // posiciona Monstros Menores
-        count = numeroMonstros;
-        while (count != 0){
-            i = geradorAleatorio.nextInt(5);
-            j = geradorAleatorio.nextInt(9);
-            if (mapaTabuleiro[i][j] == '*') {
-                mapaTabuleiro[i][j] = 'M';
-                count--;
-            }
-        }
-        
-        // posiciona armadilhas de perda fixa
-        count = numeroPerdaFixa;
-        while (count != 0){
-            i = geradorAleatorio.nextInt(5);
-            j = geradorAleatorio.nextInt(9);
-            if (mapaTabuleiro[i][j] == '*') {
-                mapaTabuleiro[i][j] = 'F';
-                count--;
-            }
-        }
-        
-        // posiciona armadilhas de perda aleatoria
-        count = numeroPerdaAleatoria;
-        while (count != 0){
-            i = geradorAleatorio.nextInt(5);
-            j = geradorAleatorio.nextInt(9);
-            if (mapaTabuleiro[i][j] == '*') {
-                mapaTabuleiro[i][j] = 'A';
-                count--;
-            }
-        }
-        */
+        // Abre tela do tabuleiro (false para modo jogador, true para DEBUG);
+        TabuleiroFrame telaTabuleiro = new TabuleiroFrame("Tabuleiro", t1, false);
         t1.printTabuleiro();
     }
 

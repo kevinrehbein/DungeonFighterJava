@@ -11,7 +11,7 @@ package dungeonfighterjava;
 public class MonstroMenor extends Monstro {
     
     public MonstroMenor() {
-        super("Monstrinho", 7, 6, 50);
+        super("MonstroMenor", 7, 6, 50);
     }
     
     @Override
