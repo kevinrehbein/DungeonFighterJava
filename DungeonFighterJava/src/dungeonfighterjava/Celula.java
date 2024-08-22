@@ -17,6 +17,7 @@ public class Celula {
     private Armadilha armadilha = null;
     private Personagem personagem = null;
     private int posX, posY;
+    private boolean empty;
     /*
     H: Heroi
     C: Chefão
@@ -32,6 +33,25 @@ public class Celula {
         this.armadilha = armadilha;
         this.posX = x;
         this.posY = y;
+        setEmpty();
+    }
+
+    public boolean isEmpty() {
+        return empty;
+    }
+
+    public void setEmpty() {
+        if (this.personagem == null && this.armadilha == null){
+            this.empty = true;
+        } else this.empty = false;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
     }
 
     public void setPersonagem(Personagem personagem) {

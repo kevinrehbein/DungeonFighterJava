@@ -36,11 +36,13 @@ public class Tabuleiro {
         public void adicionarPersonagem (Personagem personagem, int posX, int posY){
             Celula celula = getCelula(posX, posY);
             celula.setPersonagem(personagem);
+            celula.setEmpty();
         }
         
         public void removerPersonagem (Personagem personagem, int posX, int posY){
             Celula celula = getCelula(posX, posY);
             celula.setPersonagem(null);
+            celula.setEmpty();
         }
         
         public void moverPersonagem (int origemX, int origemY, int destinoX, int destinoY){
@@ -52,16 +54,20 @@ public class Tabuleiro {
                 this.removerPersonagem(p, origemX, origemY);
                 this.adicionarPersonagem(p, destinoX, destinoY);
             }
+            celulaOrigem.setEmpty();
+            celulaDestino.setEmpty();
         }
         
         public void adicionarArmadilha(Armadilha armadilha, int posX, int posY){
             Celula celula = getCelula(posX, posY);
             celula.setArmadilha(armadilha);
+            celula.setEmpty();
         }
         
         public void removerArmadilha(Armadilha armadilha, int posX, int posY){
             Celula celula = getCelula(posX, posY);
             celula.setArmadilha(null);
+            celula.setEmpty();
         }
         
     public Celula getCelula (int x, int y){
@@ -88,4 +94,5 @@ public class Tabuleiro {
             System.out.println();     
         }
     }
+    
 }

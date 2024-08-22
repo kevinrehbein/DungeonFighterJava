@@ -5,9 +5,10 @@
         <group>
             <file>file:/D:/GitHub/DungeonFighterJava/src/dungeonfighterjava/DungeonFighterJava.java</file>
             <file>file:/D:/GitHub/DungeonFighterJava/src/dungeonfighterjava/Celula.java</file>
-            <file>file:/D:/GitHub/DungeonFighterJava/src/dungeonfighterjava/Paladino.java</file>
+            <file>file:/D:/GitHub/DungeonFighterJava/src/dungeonfighterjava/TabuleiroFrame.java</file>
+            <file>file:/D:/GitHub/DungeonFighterJava/src/dungeonfighterjava/Chefao.java</file>
+            <file>file:/D:/GitHub/DungeonFighterJava/src/dungeonfighterjava/MonstroMenor.java</file>
             <file>file:/D:/GitHub/DungeonFighterJava/src/dungeonfighterjava/Tabuleiro.java</file>
-            <file>file:/D:/GitHub/DungeonFighterJava/src/dungeonfighterjava/Personagem.java</file>
             <file>file:/D:/GitHub/DungeonFighterJava/src/dungeonfighterjava/MainFrame.java</file>
         </group>
     </open-files>

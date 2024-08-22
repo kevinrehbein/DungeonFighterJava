@@ -15,7 +15,7 @@ public class DungeonFighterJava {
         Random geradorAleatorio = new Random();
         Tabuleiro t1 = new Tabuleiro(linhas, colunas);
         
-        Paladino p1 = new Paladino();
+        Barbaro p1 = new Barbaro();
         t1.adicionarPersonagem(p1, 0, geradorAleatorio.nextInt(9));
         
         Chefao c1 = new Chefao();
@@ -63,7 +63,7 @@ public class DungeonFighterJava {
         
         // Abre tela do tabuleiro (false para modo jogador, true para DEBUG);
         TabuleiroFrame telaTabuleiro = new TabuleiroFrame("Tabuleiro", t1, false);
-        t1.printTabuleiro();
+        //t1.printTabuleiro();
     }
 
 }
