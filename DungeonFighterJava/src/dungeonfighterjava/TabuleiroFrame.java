@@ -10,13 +10,15 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 import javax.swing.*;
 
 /**
  *
  * @author kevin
  */
-public class TabuleiroFrame extends JFrame implements ActionListener{
+public class TabuleiroFrame extends JFrame {
+    
     private Tabuleiro tabuleiro;
     private int x, y, posHeroiX, posHeroiY, countDicas;
     private boolean visible, flagDica=false;
@@ -24,7 +26,10 @@ public class TabuleiroFrame extends JFrame implements ActionListener{
     private JPanel gridPanel, attributesPanel;
     private JLabel l1, l2, l3, l4, l5;
     private JButton buttonDica, buttonSair;
-    private CombatFrame combatScreen;
+    
+    private Personagem player, inimigo;
+    private final int w = 10;
+    JFrame combatFrame;
     
     public TabuleiroFrame(String name, Tabuleiro tabuleiro, boolean visible) {
         super(name);
@@ -64,7 +69,7 @@ public class TabuleiroFrame extends JFrame implements ActionListener{
                 
                 // identifica botao que faz a action
                 b[x][y].setActionCommand(String.valueOf(tabuleiro.getCelula(x, y).getPosX() + "," + String.valueOf(tabuleiro.getCelula(x, y).getPosY())));
-                b[x][y].addActionListener(this);
+                b[x][y].addActionListener(this::gridPressed);
                 
                 gridPanel.add(b[x][y]);
             }
@@ -237,11 +242,11 @@ public class TabuleiroFrame extends JFrame implements ActionListener{
         l5.setText("Você tem " + String.valueOf(countDicas) + " dicas disponíveis");
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+
+    public void gridPressed(ActionEvent gridEvent) {
         
-        x = Integer.parseInt((e.getActionCommand()).substring(0, 1));
-        y = Integer.parseInt((e.getActionCommand()).substring(2, 3));
+        x = Integer.parseInt((gridEvent.getActionCommand()).substring(0, 1));
+        y = Integer.parseInt((gridEvent.getActionCommand()).substring(2, 3));
         //System.out.printf("%d %d", x, y);
         
         if (flagDica == false){
@@ -261,6 +266,12 @@ public class TabuleiroFrame extends JFrame implements ActionListener{
                             tabuleiro.moverHeroi(tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro(), posHeroiX, posHeroiY, x, y);
                         break;
                     }
+                
+                    this.posHeroiX = x;
+                    this.posHeroiY = y;
+
+                    atualizaTabuleiroFrame();
+                    atualizaLabels();
                     
                 } else {
                     
@@ -275,25 +286,14 @@ public class TabuleiroFrame extends JFrame implements ActionListener{
                                 
                                 switch (tabuleiro.getCelula(posHeroiX, posHeroiY).getPersonagem().getNome()){
                                     case "Paladino":
-                                        //tabuleiro.combat(tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino(), tabuleiro.getCelula(x, y).getMonstroMenor());
-                                    break;
+                                        combat(tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino(), tabuleiro.getCelula(x, y).getMonstroMenor());
+                                        break;
                                     case "Guerreiro":
-                                        //tabuleiro.combat(tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro(), tabuleiro.getCelula(x, y).getMonstroMenor());
-                                    break;
+                                        combat(tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro(), tabuleiro.getCelula(x, y).getMonstroMenor());
+                                        break;
                                     case "Barbaro":
-                                        
-                                        combatScreen = new CombatFrame(tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro(), tabuleiro.getCelula(x, y).getMonstroMenor());
-                                        JOptionPane.showMessageDialog(null, combatScreen, "Dungeon_Fighter", JOptionPane.PLAIN_MESSAGE);
-                                        //combatScreen = new CombatFrame(tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro(), tabuleiro.getCelula(x, y).getMonstroMenor());
-                                        
-                                        //tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().setSaude(combatScreen.);
-                                        
-                                        /*vencedor = tabuleiro.combat(tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro(), tabuleiro.getCelula(x, y).getMonstroMenor());
-                                        if (vencedor.getNome().equals("Barbaro")){
-                                            tabuleiro.moverHeroi(tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro(), posHeroiX, posHeroiY, x, y);
-                                        } else
-                                            JOptionPane.showMessageDialog(null, "GameOver");*/
-                                    break;
+                                        combat(tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro(), tabuleiro.getCelula(x, y).getMonstroMenor());
+                                        break;
                                 }
                                 
                             break;
@@ -317,11 +317,12 @@ public class TabuleiroFrame extends JFrame implements ActionListener{
                     }
                 }
                 
+                /*
                 this.posHeroiX = x;
                 this.posHeroiY = y;
 
                 atualizaTabuleiroFrame();
-                atualizaLabels();
+                atualizaLabels();*/
             }
         } else {
             
@@ -338,7 +339,7 @@ public class TabuleiroFrame extends JFrame implements ActionListener{
         }
     }
 
-    private void dicaPressed(ActionEvent e) {
+    private void dicaPressed(ActionEvent dicaEvent) {
         
         if(countDicas > 0) {
             JOptionPane.showMessageDialog(null, "Selecione qualquer casa do tabuleiro e você saberá quantas armadilhas existem naquela coluna!");
@@ -346,9 +347,204 @@ public class TabuleiroFrame extends JFrame implements ActionListener{
         }
     }
     
-    private void sairPressed(ActionEvent e) {
+    private void sairPressed(ActionEvent sairEvent) {
         this.dispose();
         FinalFrame finalScreen = new FinalFrame();
     }
     
+    private void combat(Heroi heroi, Monstro monstro){
+        this.player = heroi;
+        this.inimigo = monstro;
+        
+        criaCombatFrame();
+    }
+    
+    private void criaCombatFrame(){
+        
+        this.setVisible(false);
+        
+        combatFrame = new JFrame();
+        combatFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        combatFrame.setSize(800, 500);
+        
+        JPanel combatPanel = new JPanel();
+        combatPanel.setLayout(new BoxLayout(combatPanel, BoxLayout.Y_AXIS));
+        combatPanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
+        
+        combatPanel.add(Box.createVerticalGlue());
+        
+        JLabel l6 = new JLabel("Combate");
+        l6.setFont(new Font ("Arial", 1, 20));
+        l6.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        combatPanel.add(l6);
+        
+        combatPanel.add(Box.createVerticalGlue());
+        
+        JLabel l7 = new JLabel("Seu Turno: (Escolha uma ação abaixo)");
+        l7.setFont(new Font ("Arial", 1, 16));
+        l7.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        combatPanel.add(l7);
+        combatPanel.add(new JLabel(" "));
+        
+            JPanel buttonsPanel = new JPanel();
+            buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
+            buttonsPanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
+
+            //buttonsPanel.add(Box.createVerticalGlue());
+            buttonsPanel.add(Box.createHorizontalGlue());
+
+            JButton atacarButton = new JButton("Atacar");
+            atacarButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
+            buttonsPanel.add(atacarButton);
+            atacarButton.addActionListener(this::atacar);
+
+            buttonsPanel.add(new JLabel("   "));
+
+            JButton habilidadeButton = new JButton("Habilidade Especial");
+            habilidadeButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
+            buttonsPanel.add(habilidadeButton);
+            habilidadeButton.addActionListener(this::habilidadeEspecial);
+            
+            buttonsPanel.add(Box.createHorizontalGlue());
+            buttonsPanel.add(Box.createVerticalGlue());
+
+            combatPanel.add(buttonsPanel);
+            
+        JLabel l8 = new JLabel();
+        l8.setFont(new Font ("Arial", 1, 16));
+        l8.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        combatPanel.add(l8);
+        
+        combatPanel.add(Box.createVerticalGlue());
+        
+        combatFrame.add(combatPanel);
+        combatFrame.setVisible(true);
+    }
+    
+    private void atacar(ActionEvent atacarEvent){
+        
+        int ataque = 0, defesa = 0, resultado = 0, rounds = 2;
+        boolean turno = true;
+        
+        Random geradorAleatorio = new Random();
+        
+        while (inimigo.isAlive() && player.isAlive() && rounds > 0) {
+                
+            if (turno){ 
+                //atacando
+                switch (inimigo.getNome()){
+                case ("MonstroMenor"):
+
+                    switch (player.getNome()){
+                    case "Barbaro":
+                         ataque = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getAtaque();
+                         defesa = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(x, y).getMonstroMenor().getDefesa();
+                         resultado = ataque - defesa;
+                         break;
+                    case "Guerreiro":
+                         ataque = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getAtaque();
+                         defesa = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(x, y).getMonstroMenor().getDefesa();
+                         resultado = ataque - defesa;
+                         break;
+                    case "Paladino":
+                         ataque = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().getAtaque();
+                         defesa = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(x, y).getMonstroMenor().getDefesa();
+                         resultado = ataque - defesa;
+                         break;
+                    }
+                    break;
+
+                case "Chefao":
+                JOptionPane.showMessageDialog(null, "Não implementado");
+                break;      
+                }
+
+                if (resultado > 0){
+                    inimigo.setSaude(inimigo.getSaude() - resultado);                
+                } else player.setSaude(player.getSaude() + resultado);
+
+                JOptionPane.showMessageDialog(null, "Seu ataque: " + ataque + " | Defesa do inimigo: " + defesa + " | Dano total: " + resultado);
+                turno = false;
+                rounds--;
+
+            } else {
+                //defendendo
+                switch (inimigo.getNome()){
+                case ("MonstroMenor"):
+
+                    switch (player.getNome()){
+                    case "Barbaro":
+                         ataque = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(x, y).getMonstroMenor().getAtaque();
+                         defesa = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getDefesa();
+                         resultado = ataque - defesa;
+                         break;
+                    case "Guerreiro":
+                         ataque = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(x, y).getMonstroMenor().getAtaque();
+                         defesa = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getDefesa();
+                         resultado = ataque - defesa;
+                         break;
+                    case "Paladino":
+                         ataque = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(x, y).getMonstroMenor().getAtaque();
+                         defesa = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().getDefesa();
+                         resultado = ataque - defesa;
+                         break;
+                    }
+                    break;
+
+                case "Chefao":
+                JOptionPane.showMessageDialog(null, "Não implementado");
+                break;      
+                }
+
+                if (resultado > 0){
+                    player.setSaude(player.getSaude() - resultado);                
+                } else inimigo.setSaude(inimigo.getSaude() + resultado);
+
+                JOptionPane.showMessageDialog(null, "Ataque do inimigo: " + ataque + " | Sua Defesa: " + defesa + " | Dano total: " + resultado);
+                turno = true;
+                rounds--;
+            }
+        }
+        
+        if (player.isAlive() == false || inimigo.isAlive() == false){
+            
+            if (player.isAlive()){
+                JOptionPane.showMessageDialog(null, "Você Derrotou o inimigo");
+                
+                switch (tabuleiro.getCelula(posHeroiX, posHeroiY).getPersonagem().getNome()){
+                    case "Paladino":
+                        tabuleiro.moverHeroi(tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino(), posHeroiX, posHeroiY, x, y);
+                        break;
+                    case "Guerreiro":
+                        tabuleiro.moverHeroi(tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro(), posHeroiX, posHeroiY, x, y);
+                        break;
+                    case "Barbaro":
+                        tabuleiro.moverHeroi(tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro(), posHeroiX, posHeroiY, x, y);
+                        break;
+                }
+                posHeroiX = x;
+                posHeroiY = y;
+                
+                atualizaTabuleiroFrame();
+                atualizaLabels();
+                this.setVisible(true);
+                combatFrame.dispose();
+            }
+            
+            if (inimigo.isAlive()){
+                JOptionPane.showMessageDialog(null, "GAME OVER");
+                this.dispose();
+                dispose();
+            }
+        }
+        
+        //fim combate
+        //if (player.isAlive()){
+            
+        //} else JOptionPane.showMessageDialog(null, "GameOver");
+    }
+    
+    private void habilidadeEspecial(ActionEvent habilidadeEvent){
+        JOptionPane.showMessageDialog(null, "Habilidade");
+    }
 }

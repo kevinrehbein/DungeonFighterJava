@@ -4,72 +4,87 @@
  */
 package dungeonfighterjava;
 
-import java.util.Random;
-
 /**
  *
  * @author kevin
  */
 public class Tabuleiro {
         
-        private int linhas;
-        private int colunas;
-        private Celula[][] tabuleiro;
-        int i, j, count;
-              
-        // Construtor 
-        public Tabuleiro(int linhas, int colunas) {
-        this.linhas = linhas;
-        this.colunas = colunas;
-        this.tabuleiro = new Celula[linhas][colunas];
-        criarTabuleiro();
-        }
+    private final int linhas;
+    private final int colunas;
+    private final Celula[][] tabuleiro;
+    private int i, j;
+    private final int numDicas;
 
-        private void criarTabuleiro() {
-            for (i = 0; i < linhas; i++) {
-                for (j = 0; j < colunas; j++) {
-                    tabuleiro[i][j] = new Celula(null, null, i, j);
-                }
+    // Construtor 
+    public Tabuleiro(int linhas, int colunas, int numDicas) {
+    this.linhas = linhas;
+    this.colunas = colunas;
+    this.tabuleiro = new Celula[linhas][colunas];
+    this.numDicas = numDicas;
+    criarTabuleiro();
+    }
+
+    private void criarTabuleiro() {
+        for (i = 0; i < linhas; i++) {
+            for (j = 0; j < colunas; j++) {
+                tabuleiro[i][j] = new Celula( i, j);
             }
         }
-        
-        public void adicionarPersonagem (Personagem personagem, int posX, int posY){
-            Celula celula = getCelula(posX, posY);
-            celula.setPersonagem(personagem);
-            celula.setEmpty();
+    }
+
+    public void moverHeroi (Paladino heroi, int origemX, int origemY, int destinoX, int destinoY){
+        Celula celulaOrigem = getCelula(origemX, origemY);
+        Celula celulaDestino = getCelula(destinoX, destinoY);
+
+        if (celulaOrigem.getPersonagem() != null){
+            this.getCelula(origemX, origemY).removerPersonagem();
+            this.getCelula(destinoX, destinoY).setPersonagem(heroi);
         }
-        
-        public void removerPersonagem (Personagem personagem, int posX, int posY){
-            Celula celula = getCelula(posX, posY);
-            celula.setPersonagem(null);
-            celula.setEmpty();
+        celulaOrigem.setEmpty(true);
+        celulaDestino.setEmpty(false);
+    }
+    
+    public void moverHeroi (Guerreiro heroi, int origemX, int origemY, int destinoX, int destinoY){
+        Celula celulaOrigem = getCelula(origemX, origemY);
+        Celula celulaDestino = getCelula(destinoX, destinoY);
+
+        if (celulaOrigem.getPersonagem() != null){
+            this.getCelula(origemX, origemY).removerPersonagem();
+            this.getCelula(destinoX, destinoY).setPersonagem(heroi);
         }
+        celulaOrigem.setEmpty(true);
+        celulaDestino.setEmpty(false);
+    }
+    
+    public void moverHeroi (Barbaro heroi , int origemX, int origemY, int destinoX, int destinoY){
+        Celula celulaOrigem = getCelula(origemX, origemY);
+        Celula celulaDestino = getCelula(destinoX, destinoY);
+
+        if (celulaOrigem.getPersonagem() != null){
+            this.getCelula(origemX, origemY).removerPersonagem();
+            this.getCelula(destinoX, destinoY).setPersonagem(heroi);
+        }
+        celulaOrigem.setEmpty(true);
+        celulaDestino.setEmpty(false);
+    }
+    
+    /*public Heroi combat(Paladino heroi , MonstroMenor montro){
+        Personagem vencedor;
         
-        public void moverPersonagem (int origemX, int origemY, int destinoX, int destinoY){
-            Celula celulaOrigem = getCelula(origemX, origemY);
-            Celula celulaDestino = getCelula(destinoX, destinoY);
             
-            if (celulaOrigem.getPersonagem() != null){
-                Personagem p = celulaOrigem.getPersonagem();
-                this.removerPersonagem(p, origemX, origemY);
-                this.adicionarPersonagem(p, destinoX, destinoY);
-            }
-            celulaOrigem.setEmpty();
-            celulaDestino.setEmpty();
-        }
         
-        public void adicionarArmadilha(Armadilha armadilha, int posX, int posY){
-            Celula celula = getCelula(posX, posY);
-            celula.setArmadilha(armadilha);
-            celula.setEmpty();
-        }
+        return vencedor;
+    }
+    
+    public Guerreiro combat(Guerreiro heroi , MonstroMenor montro){
+        Personagem vencedor;
         
-        public void removerArmadilha(Armadilha armadilha, int posX, int posY){
-            Celula celula = getCelula(posX, posY);
-            celula.setArmadilha(null);
-            celula.setEmpty();
-        }
+            
         
+        return vencedor;
+    }*/
+    
     public Celula getCelula (int x, int y){
         return tabuleiro[x][y];
     }
@@ -82,6 +97,10 @@ public class Tabuleiro {
         return colunas;
     }
     
+    public int getNumDicas(){
+        return numDicas;
+    }
+    
     public void printTabuleiro() {
         for (int i = 0; i < linhas; i++) {
             for (int j = 0; j < colunas; j++) {
@@ -89,6 +108,8 @@ public class Tabuleiro {
                     System.out.printf("%s ", tabuleiro[i][j].getPersonagem().getNome());
                 } else if (tabuleiro[i][j].getArmadilha() != null) {
                     System.out.printf("%s ", tabuleiro[i][j].getArmadilha().getNome());
+                } else if (tabuleiro[i][j].isElixir()){
+                    System.out.printf("Elixir ");
                 } else System.out.printf("X "); // X representa célula vazia
             }
             System.out.println();     

@@ -14,36 +14,51 @@ import javax.swing.*;
  */
 public class Celula {
     
-    private Armadilha armadilha = null;
-    private Personagem personagem = null;
+    private Armadilha armadilha;
+    private ArmadilhaPerdaFixa armadilhaPF;
+    private ArmadilhaPerdaAleatoria armadilhaPA;
+    private Personagem personagem;
+    private Heroi heroi;
+    private Barbaro barbaro;
+    private Paladino paladino;
+    private Guerreiro guerreiro;
+    private MonstroMenor monstroMenor;
+    private Chefao chefao;
     private int posX, posY;
-    private boolean empty;
-    /*
-    H: Heroi
-    C: Chefão
-    M: Monstros menores
-    F: Armadilhas de perda fixa
-    A: Armadilhas de perda aleatória
-    *: Espaços livres
-    */
+    private boolean empty, elixir;
 
     // Construtor
-    public Celula(Personagem personagem, Armadilha armadilha, int x, int y) {
-        this.personagem = personagem;
-        this.armadilha = armadilha;
+    public Celula(int x, int y) {
+        
+        this.armadilhaPF = null;
+        this.armadilhaPA = null;
+        this.personagem = null;
+        this.heroi = null;
+        this.barbaro = null;
+        this.paladino = null;
+        this.guerreiro = null;
+        this.monstroMenor = null;
+        this.chefao = null;
         this.posX = x;
         this.posY = y;
-        setEmpty();
+        this.elixir = false;
+        setEmpty(true);
     }
 
+    public boolean isElixir() {
+        return elixir;
+    }
+
+    public void setElixir(boolean elixir) {
+        this.elixir = elixir;
+    }
+    
     public boolean isEmpty() {
         return empty;
     }
 
-    public void setEmpty() {
-        if (this.personagem == null && this.armadilha == null){
-            this.empty = true;
-        } else this.empty = false;
+    public void setEmpty(boolean status) {  // true == vazio, false == cheio
+        this.empty = status;
     }
 
     public int getPosX() {
@@ -54,15 +69,93 @@ public class Celula {
         return posY;
     }
 
-    public void setPersonagem(Personagem personagem) {
-        this.personagem = personagem;
+    public void removerPersonagem(){
+        switch (this.getPersonagem().getNome()){
+            case "Paladino":
+                this.paladino = null;
+                break;
+            case "Guerreiro":
+                this.guerreiro = null;
+                break;
+            case "Barbaro":
+                this.barbaro = null;
+                break;
+            case "MonstroMenor":
+                this.monstroMenor = null;
+                break;
+            case "Chefao":
+                this.chefao = null;
+                break;
+        }
+        this.personagem = null;
+        this.setEmpty(true);
     }
+    
+    public void setPersonagem(Barbaro personagem) {
+        this.barbaro = personagem;
+        this.personagem = personagem;
+        setEmpty(false);
+    }
+    public void setPersonagem(Guerreiro personagem) {
+        this.guerreiro = personagem;
+        this.personagem = personagem;
+        setEmpty(false);
+    }
+    public void setPersonagem(Paladino personagem) {
+        this.paladino = personagem;
+        this.personagem = personagem;
+        setEmpty(false);
+    }
+    public void setPersonagem(MonstroMenor personagem) {
+        this.monstroMenor = personagem;
+        this.personagem = personagem;
+        setEmpty(false);
+    }
+    public void setPersonagem(Chefao personagem) {
+        this.chefao = personagem;
+        this.personagem = personagem;
+        setEmpty(false);
+    }
+    
+    
     public Personagem getPersonagem() {
         return personagem;
     }
+
+    public Barbaro getBarbaro() {
+        return barbaro;
+    }
+
+    public Paladino getPaladino() {
+        return paladino;
+    }
+
+    public Guerreiro getGuerreiro() {
+        return guerreiro;
+    }
     
-    public void setArmadilha(Armadilha armadilha) {
+    public Heroi getHeroi(){
+        return heroi;
+    }
+    
+    public MonstroMenor getMonstroMenor(){
+        return monstroMenor;
+    }
+    
+    public Chefao getChefao(){
+        return chefao;
+    }
+    
+    public void setArmadilha(ArmadilhaPerdaFixa armadilha) {
+        this.armadilhaPF = armadilha;
         this.armadilha = armadilha;
+        setEmpty(false);
+    }
+    
+    public void setArmadilha(ArmadilhaPerdaAleatoria armadilha){
+        this.armadilhaPA = armadilha;
+        this.armadilha = armadilha;
+        setEmpty(false);
     }
     
     public Armadilha getArmadilha() {

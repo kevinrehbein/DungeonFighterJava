@@ -44,6 +44,13 @@ public abstract class Personagem {
         this.saude = saude; 
     }
 
+    @Override
+    public String toString() {
+        return "Personagem{" + "nome=" + nome + ", ataque=" + ataque + ", defesa=" + defesa + ", saude=" + saude + '}';
+    }
+    
+    
+
     // Método abstrato para a habilidade especial
     public abstract void usarHabilidadeEspecial();
     
@@ -54,7 +61,7 @@ public abstract class Personagem {
     }
     
     // Método para checar se o personagem está vivo
-    public boolean estaVivo() {
+    public boolean isAlive() {
         return saude > 0;
     }
 }
