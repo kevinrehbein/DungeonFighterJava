@@ -17,7 +17,7 @@ public class DungeonFighterJava {
         Random geradorAleatorio = new Random();
         Tabuleiro t1 = new Tabuleiro(linhas, colunas, numeroDicas);
         
-        Barbaro p1 = new Barbaro();
+        Barbaro p1 = new Barbaro(15, 10, 100);
         t1.getCelula(0, geradorAleatorio.nextInt(9)).setPersonagem(p1);
         
         Chefao c1 = new Chefao();
@@ -61,7 +61,7 @@ public class DungeonFighterJava {
             int i = geradorAleatorio.nextInt(5);
             int j = geradorAleatorio.nextInt(9);
             if (t1.getCelula(i, j).isEmpty()) {
-                t1.getCelula(i, j).setElixir(true);
+                t1.getCelula(i, j).setElixir();
             } else {
                 count--;
             }

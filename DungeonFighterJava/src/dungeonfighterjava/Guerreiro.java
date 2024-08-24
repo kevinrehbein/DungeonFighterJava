@@ -4,18 +4,43 @@
  */
 package dungeonfighterjava;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author kevin
  */
 public class Guerreiro extends Heroi {
     
-    public Guerreiro() {
-        super("Guerreiro", 9, 6, 100);
+    private int vidaMaxima, defesaOriginal;
+    private boolean flagHabilidade;
+    
+    public Guerreiro(int ataque, int defesa, int saude) {
+        super("Paladino", ataque, defesa, saude);
+        vidaMaxima = saude;
+        defesaOriginal = defesa;
+        flagHabilidade = true;
     }
 
     @Override
     public void usarHabilidadeEspecial() {
         // Postura Defensiva - aumenta defesa em 50% por dois turnos
+        if (flagHabilidade) {
+            
+            this.setDefesa(this.getDefesa() + this.getDefesa()/2);
+            
+            JOptionPane.showMessageDialog(null, "Postura Defensiva - aumenta defesa em 50% por dois turnos");
+            flagHabilidade = false;
+            
+        } else JOptionPane.showMessageDialog(null, "Você já usou a habilidade Especial nessa batalha!");
     }
+    
+    public void setFlagHabilidade(boolean flagHabilidade) {
+        this.flagHabilidade = flagHabilidade;
+    }
+
+    public int getDefesaOriginal() {
+        return defesaOriginal;
+    }
+    
 }

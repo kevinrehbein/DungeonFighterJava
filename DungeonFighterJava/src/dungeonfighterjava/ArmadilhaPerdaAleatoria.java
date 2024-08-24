@@ -10,16 +10,14 @@ package dungeonfighterjava;
  */
 
 public class ArmadilhaPerdaAleatoria extends Armadilha {
-    private final int perdaMaxima;
+    private final int danoMaximo;
 
     public ArmadilhaPerdaAleatoria() {
         super("ArmadilhaPA");
-        this.perdaMaxima = 10;
+        this.danoMaximo = 10;
     }
 
-    @Override
-    public void aplicarEfeito(Heroi heroi) {
-        int perda = (int) (Math.random() * (perdaMaxima + 1));
-        heroi.receberDano(perda);
-    }
+        public int getDanoMaximo(){
+            return danoMaximo;
+        }
 }

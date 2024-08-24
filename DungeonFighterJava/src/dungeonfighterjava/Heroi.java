@@ -4,6 +4,8 @@
  */
 package dungeonfighterjava;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author kevin
@@ -11,24 +13,26 @@ package dungeonfighterjava;
 public class Heroi extends Personagem {
         
     private int elixires;
-    private static final int CAPACIDADE_MAX_ELIXIRES = 5;
+    private final int CAPACIDADE_MAX_ELIXIRES = 3;
+    private final int pontosElixir = 10;
 
     public Heroi(String nome, int ataque, int defesa, int saude) {
         super(nome, ataque, defesa, saude);
         this.elixires = 0;
     }
     
-    public void adicionarElixir() {
+    public int adicionarElixir() {
         if (elixires < CAPACIDADE_MAX_ELIXIRES) {
             elixires++;
-        }
+            return 0;
+        } else return 1;
     }
     
     public void usarElixir() {
         if (elixires > 0) {
-            this.setSaude(this.getSaude() + 10); // Supondo que um elixir recupera 10 pontos de vida
+            this.setSaude(this.getSaude() + pontosElixir);
             elixires--;
-        }
+        } else JOptionPane.showMessageDialog(null, "Sua bolsa está vazia!");
     }
     
     public int getElixires() { 

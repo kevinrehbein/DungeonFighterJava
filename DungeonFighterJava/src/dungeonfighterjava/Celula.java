@@ -49,8 +49,14 @@ public class Celula {
         return elixir;
     }
 
-    public void setElixir(boolean elixir) {
-        this.elixir = elixir;
+    public void setElixir() {
+        this.elixir = true;
+        setEmpty(false);
+    }
+    
+    public void removerElixir() {
+        this.elixir = false;
+        setEmpty(true);
     }
     
     public boolean isEmpty() {
@@ -73,12 +79,18 @@ public class Celula {
         switch (this.getPersonagem().getNome()){
             case "Paladino":
                 this.paladino = null;
+                this.heroi = null;
+                this.personagem = null;
                 break;
             case "Guerreiro":
                 this.guerreiro = null;
+                this.heroi = null;
+                this.personagem = null;
                 break;
             case "Barbaro":
                 this.barbaro = null;
+                this.heroi = null;
+                this.personagem = null;
                 break;
             case "MonstroMenor":
                 this.monstroMenor = null;
@@ -94,16 +106,19 @@ public class Celula {
     public void setPersonagem(Barbaro personagem) {
         this.barbaro = personagem;
         this.personagem = personagem;
+        this.heroi = personagem;
         setEmpty(false);
     }
     public void setPersonagem(Guerreiro personagem) {
         this.guerreiro = personagem;
         this.personagem = personagem;
+        this.heroi = personagem;
         setEmpty(false);
     }
     public void setPersonagem(Paladino personagem) {
         this.paladino = personagem;
         this.personagem = personagem;
+        this.heroi = personagem;
         setEmpty(false);
     }
     public void setPersonagem(MonstroMenor personagem) {
@@ -158,8 +173,22 @@ public class Celula {
         setEmpty(false);
     }
     
+    public void removerArmadilha (){
+        this.armadilha = null;
+        this.armadilhaPA = null;
+        this.armadilhaPF = null;
+    }
+    
     public Armadilha getArmadilha() {
         return armadilha;
+    }
+    
+    public ArmadilhaPerdaFixa getArmadilhaPF() {
+        return armadilhaPF;
+    }
+    
+    public ArmadilhaPerdaAleatoria getArmadilhaPA() {
+        return armadilhaPA;
     }
     
 }

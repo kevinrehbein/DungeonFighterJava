@@ -9,15 +9,14 @@ package dungeonfighterjava;
  * @author kevin
  */
 public class ArmadilhaPerdaFixa extends Armadilha {
-    private final int perdaFixa;
+    private final int dano;
     
     public ArmadilhaPerdaFixa() {
         super("ArmadilhaPF");
-        this.perdaFixa = 1;
+        this.dano = 1;
     }
     
-    @Override
-    public void aplicarEfeito(Heroi heroi) {
-        heroi.receberDano(perdaFixa);
+    public int getDano(){
+        return dano;
     }
 }

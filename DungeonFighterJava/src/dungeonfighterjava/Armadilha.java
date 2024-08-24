@@ -22,6 +22,4 @@ public abstract class Armadilha {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
-    public abstract void aplicarEfeito(Heroi heroi);
 }

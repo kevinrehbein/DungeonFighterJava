@@ -4,20 +4,45 @@
  */
 package dungeonfighterjava;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author kevin
  */
 public class Barbaro extends Heroi {
     
-    public Barbaro() {
-        super("Barbaro", 10, 5, 100);
+    private int vidaMaxima, ataqueOriginal;
+    private boolean flagHabilidade;
+    
+    public Barbaro(int ataque, int defesa, int saude) {
+        super("Barbaro", ataque, defesa, saude);
+        vidaMaxima = saude;
+        ataqueOriginal = ataque;
+        flagHabilidade = true;
     }
 
     @Override
     public void usarHabilidadeEspecial() {
-        // Golpe furioso - aumenta ataque em 50% por um turno
+        //Golpe Furioso - Desfere um ataque que causa 50% a mais de dano
+        if (flagHabilidade) {
+            
+            this.setAtaque(this.getAtaque() + this.getAtaque()/2);
+            
+            JOptionPane.showMessageDialog(null, "Golpe Furioso - Desfere um ataque que causa 50% a mais de dano");
+            flagHabilidade = false;
+            
+        } else JOptionPane.showMessageDialog(null, "Você já usou a habilidade Especial nessa batalha!");
     }
+
+    public void setFlagHabilidade(boolean flagHabilidade) {
+        this.flagHabilidade = flagHabilidade;
+    }
+
+    public int getAtaqueOriginal() {
+        return ataqueOriginal;
+    }    
+    
 }
 
 
