@@ -1,51 +1,94 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dungeonfighterjava;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
-/**
- *
- * @author kevin
- */
 public class MainFrame extends JFrame {
     
-    public MainFrame(String name) {  
-        
-        super(name);
-        this.setSize(500, 300);
-        this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+    ImageIcon img = new ImageIcon(getClass().getResource("/images/logofundoremovido.png"));
+    JLabel foto = new JLabel(img);
+
+    public MainFrame(String title) {  
+        super(title);
+        initializeUI();
+    }
+
+    private void initializeUI() {
+        foto.setBounds(0, 0, 292, 152);
+        add(foto);
+        setSize(750, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null); // Centraliza a janela
+
         JPanel mainPanel = new JPanel();
-        this.add(mainPanel);
-        mainPanel.setLayout(null);
+        mainPanel.setLayout(new GridBagLayout());
+        mainPanel.setBackground(Color.DARK_GRAY); // Define a cor de fundo do painel
+        add(mainPanel);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(70, 10, 10, 10); // 70 para o top pra ficar bem espaçado do logo
+        gbc.gridy = 0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 1.0; // Permite que os botões se expandam horizontalmente
         
-        JButton buttonJogar = new JButton("Jogar");
-        buttonJogar.setBounds(175, 50, 150, 50);
-        mainPanel.add(buttonJogar);
-        
-        JButton button2 = new JButton("DEBUG");
-        button2.setBounds(175, 110, 150, 50);
-        mainPanel.add(button2);
-        
-        JButton buttonSair = new JButton("Sair");
-        buttonSair.setBounds(175, 170, 150, 50);
-        mainPanel.add(buttonSair);
-        
-        buttonJogar.addActionListener(this::jogar);
-        
-        buttonSair.addActionListener(this::sair);
-    }
     
-    private void sair(ActionEvent actionEventSair){
-        this.dispose();
+        
+
+        // Botão Jogar
+        gbc.gridx = 0; // primeiro botao
+        JButton buttonJogar = createButton("Jogar", e -> jogar());
+        mainPanel.add(buttonJogar, gbc);
+
+        // Botão Debug
+        gbc.gridx = 1; // segundo botao
+        JButton buttonDebug = createButton("DEBUG", e -> debug());
+        mainPanel.add(buttonDebug, gbc);
+
+        // Botão Sair
+        gbc.gridx = 2; // terceiro botao
+        JButton buttonSair = createButton("Sair", e -> sair());
+        mainPanel.add(buttonSair, gbc);
+
+        setVisible(true);
     }
-    
-    private void jogar(ActionEvent actionEventJogar){
+
+   private JButton createButton(String text, ActionListener actionListener) {
+    JButton button = new JButton(text);
+    button.setPreferredSize(new Dimension(150, 50));
+    button.setFont(new Font("Arial", Font.PLAIN, 16));
+    button.setBackground(Color.LIGHT_GRAY);
+    button.setForeground(Color.BLACK);
+    button.setFocusPainted(false); // Remove a borda de foco padrão
+    button.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2)); // Define a borda do botão
+    button.addActionListener(actionListener);
+    return button;
+}
+
+
+    private void jogar() {
+      // abre a tela de selecao de heroi
         HeroesFrame heroesScreen = new HeroesFrame("Heroes");
+        
+        dispose(); // faz com que somente a tela de seleçao de heroi fique visivel.
+    }
+
+    private void debug() {
+        // Substitua por sua lógica de debug
+        System.out.println("Modo de Debug");
+         
+         
+    }
+
+    private void sair() {
+        int response = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja sair?", "Confirmar Saída", JOptionPane.YES_NO_OPTION);
+        if (response == JOptionPane.YES_OPTION) {
+            dispose();
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new MainFrame("Tela Inicial"));
     }
 }
