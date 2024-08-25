@@ -29,7 +29,6 @@ public class Guerreiro extends Heroi {
             
             this.setDefesa(this.getDefesa() + this.getDefesa()/2);
             
-            JOptionPane.showMessageDialog(null, "Postura Defensiva - aumenta defesa em 50% por dois turnos");
             flagHabilidade = false;
             
         } else JOptionPane.showMessageDialog(null, "Você já usou a habilidade Especial nessa batalha!");
@@ -41,6 +40,10 @@ public class Guerreiro extends Heroi {
 
     public int getDefesaOriginal() {
         return defesaOriginal;
+    }
+
+    public boolean isFlagHabilidade() {
+        return flagHabilidade;
     }
     
 }

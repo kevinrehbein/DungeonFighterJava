@@ -15,10 +15,12 @@ public class Heroi extends Personagem {
     private int elixires;
     private final int CAPACIDADE_MAX_ELIXIRES = 3;
     private final int pontosElixir = 10;
+    private final int vidaMaxima;
 
     public Heroi(String nome, int ataque, int defesa, int saude) {
         super(nome, ataque, defesa, saude);
         this.elixires = 0;
+        this.vidaMaxima = saude;
     }
     
     public int adicionarElixir() {
@@ -32,6 +34,10 @@ public class Heroi extends Personagem {
         if (elixires > 0) {
             this.setSaude(this.getSaude() + pontosElixir);
             elixires--;
+            
+            if (this.getSaude() > vidaMaxima){
+                this.setSaude(vidaMaxima);
+            }
         } else JOptionPane.showMessageDialog(null, "Sua bolsa está vazia!");
     }
     

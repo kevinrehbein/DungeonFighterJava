@@ -9,7 +9,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Random;
 import javax.swing.*;
 
@@ -21,16 +20,17 @@ public class TabuleiroFrame extends JFrame {
     
     private Tabuleiro tabuleiro;
     private int x, y, posHeroiX, posHeroiY, countDicas;
-    private boolean visible, flagDica=false;
+    private boolean visible, flagDica=false, flagContinuarButton = true;
     private JButton[][] b;
     private JPanel gridPanel, attributesPanel;
-    private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9;
-    private JButton buttonDica, buttonSair, buttonElixir;
+    private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16, l17, l18, l20, l21, l22;
+    private JButton buttonDica, buttonSair, buttonElixir, continuarButton, atacarButton, habilidadeButton;
     
     private Personagem player, inimigo;
     private final int w = 10;
     JFrame combatFrame;
     private int habilidadeAtiva;
+    String resultadosAtaque, resultadosDefesa, resultadosTotal;
     
     public TabuleiroFrame(String name, Tabuleiro tabuleiro, boolean visible) {
         super(name);
@@ -520,6 +520,46 @@ public class TabuleiroFrame extends JFrame {
         combatFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         combatFrame.setSize(800, 500);
         
+        JPanel finalPanel = new JPanel();
+        finalPanel.setLayout(new BoxLayout(finalPanel, BoxLayout.X_AXIS));
+        finalPanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
+        
+        finalPanel.add(Box.createHorizontalGlue());
+        
+        
+            JPanel heroPanel = new JPanel();
+            heroPanel.setLayout(new BoxLayout(heroPanel, BoxLayout.Y_AXIS));
+            heroPanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
+
+            l14 = new JLabel(String.valueOf(tabuleiro.getCelula(posHeroiX, posHeroiY).getPersonagem().getNome()));
+            l14.setFont(new Font("Arial",1, 18));
+            l14.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+            heroPanel.add(l14);
+
+            heroPanel.add(new JLabel(" "));
+            heroPanel.add(new JLabel(" "));
+
+            l11 = new JLabel("Ataque: " + String.valueOf(tabuleiro.getCelula(posHeroiX, posHeroiY).getPersonagem().getAtaque()));
+            l11.setFont(new Font ("Arial", 1, 12));
+            l11.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+            heroPanel.add(l11);
+            heroPanel.add(new JLabel(" "));
+
+            l12 = new JLabel("Defesa: " + String.valueOf(tabuleiro.getCelula(posHeroiX, posHeroiY).getPersonagem().getDefesa()));
+            l12.setFont(new Font ("Arial", 1, 12));
+            l12.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+            heroPanel.add(l12);
+            heroPanel.add(new JLabel(" "));
+
+            l13 = new JLabel("Saúde: " + String.valueOf(tabuleiro.getCelula(posHeroiX, posHeroiY).getPersonagem().getSaude()));
+            l13.setFont(new Font ("Arial", 1, 12));
+            l13.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+            heroPanel.add(l13);
+            heroPanel.add(new JLabel(" "));
+        
+        
+        finalPanel.add(heroPanel);
+        
         JPanel combatPanel = new JPanel();
         combatPanel.setLayout(new BoxLayout(combatPanel, BoxLayout.Y_AXIS));
         combatPanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
@@ -533,10 +573,28 @@ public class TabuleiroFrame extends JFrame {
         
         combatPanel.add(Box.createVerticalGlue());
         
-        l7 = new JLabel("Seu Turno: (Escolha uma ação abaixo)");
+        l7 = new JLabel("Seu Turno");
         l7.setFont(new Font ("Arial", 1, 16));
         l7.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         combatPanel.add(l7);
+        combatPanel.add(new JLabel(" "));
+        
+        l20 = new JLabel();
+        l20.setFont(new Font ("Arial", 1, 12));
+        l20.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        combatPanel.add(l20);
+        combatPanel.add(new JLabel(" "));
+        
+        l21 = new JLabel();
+        l21.setFont(new Font ("Arial", 1, 12));
+        l21.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        combatPanel.add(l21);
+        combatPanel.add(new JLabel(" "));
+        
+        l22 = new JLabel();
+        l22.setFont(new Font ("Arial", 1, 12));
+        l22.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        combatPanel.add(l22);
         combatPanel.add(new JLabel(" "));
         
             JPanel buttonsPanel = new JPanel();
@@ -546,14 +604,14 @@ public class TabuleiroFrame extends JFrame {
             //buttonsPanel.add(Box.createVerticalGlue());
             buttonsPanel.add(Box.createHorizontalGlue());
 
-            JButton atacarButton = new JButton("Atacar");
+            atacarButton = new JButton("Atacar");
             atacarButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
             buttonsPanel.add(atacarButton);
             atacarButton.addActionListener(this::atacar);
 
             buttonsPanel.add(new JLabel("   "));
 
-            JButton habilidadeButton = new JButton("Habilidade Especial");
+            habilidadeButton = new JButton("Habilidade Especial");
             habilidadeButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
             buttonsPanel.add(habilidadeButton);
             habilidadeButton.addActionListener(this::habilidadeEspecial);
@@ -563,6 +621,12 @@ public class TabuleiroFrame extends JFrame {
 
             combatPanel.add(buttonsPanel);
             
+        continuarButton = new JButton("Continuar");
+        continuarButton.setVisible(false);
+        continuarButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
+        combatPanel.add(continuarButton);
+        continuarButton.addActionListener(this::continuar);
+            
         l8 = new JLabel();
         l8.setFont(new Font ("Arial", 1, 16));
         l8.setAlignmentX(JLabel.CENTER_ALIGNMENT);
@@ -570,16 +634,68 @@ public class TabuleiroFrame extends JFrame {
         
         combatPanel.add(Box.createVerticalGlue());
         
-        combatFrame.add(combatPanel);
+        finalPanel.add(combatPanel);
+        
+            JPanel inimigoPanel = new JPanel();
+            inimigoPanel.setLayout(new BoxLayout(inimigoPanel, BoxLayout.Y_AXIS));
+            inimigoPanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
+
+            l15 = new JLabel(String.valueOf(tabuleiro.getCelula(x, y).getPersonagem().getNome()));
+            l15.setFont(new Font("Arial",1, 18));
+            l15.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+            inimigoPanel.add(l15);
+
+            inimigoPanel.add(new JLabel(" "));
+            inimigoPanel.add(new JLabel(" "));
+
+            l16 = new JLabel("Ataque: " + String.valueOf(tabuleiro.getCelula(x, y).getPersonagem().getAtaque()));
+            l16.setFont(new Font ("Arial", 1, 12));
+            l16.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+            inimigoPanel.add(l16);
+            inimigoPanel.add(new JLabel(" "));
+
+            l17 = new JLabel("Defesa: " + String.valueOf(tabuleiro.getCelula(x, y).getPersonagem().getDefesa()));
+            l17.setFont(new Font ("Arial", 1, 12));
+            l17.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+            inimigoPanel.add(l17);
+            inimigoPanel.add(new JLabel(" "));
+
+            l18 = new JLabel("Saúde: " + String.valueOf(tabuleiro.getCelula(x, y).getPersonagem().getSaude()));
+            l18.setFont(new Font ("Arial", 1, 12));
+            l18.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+            inimigoPanel.add(l18);
+            inimigoPanel.add(new JLabel(" "));
+        
+        
+        finalPanel.add(inimigoPanel);
+        
+        finalPanel.add(Box.createHorizontalGlue());
+        
+        combatFrame.add(finalPanel);
         combatFrame.setVisible(true);
+    }
+    
+    private void atualizaLabelsCombat(){
+        l11.setText("Ataque: " + String.valueOf(tabuleiro.getCelula(posHeroiX, posHeroiY).getPersonagem().getAtaque()));
+        l12.setText("Defesa: " + String.valueOf(tabuleiro.getCelula(posHeroiX, posHeroiY).getPersonagem().getDefesa()));
+        l13.setText("Saúde: " + String.valueOf(tabuleiro.getCelula(posHeroiX, posHeroiY).getPersonagem().getSaude()));
+
+
+        l16.setText("Ataque: " + String.valueOf(tabuleiro.getCelula(x, y).getPersonagem().getAtaque()));
+        l17.setText("Defesa: " + String.valueOf(tabuleiro.getCelula(x, y).getPersonagem().getDefesa()));
+        l18.setText("Saúde: " + String.valueOf(tabuleiro.getCelula(x, y).getPersonagem().getSaude()));
+        
     }
     
     private void atacar(ActionEvent atacarEvent){
         
-        int ataque = 0, defesa = 0, resultado = 0, rounds = 2;
+        int ataque = 0, defesa = 0, resultado = 0, rounds = 2, aleatorio1, aleatorio2;
         boolean turno = true;
         
         Random geradorAleatorio = new Random();
+        
+        aleatorio1 = geradorAleatorio.nextInt(w);
+        aleatorio2 = geradorAleatorio.nextInt(w);
         
         while (inimigo.isAlive() && player.isAlive() && rounds > 0) {
                 
@@ -594,8 +710,9 @@ public class TabuleiroFrame extends JFrame {
                                 case "Barbaro":
                                     //Golpe Furioso - Desfere um ataque que causa 50% a mais de dano
                                     tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().usarHabilidadeEspecial();
-                                    ataque = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getAtaque();
-                                    defesa = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(x, y).getMonstroMenor().getDefesa();
+                                    ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getAtaque();
+                                    defesa = aleatorio2 + tabuleiro.getCelula(x, y).getMonstroMenor().getDefesa();
+                                    ataque = ataque + ataque/2;
                                     resultado = ataque - defesa;
                                     //reverte efeito da habilidade
                                     tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().setAtaque(tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getAtaqueOriginal());
@@ -604,8 +721,8 @@ public class TabuleiroFrame extends JFrame {
                                 case "Guerreiro":
                                     // Postura Defensiva - aumenta defesa em 50% por dois turnos 
                                     tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().usarHabilidadeEspecial();
-                                    ataque = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getAtaque();
-                                    defesa = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(x, y).getMonstroMenor().getDefesa();
+                                    ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getAtaque();
+                                    defesa = aleatorio2 + tabuleiro.getCelula(x, y).getMonstroMenor().getDefesa();
                                     resultado = ataque - defesa;
                                     //reverte o efeito da habilidade
                                     tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().setDefesa(tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getDefesaOriginal());
@@ -620,8 +737,9 @@ public class TabuleiroFrame extends JFrame {
                                 case "Barbaro":
                                      //Golpe Furioso - Desfere um ataque que causa 50% a mais de dano
                                     tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().usarHabilidadeEspecial();
-                                    ataque = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getAtaque();
-                                    defesa = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(x, y).getChefao().getDefesa();
+                                    ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getAtaque();
+                                    ataque = ataque + ataque/2;
+                                    defesa = aleatorio2 + tabuleiro.getCelula(x, y).getChefao().getDefesa();
                                     resultado = ataque - defesa;
                                     //reverte efeito da habilidade
                                     tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().setAtaque(tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getAtaqueOriginal());
@@ -630,8 +748,8 @@ public class TabuleiroFrame extends JFrame {
                                 case "Guerreiro":
                                     // Postura Defensiva - aumenta defesa em 50% por dois turnos 
                                     tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().usarHabilidadeEspecial();
-                                    ataque = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getAtaque();
-                                    defesa = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(x, y).getChefao().getDefesa();
+                                    ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getAtaque();
+                                    defesa = aleatorio2 + tabuleiro.getCelula(x, y).getChefao().getDefesa();
                                     resultado = ataque - defesa;
                                     //reverte o efeito da habilidade
                                     tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().setDefesa(tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getDefesaOriginal());
@@ -648,18 +766,18 @@ public class TabuleiroFrame extends JFrame {
 
                             switch (player.getNome()){
                                 case "Barbaro":
-                                     ataque = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getAtaque();
-                                     defesa = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(x, y).getMonstroMenor().getDefesa();
+                                     ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getAtaque();
+                                     defesa = aleatorio2 + tabuleiro.getCelula(x, y).getMonstroMenor().getDefesa();
                                      resultado = ataque - defesa;
                                      break;
                                 case "Guerreiro":
-                                     ataque = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getAtaque();
-                                     defesa = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(x, y).getMonstroMenor().getDefesa();
+                                     ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getAtaque();
+                                     defesa = aleatorio2 + tabuleiro.getCelula(x, y).getMonstroMenor().getDefesa();
                                      resultado = ataque - defesa;
                                      break;
                                 case "Paladino":
-                                     ataque = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().getAtaque();
-                                     defesa = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(x, y).getMonstroMenor().getDefesa();
+                                     ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().getAtaque();
+                                     defesa = aleatorio2 + tabuleiro.getCelula(x, y).getMonstroMenor().getDefesa();
                                      resultado = ataque - defesa;
                                      break;
                                 }
@@ -669,18 +787,18 @@ public class TabuleiroFrame extends JFrame {
 
                             switch (player.getNome()){
                                 case "Barbaro":
-                                     ataque = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getAtaque();
-                                     defesa = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(x, y).getChefao().getDefesa();
+                                     ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getAtaque();
+                                     defesa = aleatorio2 + tabuleiro.getCelula(x, y).getChefao().getDefesa();
                                      resultado = ataque - defesa;
                                      break;
                                 case "Guerreiro":
-                                     ataque = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getAtaque();
-                                     defesa = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(x, y).getChefao().getDefesa();
+                                     ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getAtaque();
+                                     defesa = aleatorio2 + tabuleiro.getCelula(x, y).getChefao().getDefesa();
                                      resultado = ataque - defesa;
                                      break;
                                 case "Paladino":
-                                     ataque = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().getAtaque();
-                                     defesa = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(x, y).getChefao().getDefesa();
+                                     ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().getAtaque();
+                                     defesa = aleatorio2 + tabuleiro.getCelula(x, y).getChefao().getDefesa();
                                      resultado = ataque - defesa;
                                      break;
                             }
@@ -692,10 +810,23 @@ public class TabuleiroFrame extends JFrame {
                 if (resultado > 0){
                     inimigo.setSaude(inimigo.getSaude() - resultado);                
                 } else player.setSaude(player.getSaude() + resultado);
-
-                JOptionPane.showMessageDialog(null, "Seu ataque: " + ataque + " | Defesa do inimigo: " + defesa + " | Dano total: " + resultado);
+                
+                resultadosAtaque = "Seu ataque: " + aleatorio1 + " + " + tabuleiro.getCelula(posHeroiX, posHeroiY).getHeroi().getAtaque() + " = " + ataque;
+                resultadosDefesa = "Defesa do inimigo: " + aleatorio2 + " + " + tabuleiro.getCelula(posHeroiX, posHeroiY).getHeroi().getDefesa() + " = " + defesa;
+                resultadosTotal = "Dano total: " + resultado;
+                        
+                l20.setText(resultadosAtaque);
+                l21.setText(resultadosDefesa);
+                l22.setText(resultadosTotal);
+                
+                atacarButton.setVisible(false);
+                habilidadeButton.setVisible(false);
+                continuarButton.setVisible(true);
+                //JOptionPane.showMessageDialog(null, "Seu ataque: " + aleatorio1 + " + " + (ataque - aleatorio1) + " = " + ataque + " | Sua Defesa: " + aleatorio2 + " + " + (defesa - aleatorio2) + " = " + defesa + " | Dano total: " + resultado);
                 turno = false;
                 rounds--;
+                
+                atualizaLabelsCombat();
 
             } else {
                 //defendendo
@@ -704,18 +835,18 @@ public class TabuleiroFrame extends JFrame {
 
                         switch (player.getNome()){
                             case "Barbaro":
-                                ataque = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(x, y).getMonstroMenor().getAtaque();
-                                defesa = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getDefesa();
+                                ataque = aleatorio1 + tabuleiro.getCelula(x, y).getMonstroMenor().getAtaque();
+                                defesa = aleatorio2 + tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getDefesa();
                                 resultado = ataque - defesa;
                                 break;
                             case "Guerreiro":
-                                 ataque = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(x, y).getMonstroMenor().getAtaque();
-                                 defesa = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getDefesa();
+                                 ataque = aleatorio1 + tabuleiro.getCelula(x, y).getMonstroMenor().getAtaque();
+                                 defesa = aleatorio2 + tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getDefesa();
                                  resultado = ataque - defesa;
                                  break;
                             case "Paladino":
-                                 ataque = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(x, y).getMonstroMenor().getAtaque();
-                                 defesa = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().getDefesa();
+                                 ataque = aleatorio1 + tabuleiro.getCelula(x, y).getMonstroMenor().getAtaque();
+                                 defesa = aleatorio2 + tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().getDefesa();
                                  resultado = ataque - defesa;
                                  break;
                             }
@@ -725,18 +856,18 @@ public class TabuleiroFrame extends JFrame {
                         
                         switch (player.getNome()){
                             case "Barbaro":
-                                 ataque = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getAtaque();
-                                 defesa = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(x, y).getChefao().getDefesa();
+                                 ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getAtaque();
+                                 defesa = aleatorio2 + tabuleiro.getCelula(x, y).getChefao().getDefesa();
                                  resultado = ataque - defesa;
                                  break;
                             case "Guerreiro":
-                                 ataque = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getAtaque();
-                                 defesa = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(x, y).getChefao().getDefesa();
+                                 ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getAtaque();
+                                 defesa = aleatorio2 + tabuleiro.getCelula(x, y).getChefao().getDefesa();
                                  resultado = ataque - defesa;
                                  break;
                             case "Paladino":
-                                 ataque = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().getAtaque();
-                                 defesa = geradorAleatorio.nextInt(w) + tabuleiro.getCelula(x, y).getChefao().getDefesa();
+                                 ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().getAtaque();
+                                 defesa = aleatorio2 + tabuleiro.getCelula(x, y).getChefao().getDefesa();
                                  resultado = ataque - defesa;
                                  break;
                             }
@@ -746,8 +877,11 @@ public class TabuleiroFrame extends JFrame {
                 if (resultado > 0){
                     player.setSaude(player.getSaude() - resultado);                
                 } else inimigo.setSaude(inimigo.getSaude() + resultado);
-
-                JOptionPane.showMessageDialog(null, "Ataque do inimigo: " + ataque + " | Sua Defesa: " + defesa + " | Dano total: " + resultado);
+                
+                resultadosAtaque = "Ataque do inimigo: " + aleatorio1 + " + " + tabuleiro.getCelula(posHeroiX, posHeroiY).getHeroi().getAtaque() + " = " + ataque;
+                resultadosDefesa = "Sua Defesa: " + aleatorio2 + " + " + tabuleiro.getCelula(posHeroiX, posHeroiY).getHeroi().getDefesa() + " = " + defesa;
+                resultadosTotal = "Dano total: " + resultado;
+                
                 turno = true;
                 rounds--;
             }
@@ -794,14 +928,23 @@ public class TabuleiroFrame extends JFrame {
 
         switch (player.getNome()){
         case "Barbaro":
+            if (tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().isFlagHabilidade()) {
+                JOptionPane.showMessageDialog(null, "Golpe Furioso - Seu próximo ataque causa 50% a mais de dano");
+            } else JOptionPane.showMessageDialog(null, "Você já usou a habilidade Especial nessa batalha!");
             //numero de rounds
             habilidadeAtiva = 1;
             break;
         case "Guerreiro":
+            if (tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().isFlagHabilidade()){
+                JOptionPane.showMessageDialog(null, "Postura Defensiva - aumenta defesa em 50% por dois turnos");
+            } else JOptionPane.showMessageDialog(null, "Você já usou a habilidade Especial nessa batalha!");
             //numero de rounds
             habilidadeAtiva = 2;
             break;
         case "Paladino":
+            if (tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().isFlagHabilidade()) {
+                JOptionPane.showMessageDialog(null, "Recuperação - Recupera 50% dos seus pontos de vida totais");
+            } else JOptionPane.showMessageDialog(null, "Você já usou a habilidade Especial nessa batalha!");
             tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().usarHabilidadeEspecial();
             break;
         }    
@@ -810,5 +953,30 @@ public class TabuleiroFrame extends JFrame {
     private void elixirPressed(ActionEvent elixirEvent) {
         tabuleiro.getCelula(posHeroiX, posHeroiY).getHeroi().usarElixir();
         this.atualizaLabels();
+    }
+
+    private void continuar(ActionEvent e) {
+        
+        atualizaLabelsCombat();
+        
+        if (flagContinuarButton){
+            
+            l7.setText("Turno do inimigo");
+            l20.setText(resultadosAtaque);
+            l21.setText(resultadosDefesa);
+            l22.setText(resultadosTotal);;
+            flagContinuarButton = false;
+        } else {
+            
+            l7.setText("Seu turno");
+            l20.setText("");
+            l21.setText("");
+            l22.setText("");
+            flagContinuarButton = true;
+            continuarButton.setVisible(false);
+            atacarButton.setVisible(true);
+            habilidadeButton.setVisible(true);
+        }
+        
     }
 }

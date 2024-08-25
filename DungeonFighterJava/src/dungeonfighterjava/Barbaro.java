@@ -27,12 +27,11 @@ public class Barbaro extends Heroi {
         //Golpe Furioso - Desfere um ataque que causa 50% a mais de dano
         if (flagHabilidade) {
             
-            this.setAtaque(this.getAtaque() + this.getAtaque()/2);
+            //this.setAtaque(this.getAtaque() + this.getAtaque()/2);
             
-            JOptionPane.showMessageDialog(null, "Golpe Furioso - Desfere um ataque que causa 50% a mais de dano");
             flagHabilidade = false;
             
-        } else JOptionPane.showMessageDialog(null, "Você já usou a habilidade Especial nessa batalha!");
+        }
     }
 
     public void setFlagHabilidade(boolean flagHabilidade) {
@@ -42,6 +41,10 @@ public class Barbaro extends Heroi {
     public int getAtaqueOriginal() {
         return ataqueOriginal;
     }    
+
+    public boolean isFlagHabilidade() {
+        return flagHabilidade;
+    }
     
 }
 
