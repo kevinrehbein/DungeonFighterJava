@@ -9,7 +9,10 @@ public class AttributesFrame extends JFrame {
     private int pontos = 5;
     private int ataque = 0, defesa = 0, saude = 0;
     private final String tipoHeroi;
-    private Heroi heroiConfigurado;
+          
+    private Barbaro barbaroConfigurado;
+    private Guerreiro guerreiroConfigurado;
+    private Paladino paladinoConfigurado;
 
     JLabel heroesLabel;
 
@@ -184,39 +187,58 @@ public class AttributesFrame extends JFrame {
     }
 
     private void confirmarAtributos(ActionEvent actionEvent) {
-        // Cria o herói com os atributos definidos
-        Heroi heroiConfigurado;
+        
+        // Cria o herói com os atributos definidos      
         switch (tipoHeroi) {
             case "Barbaro":
-                heroiConfigurado = new Barbaro();
+                barbaroConfigurado = new Barbaro();
+                
+                // Aplica os atributos personalizados
+                barbaroConfigurado.setAtaque(barbaroConfigurado.getAtaque() + ataque);
+                barbaroConfigurado.setDefesa(barbaroConfigurado.getDefesa() + defesa);
+                barbaroConfigurado.setSaude(barbaroConfigurado.getSaude() + saude);
+                
+                // Inicia o jogo com o herói configurado
+                iniciarJogo(barbaroConfigurado);
                 break;
             case "Guerreiro":
-                heroiConfigurado = new Guerreiro();
+                guerreiroConfigurado = new Guerreiro();
+                
+                // Aplica os atributos personalizados
+                guerreiroConfigurado.setAtaque(guerreiroConfigurado.getAtaque() + ataque);
+                guerreiroConfigurado.setDefesa(guerreiroConfigurado.getDefesa() + defesa);
+                guerreiroConfigurado.setSaude(guerreiroConfigurado.getSaude() + saude);
+                
+                // Inicia o jogo com o herói configurado
+                iniciarJogo(guerreiroConfigurado);
                 break;
             case "Paladino":
-                heroiConfigurado = new Paladino();
+                paladinoConfigurado = new Paladino();
+                
+                // Aplica os atributos personalizados
+                paladinoConfigurado.setAtaque(paladinoConfigurado.getAtaque() + ataque);
+                paladinoConfigurado.setDefesa(paladinoConfigurado.getDefesa() + defesa);
+                paladinoConfigurado.setSaude(paladinoConfigurado.getSaude() + saude);
+                
+                // Inicia o jogo com o herói configurado
+                iniciarJogo(paladinoConfigurado);
                 break;
             default:
                 throw new IllegalArgumentException("Tipo de herói desconhecido: " + tipoHeroi);
         }
-
-        // Aplica os atributos personalizados
-        heroiConfigurado.setAtaque(heroiConfigurado.getAtaque() + ataque);
-        heroiConfigurado.setDefesa(heroiConfigurado.getDefesa() + defesa);
-        heroiConfigurado.setSaude(heroiConfigurado.getSaude() + saude);
-
-       /* Sequencia de linhas para testar se os atributos estao sendo passados corretamente pro jogo
-        System.out.println("Ataque do heroi: " + heroiConfigurado.getAtaque());
-        System.out.println("Defesa do heroi: " + heroiConfigurado.getDefesa());
-        System.out.println("Saude do heroi: " + heroiConfigurado.getSaude());
-        */
-       
-        // Inicia o jogo com o herói configurado
-        iniciarJogo(heroiConfigurado);
+          
         this.dispose(); // Fecha a tela de atributos
     }
 
-    private void iniciarJogo(Heroi heroi) {
-        DungeonFighterJava.iniciarJogo(heroi);
+    private void iniciarJogo(Barbaro heroi) {
+        new DungeonFighterJava(heroi);
+    }
+    
+    private void iniciarJogo(Guerreiro heroi) {
+        new DungeonFighterJava(heroi);
+    }
+    
+    private void iniciarJogo(Paladino heroi) {
+        new DungeonFighterJava(heroi);
     }
 }

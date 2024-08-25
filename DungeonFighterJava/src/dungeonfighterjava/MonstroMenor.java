@@ -10,12 +10,8 @@ package dungeonfighterjava;
  */
 public class MonstroMenor extends Monstro {
     
-    public MonstroMenor() {
-        super("MonstroMenor", 7, 6, 50);
-    }
     
-    @Override
-    public void usarHabilidadeEspecial() {
-        // Implementar habilidade especial do monstro, se houver
+    public MonstroMenor() {
+        super("MonstroMenor", 5, 4, 12);
     }
 }

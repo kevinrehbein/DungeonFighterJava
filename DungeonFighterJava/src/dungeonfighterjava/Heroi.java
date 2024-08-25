@@ -10,17 +10,17 @@ import javax.swing.JOptionPane;
  *
  * @author kevin
  */
-public class Heroi extends Personagem {
+public abstract class Heroi extends Personagem {
         
     private int elixires;
     private final int CAPACIDADE_MAX_ELIXIRES = 3;
     private final int pontosElixir = 10;
-    private final int vidaMaxima;
+    private boolean flagHabilidade;
 
     public Heroi(String nome, int ataque, int defesa, int saude) {
         super(nome, ataque, defesa, saude);
         this.elixires = 0;
-        this.vidaMaxima = saude;
+        this.flagHabilidade = true;
     }
     
     public int adicionarElixir() {
@@ -35,8 +35,8 @@ public class Heroi extends Personagem {
             this.setSaude(this.getSaude() + pontosElixir);
             elixires--;
             
-            if (this.getSaude() > vidaMaxima){
-                this.setSaude(vidaMaxima);
+            if (this.getSaude() > this.getVidaMaxima()){
+                this.setSaude(this.getVidaMaxima());
             }
         } else JOptionPane.showMessageDialog(null, "Sua bolsa está vazia!");
     }
@@ -45,9 +45,13 @@ public class Heroi extends Personagem {
         return elixires;
     }
     
-    @Override
-    public void usarHabilidadeEspecial() {
-        // Implementar habilidade especial de acordo com o tipo de herói
+    public abstract void usarHabilidadeEspecial();
+
+    public boolean isFlagHabilidade() {
+        return flagHabilidade;
     }
-    
+
+    public void setFlagHabilidade(boolean flagHabilidade) {
+        this.flagHabilidade = flagHabilidade;
+    }
 }

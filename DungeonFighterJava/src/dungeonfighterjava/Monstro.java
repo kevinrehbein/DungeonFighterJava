@@ -8,14 +8,9 @@ package dungeonfighterjava;
  *
  * @author kevin
  */
-public class Monstro extends Personagem {
+public abstract class Monstro extends Personagem {
     public Monstro(String nome, int ataque, int defesa, int saude) {
         super(nome, ataque, defesa, saude);
-    }
-
-    @Override
-    public void usarHabilidadeEspecial() {
-        // Implementar habilidade especial do monstro, se houver
     }
 }
 

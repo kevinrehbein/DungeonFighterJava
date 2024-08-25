@@ -1,27 +1,44 @@
 package dungeonfighterjava;
 
 import java.util.Random;
-import javax.swing.*;
 
 public class DungeonFighterJava {
-    private static final int linhas = 5;
-    private static final int colunas = 10;
-    private static final int numeroMonstros = linhas - 1;
-    private static final int numeroPerdaFixa = 5;
-    private static final int numeroPerdaAleatoria = 5;
-    private static final int numeroDicas = 3;
-    private static final int numeroElixires = 4;
+    private final int linhas = 5;
+    private final int colunas = 10;
+    private final int numeroMonstros = linhas - 1;
+    private final int numeroPerdaFixa = 5;
+    private final int numeroPerdaAleatoria = 5;
+    private final int numeroDicas = 3;
+    private final int numeroElixires = 4;
+    
+    private Tabuleiro t1;
+       
+    Random geradorAleatorio = new Random();
+    
+    public DungeonFighterJava(Barbaro heroi){
+        
+        t1 = new Tabuleiro(linhas, colunas, numeroDicas);
+        t1.getCelula(0, geradorAleatorio.nextInt(9)).setPersonagem(heroi);
+        iniciarJogo();
+    }
+    
+    public DungeonFighterJava(Guerreiro heroi){
+        
+        t1 = new Tabuleiro(linhas, colunas, numeroDicas);
+        t1.getCelula(0, geradorAleatorio.nextInt(9)).setPersonagem(heroi);
+        iniciarJogo();
+    }
+    
+    public DungeonFighterJava(Paladino heroi){
+        
+        t1 = new Tabuleiro(linhas, colunas, numeroDicas);
+        t1.getCelula(0, geradorAleatorio.nextInt(9)).setPersonagem(heroi);
+        iniciarJogo();
+    }
 
-    public static void main(String[] args) {
+    public void iniciarJogo(){
         
-        Random geradorAleatorio = new Random();
-        Tabuleiro t1 = new Tabuleiro(linhas, colunas, numeroDicas);
-        
-        Barbaro p1 = new Barbaro(15, 10, 100);
-        t1.getCelula(0, geradorAleatorio.nextInt(9)).setPersonagem(p1);
-        
-        Chefao c1 = new Chefao();
-        t1.getCelula(linhas-1, geradorAleatorio.nextInt(9)).setPersonagem(c1);
+        t1.getCelula(linhas-1, geradorAleatorio.nextInt(9)).setPersonagem(new Chefao());
         
         // posiciona Monstros Menores
         for (int count = 0; count < numeroMonstros; count++) {
@@ -68,8 +85,8 @@ public class DungeonFighterJava {
         }
         
         // Abre tela do tabuleiro (false para modo jogador, true para DEBUG);
-        TabuleiroFrame telaTabuleiro = new TabuleiroFrame("Dungeon_Fighter", t1, true);
-        //t1.printTabuleiro();
+        // TabuleiroFrame telaTabuleiro = new TabuleiroFrame("Dungeon_Fighter", t1, true);
+        // t1.printTabuleiro();
     }
 
 }

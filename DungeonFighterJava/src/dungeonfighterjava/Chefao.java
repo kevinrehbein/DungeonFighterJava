@@ -9,12 +9,8 @@ package dungeonfighterjava;
  * @author kevin
  */
 public class Chefao extends Monstro {
-    public Chefao() {
-        super("Chefao", 15, 12, 200);
-    }
     
-    @Override
-    public void usarHabilidadeEspecial() {
-        // Implementar habilidade especial do Chefão, se houver
+    public Chefao() {
+        super("Chefao", 8, 8, 20);
     }
 }

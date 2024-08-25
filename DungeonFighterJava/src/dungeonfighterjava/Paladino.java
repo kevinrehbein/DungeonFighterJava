@@ -11,41 +11,24 @@ import javax.swing.JOptionPane;
  * @author kevin
  */
 public class Paladino extends Heroi {
-    
-    private int vidaMaxima;
-    private boolean flagHabilidade;
-    
-    public Paladino(int ataque, int defesa, int saude) {
-        super("Paladino", ataque, defesa, saude);
-        vidaMaxima = saude;
-        flagHabilidade = true;
+       
+    public Paladino() {
+        super("Paladino", 5, 5, 10);
     }
 
     @Override
     public void usarHabilidadeEspecial() {
         // Recuperação - restaura 50% dos pontos de vida totais
-        if (flagHabilidade) {
-            this.setSaude(this.getSaude() + this.vidaMaxima/2);
+        if (this.isFlagHabilidade()) {
+            this.setSaude(this.getSaude() + this.getVidaMaxima()/2);
         
-            if (this.getSaude() > vidaMaxima) {
-            this.setSaude(vidaMaxima);
+            if (this.getSaude() > this.getVidaMaxima()) {
+            this.setSaude(this.getVidaMaxima());
             }
             
-            flagHabilidade = false;
+            this.setFlagHabilidade(false);
         } else JOptionPane.showMessageDialog(null, "Você já usou a habilidade Especial nessa batalha!");
-    }
-
-    public void setFlagHabilidade(boolean flagHabilidade) {
-        this.flagHabilidade = flagHabilidade;
-    }
-
-    public boolean isFlagHabilidade() {
-        return flagHabilidade;
-    }
-
-    
-    
-    
+    }  
 }
 
 

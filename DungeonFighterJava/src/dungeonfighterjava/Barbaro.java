@@ -12,40 +12,16 @@ import javax.swing.JOptionPane;
  */
 public class Barbaro extends Heroi {
     
-    private int vidaMaxima, ataqueOriginal;
-    private boolean flagHabilidade;
-    
-    public Barbaro(int ataque, int defesa, int saude) {
-        super("Barbaro", ataque, defesa, saude);
-        vidaMaxima = saude;
-        ataqueOriginal = ataque;
-        flagHabilidade = true;
+    public Barbaro() {
+        super("Barbaro", 6, 4, 10);
     }
 
     @Override
     public void usarHabilidadeEspecial() {
         //Golpe Furioso - Desfere um ataque que causa 50% a mais de dano
-        if (flagHabilidade) {
-            
-            //this.setAtaque(this.getAtaque() + this.getAtaque()/2);
-            
-            flagHabilidade = false;
-            
+        if (this.isFlagHabilidade()) {
+
+            this.setFlagHabilidade(false);    
         }
     }
-
-    public void setFlagHabilidade(boolean flagHabilidade) {
-        this.flagHabilidade = flagHabilidade;
-    }
-
-    public int getAtaqueOriginal() {
-        return ataqueOriginal;
-    }    
-
-    public boolean isFlagHabilidade() {
-        return flagHabilidade;
-    }
-    
 }
-
-

@@ -13,12 +13,16 @@ public abstract class Personagem {
     private int ataque;
     private int defesa;
     private int saude;
+    private final int vidaMaxima, ataqueOriginal, defesaOriginal;
     
     public Personagem(String nome, int ataque, int defesa, int saude) {
         this.nome = nome;
         this.ataque = ataque;
         this.defesa = defesa;
         this.saude = saude;
+        this.vidaMaxima = saude;
+        this.ataqueOriginal = ataque;
+        this.defesaOriginal = defesa;
     }
     
     // Métodos para acessar e modificar atributos
@@ -44,15 +48,17 @@ public abstract class Personagem {
         this.saude = saude; 
     }
 
-    @Override
-    public String toString() {
-        return "Personagem{" + "nome=" + nome + ", ataque=" + ataque + ", defesa=" + defesa + ", saude=" + saude + '}';
+    public int getVidaMaxima() {
+        return vidaMaxima;
     }
-    
-    
 
-    // Método abstrato para a habilidade especial
-    public abstract void usarHabilidadeEspecial();
+    public int getAtaqueOriginal() {
+        return ataqueOriginal;
+    }
+
+    public int getDefesaOriginal() {
+        return defesaOriginal;
+    }
     
     // Método para receber dano
     public void receberDano(int dano) {
