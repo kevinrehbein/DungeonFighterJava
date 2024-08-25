@@ -1,14 +1,15 @@
 package dungeonfighterjava;
 
+
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class MainFrame extends JFrame {
     
-    ImageIcon img = new ImageIcon(getClass().getResource("/images/logofundoremovido.png"));
+    ImageIcon img = new ImageIcon(getClass().getResource("./images/logofundoremovido.png"));
     JLabel foto = new JLabel(img);
+    HeroesFrame heroesScreen = null;
 
     public MainFrame(String title) {  
         super(title);
@@ -16,7 +17,7 @@ public class MainFrame extends JFrame {
     }
 
     private void initializeUI() {
-        foto.setBounds(0, 0, 292, 152);
+        foto.setBounds(220, 20, 292, 152);
         add(foto);
         setSize(750, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,25 +65,32 @@ public class MainFrame extends JFrame {
     button.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2)); // Define a borda do botão
     button.addActionListener(actionListener);
     return button;
-}
+    }
 
 
     private void jogar() {
       // abre a tela de selecao de heroi
-        HeroesFrame heroesScreen = new HeroesFrame("Heroes");
+        heroesScreen = new HeroesFrame("Heroes");
         
-        dispose(); // faz com que somente a tela de seleçao de heroi fique visivel.
+        //dispose(); // faz com que somente a tela de seleçao de heroi fique visivel.
     }
 
     private void debug() {
-        // Substitua por sua lógica de debug
-        System.out.println("Modo de Debug");
-         
-         
-    }
+        try {
+            if (heroesScreen.getAttributesScreen().getDungeonFighterStart().getTabuleiroScreen().isTabuleiroVisible()){
+                heroesScreen.getAttributesScreen().getDungeonFighterStart().getTabuleiroScreen().setTabuleiroVisible(false);
+            } else heroesScreen.getAttributesScreen().getDungeonFighterStart().getTabuleiroScreen().setTabuleiroVisible(true);
+            
+            JOptionPane.showMessageDialog(null, "Clique novamente para mudar a visibilidade do tabuleiro");
+        } catch (NullPointerException nexc) {
+            JOptionPane.showMessageDialog(this, "Tabuleiro não criado", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+            
+    }    
 
     private void sair() {
         int response = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja sair?", "Confirmar Saída", JOptionPane.YES_NO_OPTION);
+        
         if (response == JOptionPane.YES_OPTION) {
             dispose();
         }

@@ -1,11 +1,11 @@
 package dungeonfighterjava;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import javax.swing.*;
 
 public class HeroesFrame extends JFrame {
     private String tipoHeroi = null;
+    private AttributesFrame attributesScreen;
 
     public HeroesFrame(String name) {
         super(name);
@@ -38,9 +38,9 @@ public class HeroesFrame extends JFrame {
         // Adiciona as imagens e botões
         String[] nomes = {"Barbaro", "Guerreiro", "Paladino"};
         String[] caminhosImagens = {
-            "/images/barbaro.png",
-            "/images/guerreiro.png",
-            "/images/paladino.png"
+            "./images/barbaro.png",
+            "./images/guerreiro.png",
+            "./images/paladino.png"
         };
 
         for (int i = 0; i < 3; i++) {
@@ -79,9 +79,14 @@ public class HeroesFrame extends JFrame {
 
     private void heroSelected(String heroi) {
         tipoHeroi = heroi;
-        AttributesFrame attributesScreen = new AttributesFrame("Atributos", tipoHeroi);    
+        attributesScreen = new AttributesFrame("Atributos", tipoHeroi);    
         dispose(); // Fecha a tela atual e mostra a tela de atributos
     }
+
+    public AttributesFrame getAttributesScreen() {
+        return attributesScreen;
+    }
+
 }
 
 

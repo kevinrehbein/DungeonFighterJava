@@ -12,6 +12,7 @@ public class DungeonFighterJava {
     private final int numeroElixires = 4;
     
     private Tabuleiro t1;
+    private TabuleiroFrame tabuleiroScreen = null;
        
     Random geradorAleatorio = new Random();
     
@@ -84,9 +85,12 @@ public class DungeonFighterJava {
             }
         }
         
-        // Abre tela do tabuleiro (false para modo jogador, true para DEBUG);
-        // TabuleiroFrame telaTabuleiro = new TabuleiroFrame("Dungeon_Fighter", t1, true);
+        tabuleiroScreen = new TabuleiroFrame("Dungeon_Fighter", t1);
         // t1.printTabuleiro();
     }
 
+    public TabuleiroFrame getTabuleiroScreen() {
+        return tabuleiroScreen;
+    }
+    
 }

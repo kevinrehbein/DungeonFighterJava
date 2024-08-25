@@ -5,13 +5,11 @@
         <group>
             <file>file:/D:/GitHub/DungeonFighterJava/src/dungeonfighterjava/DungeonFighterJava.java</file>
             <file>file:/D:/GitHub/DungeonFighterJava/src/dungeonfighterjava/TabuleiroFrame.java</file>
-            <file>file:/D:/GitHub/DungeonFighterJava/src/dungeonfighterjava/Celula.java</file>
-            <file>file:/D:/GitHub/DungeonFighterJava/src/dungeonfighterjava/Guerreiro.java</file>
-            <file>file:/D:/GitHub/DungeonFighterJava/src/dungeonfighterjava/Paladino.java</file>
+            <file>file:/D:/GitHub/DungeonFighterJava/src/dungeonfighterjava/HeroesFrame.java</file>
+            <file>file:/D:/GitHub/DungeonFighterJava/src/dungeonfighterjava/AttributesFrame.java</file>
             <file>file:/D:/GitHub/DungeonFighterJava/src/dungeonfighterjava/Tabuleiro.java</file>
-            <file>file:/D:/GitHub/DungeonFighterJava/src/dungeonfighterjava/Personagem.java</file>
             <file>file:/D:/GitHub/DungeonFighterJava/src/dungeonfighterjava/Heroi.java</file>
-            <file>file:/D:/GitHub/DungeonFighterJava/src/dungeonfighterjava/Barbaro.java</file>
+            <file>file:/D:/GitHub/DungeonFighterJava/src/dungeonfighterjava/MainFrame.java</file>
         </group>
     </open-files>
 </project-private>

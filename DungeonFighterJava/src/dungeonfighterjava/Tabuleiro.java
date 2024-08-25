@@ -69,22 +69,6 @@ public class Tabuleiro {
         celulaDestino.setEmpty(false);
     }
     
-    /*public Heroi combat(Paladino heroi , MonstroMenor montro){
-        Personagem vencedor;
-        
-            
-        
-        return vencedor;
-    }
-    
-    public Guerreiro combat(Guerreiro heroi , MonstroMenor montro){
-        Personagem vencedor;
-        
-            
-        
-        return vencedor;
-    }*/
-    
     public Celula getCelula (int x, int y){
         return tabuleiro[x][y];
     }

@@ -14,7 +14,9 @@ public class AttributesFrame extends JFrame {
     private Guerreiro guerreiroConfigurado;
     private Paladino paladinoConfigurado;
 
-    JLabel heroesLabel;
+    private final JLabel heroesLabel;
+    
+    private DungeonFighterJava dungeonFighterStart;
 
     public AttributesFrame(String name, String tipoHeroi) {
         super(name);
@@ -60,6 +62,7 @@ public class AttributesFrame extends JFrame {
         // Botões e rótulos para Ataque
         JButton b1 = new JButton("+");
         b1.addActionListener(this::aumentaAtaque);
+        b1.setBackground(Color.LIGHT_GRAY);
         attributesPanel.add(b1, attrGbc);
 
         attrGbc.gridx = 1;
@@ -70,6 +73,7 @@ public class AttributesFrame extends JFrame {
         attrGbc.gridx = 2;
         JButton b2 = new JButton("-");
         b2.addActionListener(this::diminuiAtaque);
+        b2.setBackground(Color.LIGHT_GRAY);
         attributesPanel.add(b2, attrGbc);
 
         // Botões e rótulos para Defesa
@@ -77,6 +81,7 @@ public class AttributesFrame extends JFrame {
         attrGbc.gridx = 0;
         JButton b3 = new JButton("+");
         b3.addActionListener(this::aumentaDefesa);
+        b3.setBackground(Color.LIGHT_GRAY);
         attributesPanel.add(b3, attrGbc);
 
         attrGbc.gridx = 1;
@@ -87,6 +92,7 @@ public class AttributesFrame extends JFrame {
         attrGbc.gridx = 2;
         JButton b4 = new JButton("-");
         b4.addActionListener(this::diminuiDefesa);
+        b4.setBackground(Color.LIGHT_GRAY);
         attributesPanel.add(b4, attrGbc);
 
         // Botões e rótulos para Saúde
@@ -94,6 +100,7 @@ public class AttributesFrame extends JFrame {
         attrGbc.gridx = 0;
         JButton b5 = new JButton("+");
         b5.addActionListener(this::aumentaSaude);
+        b5.setBackground(Color.LIGHT_GRAY);
         attributesPanel.add(b5, attrGbc);
 
         attrGbc.gridx = 1;
@@ -104,6 +111,7 @@ public class AttributesFrame extends JFrame {
         attrGbc.gridx = 2;
         JButton b6 = new JButton("-");
         b6.addActionListener(this::diminuiSaude);
+        b6.setBackground(Color.LIGHT_GRAY);
         attributesPanel.add(b6, attrGbc);
 
         gbc.gridwidth = GridBagConstraints.REMAINDER; // Ocupa toda a linha
@@ -116,6 +124,7 @@ public class AttributesFrame extends JFrame {
         gbc.anchor = GridBagConstraints.CENTER;
 
         JButton confirmarButton = new JButton("Confirmar");
+        confirmarButton.setBackground(Color.LIGHT_GRAY);
         confirmarButton.setPreferredSize(new Dimension(100, 30));
         confirmarButton.addActionListener(this::confirmarAtributos);
         heroesPanel.add(confirmarButton, gbc);
@@ -231,14 +240,19 @@ public class AttributesFrame extends JFrame {
     }
 
     private void iniciarJogo(Barbaro heroi) {
-        new DungeonFighterJava(heroi);
+        dungeonFighterStart = new DungeonFighterJava(heroi);
     }
     
     private void iniciarJogo(Guerreiro heroi) {
-        new DungeonFighterJava(heroi);
+        dungeonFighterStart = new DungeonFighterJava(heroi);
     }
     
     private void iniciarJogo(Paladino heroi) {
-        new DungeonFighterJava(heroi);
+        dungeonFighterStart = new DungeonFighterJava(heroi);
     }
+
+    public DungeonFighterJava getDungeonFighterStart() {
+        return dungeonFighterStart;
+    }
+ 
 }

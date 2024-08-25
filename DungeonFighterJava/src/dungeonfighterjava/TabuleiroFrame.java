@@ -8,6 +8,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.util.Random;
 import javax.swing.*;
@@ -32,10 +34,10 @@ public class TabuleiroFrame extends JFrame {
     private int habilidadeAtiva;
     String resultadosAtaque, resultadosDefesa, resultadosTotal;
     
-    public TabuleiroFrame(String name, Tabuleiro tabuleiro, boolean visible) {
+    public TabuleiroFrame(String name, Tabuleiro tabuleiro) {
         super(name);
         this.tabuleiro = tabuleiro;
-        this.visible = visible;
+        this.visible = false;
         this.countDicas = tabuleiro.getNumDicas();
         
         criaTabuleiroFrame();
@@ -87,6 +89,11 @@ public class TabuleiroFrame extends JFrame {
         attributesPanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
         
         attributesPanel.add(Box.createVerticalGlue());
+        
+        ImageIcon dungeon = new ImageIcon(getClass().getResource("./images/logofundoremovido.png"));
+        JLabel imageDungeon = new JLabel(dungeon);
+        imageDungeon.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        attributesPanel.add(imageDungeon);
         
         l1 = new JLabel("Atributos " + String.valueOf(tabuleiro.getCelula(posHeroiX, posHeroiY).getPersonagem().getNome()));
         l1.setFont(new Font("Arial",1, 18));
@@ -193,25 +200,30 @@ public class TabuleiroFrame extends JFrame {
 
                 switch (tabuleiro.getCelula(x, y).getPersonagem().getNome()) {
                     case "Paladino":
-                        b[x][y].setBackground(Color.RED);
+                        b[x][y].setIcon(new ImageIcon(getClass().getResource("./images/paladinoButton.png")));
+                        b[x][y].setBackground(Color.BLACK);
                         this.posHeroiX = x;
                         this.posHeroiY = y;
                     break;
                     case "Guerreiro":
-                        b[x][y].setBackground(Color.RED);
+                        b[x][y].setIcon(new ImageIcon(getClass().getResource("./images/guerreiroButton.png")));
+                        b[x][y].setBackground(Color.BLACK);
                         this.posHeroiX = x;
                         this.posHeroiY = y;
                     break;
                     case "Barbaro":
-                        b[x][y].setBackground(Color.RED);
+                        b[x][y].setIcon(new ImageIcon(getClass().getResource("./images/barbaroButton.png")));
+                        b[x][y].setBackground(Color.BLACK);
                         this.posHeroiX = x;
                         this.posHeroiY = y;
                     break;
                     case "MonstroMenor":
-                        b[x][y].setBackground(Color.MAGENTA);
+                        b[x][y].setIcon(new ImageIcon(getClass().getResource("./images/monstroMenorButton.png")));
+                        b[x][y].setBackground(Color.BLACK);
                     break;
                     case "Chefao":
-                        b[x][y].setBackground(Color.BLUE);
+                        b[x][y].setIcon(new ImageIcon(getClass().getResource("./images/chefaoButton.png")));
+                        b[x][y].setBackground(Color.BLACK);
                     break;
                 }
 
@@ -219,18 +231,24 @@ public class TabuleiroFrame extends JFrame {
 
                 switch (tabuleiro.getCelula(x, y).getArmadilha().getNome()){
                     case "ArmadilhaPF":
-                        b[x][y].setBackground(Color.GRAY);
+                        b[x][y].setIcon(new ImageIcon(getClass().getResource("./images/armadilhaPerdaFixaButton.png")));
+                        b[x][y].setBackground(Color.BLACK);
                     break;
                     case "ArmadilhaPA":
-                        b[x][y].setBackground(Color.DARK_GRAY);
+                        b[x][y].setIcon(new ImageIcon(getClass().getResource("./images/armadilhaPerdaAleatoriaButton.png")));
+                        b[x][y].setBackground(Color.BLACK);
                     break;
                 }
 
             } else if(tabuleiro.getCelula(x, y).isElixir()){
                 
-                b[x][y].setBackground(Color.GREEN);
+                b[x][y].setIcon(new ImageIcon(getClass().getResource("./images/elixirButton.png")));
+                b[x][y].setBackground(Color.BLACK);
                 
-            } else b[x][y].setBackground(Color.WHITE);
+            } else {
+                b[x][y].setBackground(Color.BLACK);
+                b[x][y].setIcon(null);
+            }
 
         } else {
 
@@ -238,29 +256,37 @@ public class TabuleiroFrame extends JFrame {
 
                 switch (tabuleiro.getCelula(x, y).getPersonagem().getNome()) {
                     case "Paladino":
-                        b[x][y].setBackground(Color.RED);
+                        b[x][y].setIcon(new ImageIcon(getClass().getResource("./images/paladinoButton.png")));
+                        b[x][y].setBackground(Color.BLACK);
                         this.posHeroiX = x;
                         this.posHeroiY = y;
                     break;
                     case "Guerreiro":
-                        b[x][y].setBackground(Color.RED);
+                        b[x][y].setIcon(new ImageIcon(getClass().getResource("./images/guerreiroButton.png")));
+                        b[x][y].setBackground(Color.BLACK);
                         this.posHeroiX = x;
                         this.posHeroiY = y;
                     break;
                     case "Barbaro":
-                        b[x][y].setBackground(Color.RED);
+                        b[x][y].setIcon(new ImageIcon(getClass().getResource("./images/barbaroButton.png")));
+                        b[x][y].setBackground(Color.BLACK);
                         this.posHeroiX = x;
                         this.posHeroiY = y;
                     break;
                     case "Chefao":
-                        b[x][y].setBackground(Color.BLUE);
+                        b[x][y].setIcon(new ImageIcon(getClass().getResource("./images/chefaoButton.png")));
+                        b[x][y].setBackground(Color.BLACK);
                     break;
                     default:
+                        b[x][y].setIcon(null);
                         b[x][y].setBackground(Color.BLACK);
                     break;
                 }
 
-            } else b[x][y].setBackground(Color.BLACK);
+            } else {
+                b[x][y].setIcon(null);
+                b[x][y].setBackground(Color.BLACK);
+            }
         }
     }
     
@@ -467,6 +493,7 @@ public class TabuleiroFrame extends JFrame {
             atualizaLabels();
         } else {
             JOptionPane.showMessageDialog(null, "GAME OVER");
+            dispose();
         }  
     }
     
@@ -502,6 +529,7 @@ public class TabuleiroFrame extends JFrame {
             atualizaLabels();
         } else {
             JOptionPane.showMessageDialog(null, "GAME OVER");
+            dispose();
         }    
     }
     
@@ -530,6 +558,25 @@ public class TabuleiroFrame extends JFrame {
             JPanel heroPanel = new JPanel();
             heroPanel.setLayout(new BoxLayout(heroPanel, BoxLayout.Y_AXIS));
             heroPanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
+            
+            ImageIcon hero = null;
+            switch (tabuleiro.getCelula(posHeroiX, posHeroiY).getPersonagem().getNome()) {
+                case "Barbaro":
+                    hero = new ImageIcon(getClass().getResource("./images/barbaro.png"));
+                    break;
+                case "Guerreiro":
+                    hero = new ImageIcon(getClass().getResource("./images/guerreiro.png"));
+                    break;
+                case "Paladino":
+                    hero = new ImageIcon(getClass().getResource("./images/paladino.png"));
+            }
+
+            if (inimigo != null) {
+                JLabel imageHero = new JLabel(hero);
+                imageHero.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+                heroPanel.add(imageHero);
+            }
+                    
 
             l14 = new JLabel(String.valueOf(tabuleiro.getCelula(posHeroiX, posHeroiY).getPersonagem().getNome()));
             l14.setFont(new Font("Arial",1, 18));
@@ -639,6 +686,22 @@ public class TabuleiroFrame extends JFrame {
             JPanel inimigoPanel = new JPanel();
             inimigoPanel.setLayout(new BoxLayout(inimigoPanel, BoxLayout.Y_AXIS));
             inimigoPanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
+            
+            ImageIcon inimigo = null;
+            switch (tabuleiro.getCelula(x, y).getPersonagem().getNome()) {
+                case "MonstroMenor":
+                    inimigo = new ImageIcon(getClass().getResource("./images/monstroMenor.png"));
+                    break;
+                case "Chefao":
+                    inimigo = new ImageIcon(getClass().getResource("./images/chefao.png"));
+                    break;
+            }
+
+            if (inimigo != null) {
+                JLabel imageInimigo = new JLabel(inimigo);
+                imageInimigo.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+                inimigoPanel.add(imageInimigo);
+            }
 
             l15 = new JLabel(String.valueOf(tabuleiro.getCelula(x, y).getPersonagem().getNome()));
             l15.setFont(new Font("Arial",1, 18));
@@ -918,8 +981,8 @@ public class TabuleiroFrame extends JFrame {
             
             if (inimigo.isAlive()){
                 JOptionPane.showMessageDialog(null, "GAME OVER");
-                this.dispose();
                 dispose();
+                combatFrame.dispose();
             }
         }
     }
@@ -978,5 +1041,15 @@ public class TabuleiroFrame extends JFrame {
             habilidadeButton.setVisible(true);
         }
         
+    }
+
+    public void setTabuleiroVisible(boolean visible) {
+        this.visible = visible;
+        
+        this.atualizaTabuleiroFrame();
+    }
+    
+    public boolean isTabuleiroVisible() {
+        return this.visible;
     }
 }
