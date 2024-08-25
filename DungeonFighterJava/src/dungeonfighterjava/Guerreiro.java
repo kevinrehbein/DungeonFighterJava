@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
  *
  * @author kevin
  */
-public class Guerreiro extends Heroi {
+public class Guerreiro extends Heroi implements Cloneable {
     
     public Guerreiro() {
         super("Guerreiro", 4, 6, 10);
@@ -26,5 +26,10 @@ public class Guerreiro extends Heroi {
             this.setFlagHabilidade(false);
             
         } else JOptionPane.showMessageDialog(null, "Você já usou a habilidade Especial nessa batalha!");
-    }   
+    }  
+    
+    @Override
+    public Guerreiro clone() throws CloneNotSupportedException {
+        return (Guerreiro) super.clone();
+    }
 }

@@ -7,12 +7,12 @@ import java.awt.event.ActionEvent;
 public class AttributesFrame extends JFrame {
 
     private int pontos = 5;
-    private int ataque = 0, defesa = 0, saude = 0;
+    public  int ataque, defesa, saude;
     private final String tipoHeroi;
           
-    private Barbaro barbaroConfigurado;
-    private Guerreiro guerreiroConfigurado;
-    private Paladino paladinoConfigurado;
+    public static Barbaro barbaroConfigurado;
+    public static Guerreiro guerreiroConfigurado;
+    public static Paladino paladinoConfigurado;
 
     private final JLabel heroesLabel;
     
@@ -236,7 +236,7 @@ public class AttributesFrame extends JFrame {
                 throw new IllegalArgumentException("Tipo de herói desconhecido: " + tipoHeroi);
         }
           
-        this.dispose(); // Fecha a tela de atributos
+        this.setVisible(false);// Fecha a tela de atributos
     }
 
     private void iniciarJogo(Barbaro heroi) {

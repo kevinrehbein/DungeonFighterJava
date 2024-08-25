@@ -3,17 +3,24 @@ package dungeonfighterjava;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 
 public class MainFrame extends JFrame {
     
+    public static List<JFrame> openWindows = new ArrayList<>();
+       
     ImageIcon img = new ImageIcon(getClass().getResource("./images/logofundoremovido.png"));
     JLabel foto = new JLabel(img);
     HeroesFrame heroesScreen = null;
+    
 
     public MainFrame(String title) {  
         super(title);
         initializeUI();
+        
+        openWindows.add(this);
     }
 
     private void initializeUI() {
@@ -70,9 +77,15 @@ public class MainFrame extends JFrame {
 
     private void jogar() {
       // abre a tela de selecao de heroi
+      
+    try {
+        heroesScreen.getName();
+          JOptionPane.showMessageDialog(this, "Tabuleiro já criado", "Erro", JOptionPane.ERROR_MESSAGE);
+    } catch (NullPointerException nexc){
         heroesScreen = new HeroesFrame("Heroes");
+    }
         
-        //dispose(); // faz com que somente a tela de seleçao de heroi fique visivel.
+       //dispose(); // faz com que somente a tela de seleçao de heroi fique visivel.
     }
 
     private void debug() {

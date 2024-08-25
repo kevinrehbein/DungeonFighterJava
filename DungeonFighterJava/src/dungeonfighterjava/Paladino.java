@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
  *
  * @author kevin
  */
-public class Paladino extends Heroi {
+public class Paladino extends Heroi implements Cloneable {
        
     public Paladino() {
         super("Paladino", 5, 5, 10);
@@ -28,7 +28,12 @@ public class Paladino extends Heroi {
             
             this.setFlagHabilidade(false);
         } else JOptionPane.showMessageDialog(null, "Você já usou a habilidade Especial nessa batalha!");
-    }  
+    } 
+    
+    @Override
+    public Paladino clone() throws CloneNotSupportedException {
+        return (Paladino) super.clone();
+    }
 }
 
 

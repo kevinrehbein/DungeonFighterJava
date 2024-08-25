@@ -12,6 +12,8 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -20,27 +22,98 @@ import javax.swing.*;
  */
 public class TabuleiroFrame extends JFrame {
     
-    private Tabuleiro tabuleiro;
-    private int x, y, posHeroiX, posHeroiY, countDicas;
+    private Tabuleiro tabuleiro, tabuleiroCopia;
+    private int x, y, posHeroiX, posHeroiY, countDicas, ataqueCopia, defesaCopia, saudeCopia;
     private boolean visible, flagDica=false, flagContinuarButton = true;
     private JButton[][] b;
     private JPanel gridPanel, attributesPanel;
-    private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16, l17, l18, l20, l21, l22;
-    private JButton buttonDica, buttonSair, buttonElixir, continuarButton, atacarButton, habilidadeButton;
+    private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16, l17, l18, l19, l20, l21, l22;
+    private JButton buttonDica, buttonSair, buttonElixir, buttonElixir2, continuarButton, atacarButton, habilidadeButton;
     
     private Personagem player, inimigo;
-    private final int w = 10;
+    private int w = 10;
     JFrame combatFrame;
     private int habilidadeAtiva;
     String resultadosAtaque, resultadosDefesa, resultadosTotal;
     
-    public TabuleiroFrame(String name, Tabuleiro tabuleiro) {
+    public TabuleiroFrame(String name, Tabuleiro tabuleiro){
         super(name);
         this.tabuleiro = tabuleiro;
         this.visible = false;
         this.countDicas = tabuleiro.getNumDicas();
-        
+        criaTabuleiroCopia(tabuleiro);
         criaTabuleiroFrame();
+    }
+    
+    public void criaTabuleiroCopia(Tabuleiro tabuleiro){
+        
+        this.tabuleiroCopia = new Tabuleiro(tabuleiro.getLinhas(), tabuleiro.getColunas(), tabuleiro.getNumDicas());
+        
+        for (int x = 0; x < tabuleiro.getLinhas(); x++){
+            for (int y = 0; y < tabuleiro.getColunas(); y++){
+                if (tabuleiro.getCelula(x, y).getPersonagem() != null){
+
+                    switch (tabuleiro.getCelula(x, y).getPersonagem().getNome()) {
+                        case "Paladino":
+                            Paladino p1 = new Paladino();
+                            int ataque = AttributesFrame.paladinoConfigurado.getAtaque();
+                            int defesa = AttributesFrame.paladinoConfigurado.getDefesa();
+                            int saude = AttributesFrame.paladinoConfigurado.getSaude();
+                            
+                            p1.setAtaque(ataque);
+                            p1.setDefesa(defesa);
+                            p1.setSaude(saude);
+                            tabuleiroCopia.getCelula(x, y).setPersonagem(p1);   
+                        break;
+                        case "Guerreiro":
+                            Guerreiro g1 = new Guerreiro();
+                            ataque = AttributesFrame.guerreiroConfigurado.getAtaque();
+                            defesa = AttributesFrame.guerreiroConfigurado.getDefesa();
+                            saude = AttributesFrame.guerreiroConfigurado.getSaude();
+                            
+                            g1.setAtaque(ataque);
+                            g1.setDefesa(defesa);
+                            g1.setSaude(saude);
+                            tabuleiroCopia.getCelula(x, y).setPersonagem(g1); 
+
+                        break;
+                        case "Barbaro":
+                            Barbaro b1 = new Barbaro();
+                            ataque = AttributesFrame.barbaroConfigurado.getAtaque();
+                            defesa = AttributesFrame.barbaroConfigurado.getDefesa();
+                            saude = AttributesFrame.barbaroConfigurado.getSaude();
+                            
+                            b1.setAtaque(ataque);
+                            b1.setDefesa(defesa);
+                            b1.setSaude(saude);
+                            tabuleiroCopia.getCelula(x, y).setPersonagem(b1); 
+                        break;
+                        case "MonstroMenor":
+                            tabuleiroCopia.getCelula(x, y).setPersonagem(new MonstroMenor());
+                        break;
+                        case "Chefao":
+                            tabuleiroCopia.getCelula(x, y).setPersonagem(new Chefao());
+                        break;
+                    }
+
+                } else if (tabuleiro.getCelula(x, y).getArmadilha() != null){
+
+                    switch (tabuleiro.getCelula(x, y).getArmadilha().getNome()){
+                        case "ArmadilhaPF":
+                            tabuleiroCopia.getCelula(x, y).setArmadilha(new ArmadilhaPerdaAleatoria());
+                        break;
+                        case "ArmadilhaPA":
+                            tabuleiroCopia.getCelula(x, y).setArmadilha(new ArmadilhaPerdaFixa());
+                        break;
+                    }
+
+                } else if(tabuleiro.getCelula(x, y).isElixir()){
+
+                    tabuleiro.getCelula(x, y).setElixir();
+
+                }
+            }
+        }
     }
 
     public int getX() {
@@ -51,7 +124,7 @@ public class TabuleiroFrame extends JFrame {
         return y;
     }
     
-    public void criaTabuleiroFrame(){
+    private void criaTabuleiroFrame(){
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1920, 720);
@@ -77,10 +150,6 @@ public class TabuleiroFrame extends JFrame {
                 gridPanel.add(b[x][y]);
             }
         }
-        
-        //print tabuleiro no terminal
-        tabuleiro.printTabuleiro();
-        System.out.println();
         
         //Cria lado esquerdo da tela
         attributesPanel = new JPanel();
@@ -296,6 +365,9 @@ public class TabuleiroFrame extends JFrame {
         l4.setText("Saúde: " + String.valueOf(tabuleiro.getCelula(posHeroiX, posHeroiY).getPersonagem().getSaude()));
         l5.setText("Você tem " + String.valueOf(countDicas) + " dicas disponíveis");
         l9.setText("Bolsa: " + String.valueOf(tabuleiro.getCelula(posHeroiX, posHeroiY).getHeroi().getElixires()));
+        if (this.l19 != null){
+            l19.setText("Bolsa: " + String.valueOf(tabuleiro.getCelula(posHeroiX, posHeroiY).getHeroi().getElixires())); 
+        }
     }
 
 
@@ -461,7 +533,7 @@ public class TabuleiroFrame extends JFrame {
     
     private void sairPressed(ActionEvent sairEvent) {
         this.dispose();
-        FinalFrame finalScreen = new FinalFrame();
+        FinalFrame finalScreen = new FinalFrame(tabuleiroCopia);
     }
     
     private void acionarArmadilha(Heroi heroi, ArmadilhaPerdaFixa armadilha){
@@ -472,7 +544,7 @@ public class TabuleiroFrame extends JFrame {
         
         if (tabuleiro.getCelula(posHeroiX, posHeroiY).getHeroi().isAlive()){
                 
-            switch (tabuleiro.getCelula(posHeroiX, posHeroiY).getPersonagem().getNome()){
+            switch (tabuleiro.getCelula(posHeroiX, posHeroiY).getPersonagem().getNome()){   
                 case "Paladino":
                     tabuleiro.getCelula(x, y).removerArmadilha();
                     tabuleiro.moverHeroi(tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino(), posHeroiX, posHeroiY, x, y);
@@ -493,7 +565,8 @@ public class TabuleiroFrame extends JFrame {
             atualizaLabels();
         } else {
             JOptionPane.showMessageDialog(null, "GAME OVER");
-            dispose();
+            JFrame finalScreen = new FinalFrame(tabuleiroCopia);
+            closeWindows();
         }  
     }
     
@@ -529,7 +602,9 @@ public class TabuleiroFrame extends JFrame {
             atualizaLabels();
         } else {
             JOptionPane.showMessageDialog(null, "GAME OVER");
-            dispose();
+            tabuleiroCopia.printTabuleiro();
+            JFrame finalScreen = new FinalFrame(tabuleiroCopia);
+            setWindowsInvible();
         }    
     }
     
@@ -644,6 +719,22 @@ public class TabuleiroFrame extends JFrame {
         combatPanel.add(l22);
         combatPanel.add(new JLabel(" "));
         
+        combatPanel.add(Box.createHorizontalGlue());
+        
+        l19 = new JLabel("Bolsa: " + String.valueOf(tabuleiro.getCelula(posHeroiX, posHeroiY).getHeroi().getElixires()));
+        l19.setFont(new Font ("Arial", 1, 12));
+        l19.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        combatPanel.add(l19);
+        
+        combatPanel.add(new JLabel(" "));
+        
+        buttonElixir2 = new JButton("Elixir");
+        //buttonElixir2.setPreferredSize(new java.awt.Dimension(200, 40));
+        buttonElixir2.setBackground(Color.LIGHT_GRAY);
+        buttonElixir2.setAlignmentX(JButton.CENTER_ALIGNMENT);
+        buttonElixir2.addActionListener(this::elixirPressed);
+        combatPanel.add(buttonElixir2);
+        
             JPanel buttonsPanel = new JPanel();
             buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
             buttonsPanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
@@ -653,6 +744,7 @@ public class TabuleiroFrame extends JFrame {
 
             atacarButton = new JButton("Atacar");
             atacarButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
+            atacarButton.setBackground(Color.LIGHT_GRAY);
             buttonsPanel.add(atacarButton);
             atacarButton.addActionListener(this::atacar);
 
@@ -660,6 +752,7 @@ public class TabuleiroFrame extends JFrame {
 
             habilidadeButton = new JButton("Habilidade Especial");
             habilidadeButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
+            habilidadeButton.setBackground(Color.LIGHT_GRAY);
             buttonsPanel.add(habilidadeButton);
             habilidadeButton.addActionListener(this::habilidadeEspecial);
             
@@ -671,6 +764,7 @@ public class TabuleiroFrame extends JFrame {
         continuarButton = new JButton("Continuar");
         continuarButton.setVisible(false);
         continuarButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
+        continuarButton.setBackground(Color.LIGHT_GRAY);
         combatPanel.add(continuarButton);
         continuarButton.addActionListener(this::continuar);
             
@@ -759,6 +853,7 @@ public class TabuleiroFrame extends JFrame {
         
         aleatorio1 = geradorAleatorio.nextInt(w);
         aleatorio2 = geradorAleatorio.nextInt(w);
+        
         
         while (inimigo.isAlive() && player.isAlive() && rounds > 0) {
                 
@@ -882,6 +977,8 @@ public class TabuleiroFrame extends JFrame {
                 l21.setText(resultadosDefesa);
                 l22.setText(resultadosTotal);
                 
+                l19.setVisible(false);
+                buttonElixir2.setVisible(false);
                 atacarButton.setVisible(false);
                 habilidadeButton.setVisible(false);
                 continuarButton.setVisible(true);
@@ -953,7 +1050,7 @@ public class TabuleiroFrame extends JFrame {
         //fim da batalha
         if (player.isAlive() == false || inimigo.isAlive() == false){
             
-            if (player.isAlive()){
+            if (player.isAlive() && inimigo.getNome().equals("MonstroMenor")){
                 JOptionPane.showMessageDialog(null, "Você Derrotou o inimigo");
                 
                 switch (tabuleiro.getCelula(posHeroiX, posHeroiY).getPersonagem().getNome()){
@@ -979,9 +1076,17 @@ public class TabuleiroFrame extends JFrame {
                 combatFrame.dispose();
             }
             
+            if (player.isAlive() && inimigo.getNome().equals("Chefao")){
+                JOptionPane.showMessageDialog(null, "Parabéns! Você derrotou o Chefao e venceu o jogo!");
+                JFrame finalScreen = new FinalFrame(tabuleiroCopia);
+                combatFrame.dispose();
+                closeWindows();
+            }
+            
             if (inimigo.isAlive()){
                 JOptionPane.showMessageDialog(null, "GAME OVER");
-                dispose();
+                JFrame finalScreen = new FinalFrame(tabuleiroCopia);
+                setWindowsInvible();
                 combatFrame.dispose();
             }
         }
@@ -1016,6 +1121,7 @@ public class TabuleiroFrame extends JFrame {
     private void elixirPressed(ActionEvent elixirEvent) {
         tabuleiro.getCelula(posHeroiX, posHeroiY).getHeroi().usarElixir();
         this.atualizaLabels();
+        atualizaLabelsCombat();
     }
 
     private void continuar(ActionEvent e) {
@@ -1039,6 +1145,9 @@ public class TabuleiroFrame extends JFrame {
             continuarButton.setVisible(false);
             atacarButton.setVisible(true);
             habilidadeButton.setVisible(true);
+            
+            l19.setVisible(true);
+            buttonElixir2.setVisible(true);
         }
         
     }
@@ -1051,5 +1160,19 @@ public class TabuleiroFrame extends JFrame {
     
     public boolean isTabuleiroVisible() {
         return this.visible;
+    }
+    
+    public void closeWindows() {
+        for(JFrame frame : MainFrame.openWindows){
+            frame.dispose();
+        }
+        dispose();
+    }
+    
+    public void setWindowsInvible() {
+        for(JFrame frame : MainFrame.openWindows){
+            frame.setVisible(false);
+        }
+        dispose();
     }
 }

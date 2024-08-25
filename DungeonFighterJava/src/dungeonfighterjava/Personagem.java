@@ -8,7 +8,7 @@ package dungeonfighterjava;
  *
  * @author kevin
  */
-public abstract class Personagem {
+public abstract class Personagem implements Cloneable {
     private String nome;
     private int ataque;
     private int defesa;
@@ -69,6 +69,11 @@ public abstract class Personagem {
     // Método para checar se o personagem está vivo
     public boolean isAlive() {
         return saude > 0;
+    }
+    
+    @Override
+    public Personagem clone() throws CloneNotSupportedException {
+        return (Personagem) super.clone();
     }
 }
 

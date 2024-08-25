@@ -8,10 +8,15 @@ package dungeonfighterjava;
  *
  * @author kevin
  */
-public class MonstroMenor extends Monstro {
+public class MonstroMenor extends Monstro implements Cloneable{
     
     
     public MonstroMenor() {
         super("MonstroMenor", 5, 4, 12);
+    }
+    
+    @Override
+    public MonstroMenor clone() throws CloneNotSupportedException {
+        return (MonstroMenor) super.clone();
     }
 }
