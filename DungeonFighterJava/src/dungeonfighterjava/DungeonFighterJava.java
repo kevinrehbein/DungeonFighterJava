@@ -1,8 +1,6 @@
 package dungeonfighterjava;
 
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class DungeonFighterJava {
     private final int linhas = 5;
@@ -93,6 +91,10 @@ public class DungeonFighterJava {
 
     public TabuleiroFrame getTabuleiroScreen() {
         return tabuleiroScreen;
+    }
+
+    public void setTabuleiroScreen(TabuleiroFrame tabuleiroScreen) {
+        this.tabuleiroScreen = tabuleiroScreen;
     }
     
 }

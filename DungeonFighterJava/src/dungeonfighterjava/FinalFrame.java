@@ -50,7 +50,7 @@ public class FinalFrame extends JFrame {
    
         // Botão Reiniciar Jogo
         gbc.gridx = 0; // primeiro botao
-        JButton buttonJogar = createButton("Reinicar Jogo", e -> reiniciarJogo());
+        JButton buttonJogar = createButton("Reiniciar Jogo", e -> reiniciarJogo());
         mainPanel.add(buttonJogar, gbc);
 
         // Botão Nov Jogo
@@ -78,6 +78,7 @@ public class FinalFrame extends JFrame {
         tabuleiroAnterior.printTabuleiro();
         setWindowsVisible();
         TabuleiroFrame tabuleiroScreen = new TabuleiroFrame("Dungeon_Fighter", tabuleiroAnterior);
+        MainFrame.heroesScreen.getAttributesScreen().getDungeonFighterStart().setTabuleiroScreen(tabuleiroScreen);
         dispose();
    }
     

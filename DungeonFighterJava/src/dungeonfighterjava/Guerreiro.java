@@ -25,7 +25,7 @@ public class Guerreiro extends Heroi implements Cloneable {
             
             this.setFlagHabilidade(false);
             
-        } else JOptionPane.showMessageDialog(null, "Você já usou a habilidade Especial nessa batalha!");
+        }
     }  
     
     @Override

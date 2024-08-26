@@ -13,11 +13,12 @@ public class MainFrame extends JFrame {
        
     ImageIcon img = new ImageIcon(getClass().getResource("./images/logofundoremovido.png"));
     JLabel foto = new JLabel(img);
-    HeroesFrame heroesScreen = null;
+    public static HeroesFrame heroesScreen;
     
 
     public MainFrame(String title) {  
         super(title);
+        heroesScreen = null;
         initializeUI();
         
         openWindows.add(this);
@@ -79,7 +80,7 @@ public class MainFrame extends JFrame {
       // abre a tela de selecao de heroi
       
     try {
-        heroesScreen.getName();
+        if (heroesScreen.getAttributesScreen().getDungeonFighterStart() != null)
           JOptionPane.showMessageDialog(this, "Tabuleiro já criado", "Erro", JOptionPane.ERROR_MESSAGE);
     } catch (NullPointerException nexc){
         heroesScreen = new HeroesFrame("Heroes");
@@ -98,8 +99,8 @@ public class MainFrame extends JFrame {
         } catch (NullPointerException nexc) {
             JOptionPane.showMessageDialog(this, "Tabuleiro não criado", "Erro", JOptionPane.ERROR_MESSAGE);
         }
-            
-    }    
+       
+    }  
 
     private void sair() {
         int response = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja sair?", "Confirmar Saída", JOptionPane.YES_NO_OPTION);
