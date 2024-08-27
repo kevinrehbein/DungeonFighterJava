@@ -534,8 +534,8 @@ public class TabuleiroFrame extends JFrame {
     }
     
     private void sairPressed(ActionEvent sairEvent) {
-        this.dispose();
         FinalFrame finalScreen = new FinalFrame(tabuleiroCopia);
+        setWindowsInvisible();
     }
     
     private void acionarArmadilha(Heroi heroi, ArmadilhaPerdaFixa armadilha){
@@ -568,7 +568,7 @@ public class TabuleiroFrame extends JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "GAME OVER");
             JFrame finalScreen = new FinalFrame(tabuleiroCopia);
-            closeWindows();
+            this.setWindowsInvisible();
         }  
     }
     
@@ -960,7 +960,7 @@ public class TabuleiroFrame extends JFrame {
                 JOptionPane.showMessageDialog(null, "Parabéns! Você derrotou o Chefao e venceu o jogo!");
                 JFrame finalScreen = new FinalFrame(tabuleiroCopia);
                 combatFrame.dispose();
-                closeWindows();
+                setWindowsInvisible();
             }
         } else {
             JOptionPane.showMessageDialog(null, "GAME OVER");

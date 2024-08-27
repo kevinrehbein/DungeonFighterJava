@@ -207,7 +207,7 @@ public class AttributesFrame extends JFrame {
             switch (tipoHeroi) {
                 case "Barbaro":
                     barbaroConfigurado = new Barbaro();
-
+                    
                     // Aplica os atributos personalizados
                     barbaroConfigurado.setAtaque(barbaroConfigurado.getAtaque() + ataque);
                     barbaroConfigurado.setDefesa(barbaroConfigurado.getDefesa() + defesa);

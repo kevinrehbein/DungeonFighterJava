@@ -2,7 +2,7 @@
 
 <ClassDiagram name="dungeonfighterjava">
   <ClassDiagramComponents>
-    <Class name="Armadilha" package="dungeonfighterjava" visibility="public" isAbstract="true" xPosition="20.0" yPosition="20.0">
+    <Class name="Armadilha" package="dungeonfighterjava" visibility="public" isAbstract="true" xPosition="35.0" yPosition="62.0">
       <Fields>
         <Field name="nome" type="String" visibility="package"/>
       </Fields>
@@ -18,7 +18,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="ArmadilhaPerdaAleatoria" package="dungeonfighterjava" visibility="public" xPosition="320.0" yPosition="20.0">
+    <Class name="ArmadilhaPerdaAleatoria" package="dungeonfighterjava" visibility="public" xPosition="253.0" yPosition="293.0">
       <Fields>
         <Field name="danoMaximo" type="int" visibility="private" isFinal="true"/>
       </Fields>
@@ -30,7 +30,7 @@
         <Method name="clone" returnType="ArmadilhaPerdaAleatoria" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="ArmadilhaPerdaFixa" package="dungeonfighterjava" visibility="public" xPosition="620.0" yPosition="20.0">
+    <Class name="ArmadilhaPerdaFixa" package="dungeonfighterjava" visibility="public" xPosition="320.0" yPosition="1.0">
       <Fields>
         <Field name="dano" type="int" visibility="private" isFinal="true"/>
       </Fields>
@@ -42,7 +42,7 @@
         <Method name="clone" returnType="ArmadilhaPerdaFixa" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="AttributesFrame" package="dungeonfighterjava" visibility="public" xPosition="920.0" yPosition="20.0">
+    <Class name="AttributesFrame" package="dungeonfighterjava" visibility="public" xPosition="842.0" yPosition="1279.0">
       <Fields>
         <Field name="pontos" type="int" visibility="private"/>
         <Field name="ataque" type="int" visibility="public"/>
@@ -94,7 +94,7 @@
         <Method name="getDungeonFighterStart" returnType="DungeonFighterJava" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Barbaro" package="dungeonfighterjava" visibility="public" xPosition="1220.0" yPosition="20.0">
+    <Class name="Barbaro" package="dungeonfighterjava" visibility="public" xPosition="1267.0" yPosition="585.0">
       <Fields/>
       <Constructors>
         <Constructor visibility="public"/>
@@ -104,7 +104,7 @@
         <Method name="clone" returnType="Barbaro" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Celula" package="dungeonfighterjava" visibility="public" xPosition="1520.0" yPosition="20.0">
+    <Class name="Celula" package="dungeonfighterjava" visibility="public" xPosition="606.0" yPosition="-49.0">
       <Fields>
         <Field name="armadilha" type="Armadilha" visibility="private"/>
         <Field name="armadilhaPF" type="ArmadilhaPerdaFixa" visibility="private"/>
@@ -171,7 +171,7 @@
         <Method name="clone" returnType="Celula" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Chefao" package="dungeonfighterjava" visibility="public" xPosition="1820.0" yPosition="20.0">
+    <Class name="Chefao" package="dungeonfighterjava" visibility="public" xPosition="1206.0" yPosition="-49.0">
       <Fields/>
       <Constructors>
         <Constructor visibility="public"/>
@@ -180,7 +180,7 @@
         <Method name="clone" returnType="Chefao" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="DungeonFighterJava" package="dungeonfighterjava" visibility="public" xPosition="2120.0" yPosition="20.0">
+    <Class name="DungeonFighterJava" package="dungeonfighterjava" visibility="public" xPosition="1508.0" yPosition="1217.0">
       <Fields>
         <Field name="linhas" type="int" visibility="private" isFinal="true"/>
         <Field name="colunas" type="int" visibility="private" isFinal="true"/>
@@ -212,7 +212,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="FinalFrame" package="dungeonfighterjava" visibility="public" xPosition="20.0" yPosition="420.0">
+    <Class name="FinalFrame" package="dungeonfighterjava" visibility="public" xPosition="35.0" yPosition="475.0">
       <Fields>
         <Field name="tabuleiroAnterior" type="Tabuleiro" visibility="private" isFinal="true"/>
         <Field name="img" type="ImageIcon" visibility="package"/>
@@ -235,7 +235,7 @@
         <Method name="closeWindows" returnType="void" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Guerreiro" package="dungeonfighterjava" visibility="public" xPosition="320.0" yPosition="420.0">
+    <Class name="Guerreiro" package="dungeonfighterjava" visibility="public" xPosition="941.0" yPosition="825.0">
       <Fields/>
       <Constructors>
         <Constructor visibility="public"/>
@@ -245,7 +245,7 @@
         <Method name="clone" returnType="Guerreiro" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="HeroesFrame" package="dungeonfighterjava" visibility="public" xPosition="620.0" yPosition="420.0">
+    <Class name="HeroesFrame" package="dungeonfighterjava" visibility="public" xPosition="416.0" yPosition="1350.0">
       <Fields>
         <Field name="tipoHeroi" type="String" visibility="private"/>
         <Field name="attributesScreen" type="AttributesFrame" visibility="private"/>
@@ -263,7 +263,7 @@
         <Method name="getAttributesScreen" returnType="AttributesFrame" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Heroi" package="dungeonfighterjava" visibility="public" isAbstract="true" xPosition="920.0" yPosition="420.0">
+    <Class name="Heroi" package="dungeonfighterjava" visibility="public" isAbstract="true" xPosition="1624.0" yPosition="475.0">
       <Fields>
         <Field name="elixires" type="int" visibility="private"/>
         <Field name="CAPACIDADE_MAX_ELIXIRES" type="int" visibility="private" isFinal="true"/>
@@ -290,7 +290,7 @@
         <Method name="clone" returnType="Heroi" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="MainFrame" package="dungeonfighterjava" visibility="public" xPosition="1220.0" yPosition="420.0">
+    <Class name="MainFrame" package="dungeonfighterjava" visibility="public" xPosition="-1.0" yPosition="1302.0">
       <Fields>
         <Field name="openWindows" type="List&lt;JFrame&gt;" visibility="public" isStatic="true"/>
         <Field name="img" type="ImageIcon" visibility="package"/>
@@ -316,7 +316,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Monstro" package="dungeonfighterjava" visibility="public" isAbstract="true" xPosition="1520.0" yPosition="420.0">
+    <Class name="Monstro" package="dungeonfighterjava" visibility="public" isAbstract="true" xPosition="1720.0" yPosition="282.0">
       <Fields/>
       <Constructors>
         <Constructor visibility="public">
@@ -330,7 +330,7 @@
         <Method name="clone" returnType="Monstro" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="MonstroMenor" package="dungeonfighterjava" visibility="public" xPosition="1820.0" yPosition="420.0">
+    <Class name="MonstroMenor" package="dungeonfighterjava" visibility="public" xPosition="1798.0" yPosition="14.0">
       <Fields/>
       <Constructors>
         <Constructor visibility="public"/>
@@ -339,7 +339,7 @@
         <Method name="clone" returnType="MonstroMenor" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Paladino" package="dungeonfighterjava" visibility="public" xPosition="2120.0" yPosition="420.0">
+    <Class name="Paladino" package="dungeonfighterjava" visibility="public" xPosition="1508.0" yPosition="863.0">
       <Fields/>
       <Constructors>
         <Constructor visibility="public"/>
@@ -349,7 +349,7 @@
         <Method name="clone" returnType="Paladino" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Personagem" package="dungeonfighterjava" visibility="public" isAbstract="true" xPosition="20.0" yPosition="820.0">
+    <Class name="Personagem" package="dungeonfighterjava" visibility="public" isAbstract="true" xPosition="2162.0" yPosition="37.0">
       <Fields>
         <Field name="nome" type="String" visibility="private"/>
         <Field name="ataque" type="int" visibility="private"/>
@@ -389,7 +389,7 @@
         <Method name="clone" returnType="Personagem" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Tabuleiro" package="dungeonfighterjava" visibility="public" xPosition="320.0" yPosition="820.0">
+    <Class name="Tabuleiro" package="dungeonfighterjava" visibility="public" xPosition="199.0" yPosition="877.0">
       <Fields>
         <Field name="linhas" type="int" visibility="private" isFinal="true"/>
         <Field name="colunas" type="int" visibility="private" isFinal="true"/>
@@ -438,7 +438,7 @@
         <Method name="clone" returnType="Tabuleiro" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="TabuleiroFrame" package="dungeonfighterjava" visibility="public" xPosition="620.0" yPosition="820.0">
+    <Class name="TabuleiroFrame" package="dungeonfighterjava" visibility="public" xPosition="2100.0" yPosition="590.0">
       <Fields>
         <Field name="tabuleiro" type="Tabuleiro" visibility="private"/>
         <Field name="x" type="int" visibility="private"/>
@@ -545,71 +545,71 @@
     </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="heroi" source="dungeonfighterjava.Celula" target="dungeonfighterjava.Heroi" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.ArmadilhaPerdaFixa" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.Tabuleiro" target="dungeonfighterjava.Paladino" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.AttributesFrame" target="dungeonfighterjava.DungeonFighterJava" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.Monstro" target="dungeonfighterjava.Monstro" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="heroesScreen" source="dungeonfighterjava.MainFrame" target="dungeonfighterjava.HeroesFrame" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.DungeonFighterJava" target="dungeonfighterjava.TabuleiroFrame" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="personagem" source="dungeonfighterjava.Celula" target="dungeonfighterjava.Personagem" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="guerreiroConfigurado" source="dungeonfighterjava.AttributesFrame" target="dungeonfighterjava.Guerreiro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="barbaro" source="dungeonfighterjava.Celula" target="dungeonfighterjava.Barbaro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.TabuleiroFrame" target="dungeonfighterjava.Monstro" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="t1" source="dungeonfighterjava.DungeonFighterJava" target="dungeonfighterjava.Tabuleiro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="tabuleiroAnterior" source="dungeonfighterjava.FinalFrame" target="dungeonfighterjava.Tabuleiro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.Celula" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.MonstroMenor" target="dungeonfighterjava.MonstroMenor" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.Chefao" target="dungeonfighterjava.Chefao" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="dungeonFighterStart" source="dungeonfighterjava.AttributesFrame" target="dungeonfighterjava.DungeonFighterJava" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <IsRelation name="is" source="dungeonfighterjava.Chefao" target="dungeonfighterjava.Monstro"/>
-    <IsRelation name="is" source="dungeonfighterjava.MonstroMenor" target="dungeonfighterjava.Monstro"/>
-    <UseRelation source="dungeonfighterjava.Personagem" target="dungeonfighterjava.Personagem" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <IsRelation name="is" source="dungeonfighterjava.Barbaro" target="dungeonfighterjava.Heroi"/>
-    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.ArmadilhaPerdaAleatoria" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="paladinoConfigurado" source="dungeonfighterjava.AttributesFrame" target="dungeonfighterjava.Paladino" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <IsRelation name="is" source="dungeonfighterjava.ArmadilhaPerdaAleatoria" target="dungeonfighterjava.Armadilha"/>
-    <IsRelation name="is" source="dungeonfighterjava.ArmadilhaPerdaFixa" target="dungeonfighterjava.Armadilha"/>
-    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.Paladino" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <IsRelation name="is" source="dungeonfighterjava.Monstro" target="dungeonfighterjava.Personagem"/>
-    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.Heroi" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="chefao" source="dungeonfighterjava.Celula" target="dungeonfighterjava.Chefao" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="barbaroConfigurado" source="dungeonfighterjava.AttributesFrame" target="dungeonfighterjava.Barbaro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.Guerreiro" target="dungeonfighterjava.Guerreiro" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="armadilhaPF" source="dungeonfighterjava.Celula" target="dungeonfighterjava.ArmadilhaPerdaFixa" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.AttributesFrame" target="dungeonfighterjava.Guerreiro" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="monstroMenor" source="dungeonfighterjava.Celula" target="dungeonfighterjava.MonstroMenor" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.Barbaro" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.Barbaro" target="dungeonfighterjava.Barbaro" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <IsRelation name="is" source="dungeonfighterjava.Paladino" target="dungeonfighterjava.Heroi"/>
-    <HasRelation name="tabuleiro" source="dungeonfighterjava.TabuleiroFrame" target="dungeonfighterjava.Tabuleiro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.AttributesFrame" target="dungeonfighterjava.Paladino" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.Personagem" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="attributesScreen" source="dungeonfighterjava.HeroesFrame" target="dungeonfighterjava.AttributesFrame" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.TabuleiroFrame" target="dungeonfighterjava.Heroi" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.Paladino" target="dungeonfighterjava.Paladino" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <IsRelation name="is" source="dungeonfighterjava.Guerreiro" target="dungeonfighterjava.Heroi"/>
-    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.Armadilha" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="player" source="dungeonfighterjava.TabuleiroFrame" target="dungeonfighterjava.Personagem" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <IsRelation name="is" source="dungeonfighterjava.Heroi" target="dungeonfighterjava.Personagem"/>
-    <UseRelation source="dungeonfighterjava.HeroesFrame" target="dungeonfighterjava.AttributesFrame" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="paladino" source="dungeonfighterjava.Celula" target="dungeonfighterjava.Paladino" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="guerreiro" source="dungeonfighterjava.Celula" target="dungeonfighterjava.Guerreiro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="tabuleiroScreen" source="dungeonfighterjava.DungeonFighterJava" target="dungeonfighterjava.TabuleiroFrame" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="dungeonfighterjava.ArmadilhaPerdaAleatoria" target="dungeonfighterjava.ArmadilhaPerdaAleatoria" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.Tabuleiro" target="dungeonfighterjava.Barbaro" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="armadilhaPA" source="dungeonfighterjava.Celula" target="dungeonfighterjava.ArmadilhaPerdaAleatoria" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.MonstroMenor" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.ArmadilhaPerdaFixa" target="dungeonfighterjava.ArmadilhaPerdaFixa" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.Tabuleiro" target="dungeonfighterjava.Tabuleiro" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.TabuleiroFrame" target="dungeonfighterjava.Tabuleiro" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="armadilha" source="dungeonfighterjava.Celula" target="dungeonfighterjava.Armadilha" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.TabuleiroFrame" target="dungeonfighterjava.Personagem" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.AttributesFrame" target="dungeonfighterjava.Barbaro" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.Chefao" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.Tabuleiro" target="dungeonfighterjava.Guerreiro" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.Guerreiro" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="dungeonfighterjava.Heroi" target="dungeonfighterjava.Heroi" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Chefao" target="dungeonfighterjava.Chefao" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.Paladino" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.AttributesFrame" target="dungeonfighterjava.Barbaro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.AttributesFrame" target="dungeonfighterjava.Guerreiro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.Chefao" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.Barbaro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.Guerreiro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="armadilha" source="dungeonfighterjava.Celula" target="dungeonfighterjava.Armadilha" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="chefao" source="dungeonfighterjava.Celula" target="dungeonfighterjava.Chefao" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.HeroesFrame" target="dungeonfighterjava.AttributesFrame" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="heroi" source="dungeonfighterjava.Celula" target="dungeonfighterjava.Heroi" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="heroesScreen" source="dungeonfighterjava.MainFrame" target="dungeonfighterjava.HeroesFrame" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="barbaro" source="dungeonfighterjava.Celula" target="dungeonfighterjava.Barbaro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="dungeonfighterjava.Chefao" target="dungeonfighterjava.Monstro"/>
+    <UseRelation source="dungeonfighterjava.TabuleiroFrame" target="dungeonfighterjava.Tabuleiro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.ArmadilhaPerdaFixa" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="monstroMenor" source="dungeonfighterjava.Celula" target="dungeonfighterjava.MonstroMenor" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="guerreiro" source="dungeonfighterjava.Celula" target="dungeonfighterjava.Guerreiro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.DungeonFighterJava" target="dungeonfighterjava.TabuleiroFrame" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="dungeonfighterjava.Monstro" target="dungeonfighterjava.Personagem"/>
+    <HasRelation name="tabuleiro" source="dungeonfighterjava.TabuleiroFrame" target="dungeonfighterjava.Tabuleiro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.MonstroMenor" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="personagem" source="dungeonfighterjava.Celula" target="dungeonfighterjava.Personagem" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.ArmadilhaPerdaFixa" target="dungeonfighterjava.ArmadilhaPerdaFixa" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Barbaro" target="dungeonfighterjava.Barbaro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.Armadilha" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.Celula" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Tabuleiro" target="dungeonfighterjava.Barbaro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.TabuleiroFrame" target="dungeonfighterjava.Monstro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.TabuleiroFrame" target="dungeonfighterjava.Heroi" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="dungeonfighterjava.Paladino" target="dungeonfighterjava.Heroi"/>
+    <HasRelation name="barbaroConfigurado" source="dungeonfighterjava.AttributesFrame" target="dungeonfighterjava.Barbaro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Monstro" target="dungeonfighterjava.Monstro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Paladino" target="dungeonfighterjava.Paladino" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="dungeonfighterjava.Heroi" target="dungeonfighterjava.Personagem"/>
+    <HasRelation name="t1" source="dungeonfighterjava.DungeonFighterJava" target="dungeonfighterjava.Tabuleiro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.AttributesFrame" target="dungeonfighterjava.DungeonFighterJava" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="armadilhaPF" source="dungeonfighterjava.Celula" target="dungeonfighterjava.ArmadilhaPerdaFixa" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Guerreiro" target="dungeonfighterjava.Guerreiro" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="dungeonfighterjava.Tabuleiro" target="dungeonfighterjava.Celula" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="tabuleiroAnterior" source="dungeonfighterjava.FinalFrame" target="dungeonfighterjava.Tabuleiro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.Heroi" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Tabuleiro" target="dungeonfighterjava.Tabuleiro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="dungeonfighterjava.MonstroMenor" target="dungeonfighterjava.Monstro"/>
+    <UseRelation source="dungeonfighterjava.AttributesFrame" target="dungeonfighterjava.Paladino" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Tabuleiro" target="dungeonfighterjava.Paladino" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="dungeonfighterjava.Barbaro" target="dungeonfighterjava.Heroi"/>
+    <HasRelation name="player" source="dungeonfighterjava.TabuleiroFrame" target="dungeonfighterjava.Personagem" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Personagem" target="dungeonfighterjava.Personagem" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="dungeonFighterStart" source="dungeonfighterjava.AttributesFrame" target="dungeonfighterjava.DungeonFighterJava" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.ArmadilhaPerdaAleatoria" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="dungeonfighterjava.Guerreiro" target="dungeonfighterjava.Heroi"/>
+    <IsRelation name="is" source="dungeonfighterjava.ArmadilhaPerdaFixa" target="dungeonfighterjava.Armadilha"/>
+    <HasRelation name="guerreiroConfigurado" source="dungeonfighterjava.AttributesFrame" target="dungeonfighterjava.Guerreiro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="paladinoConfigurado" source="dungeonfighterjava.AttributesFrame" target="dungeonfighterjava.Paladino" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.MonstroMenor" target="dungeonfighterjava.MonstroMenor" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="armadilhaPA" source="dungeonfighterjava.Celula" target="dungeonfighterjava.ArmadilhaPerdaAleatoria" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.TabuleiroFrame" target="dungeonfighterjava.Personagem" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.Personagem" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="attributesScreen" source="dungeonfighterjava.HeroesFrame" target="dungeonfighterjava.AttributesFrame" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="paladino" source="dungeonfighterjava.Celula" target="dungeonfighterjava.Paladino" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Tabuleiro" target="dungeonfighterjava.Guerreiro" sourceCardinality="1..1" targetCardinality="1..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>

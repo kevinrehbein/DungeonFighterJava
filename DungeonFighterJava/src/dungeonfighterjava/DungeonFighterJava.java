@@ -18,22 +18,47 @@ public class DungeonFighterJava {
     
     public DungeonFighterJava(Barbaro heroi){
         
+        int ataque = heroi.getAtaque();
+        int defesa = heroi.getDefesa();
+        int saude = heroi.getSaude();
+        
+        Barbaro p1 = new Barbaro();
+        p1.setAtaque(ataque);
+        p1.setDefesa(defesa);
+        p1.setSaude(saude);
+        
         t1 = new Tabuleiro(linhas, colunas, numeroDicas);
-        t1.getCelula(0, geradorAleatorio.nextInt(9)).setPersonagem(heroi);
+        t1.getCelula(0, geradorAleatorio.nextInt(9)).setPersonagem(p1);
         iniciarJogo();
     }
     
     public DungeonFighterJava(Guerreiro heroi){
+        int ataque = heroi.getAtaque();
+        int defesa = heroi.getDefesa();
+        int saude = heroi.getSaude();
+        
+        Guerreiro p1 = new Guerreiro();
+        p1.setAtaque(ataque);
+        p1.setDefesa(defesa);
+        p1.setSaude(saude);
         
         t1 = new Tabuleiro(linhas, colunas, numeroDicas);
-        t1.getCelula(0, geradorAleatorio.nextInt(9)).setPersonagem(heroi);
+        t1.getCelula(0, geradorAleatorio.nextInt(9)).setPersonagem(p1);
         iniciarJogo();
     }
     
     public DungeonFighterJava(Paladino heroi){
+        int ataque = heroi.getAtaque();
+        int defesa = heroi.getDefesa();
+        int saude = heroi.getSaude();
+        
+        Paladino p1 = new Paladino();
+        p1.setAtaque(ataque);
+        p1.setDefesa(defesa);
+        p1.setSaude(saude);
         
         t1 = new Tabuleiro(linhas, colunas, numeroDicas);
-        t1.getCelula(0, geradorAleatorio.nextInt(9)).setPersonagem(heroi);
+        t1.getCelula(0, geradorAleatorio.nextInt(9)).setPersonagem(p1);
         iniciarJogo();
     }
 

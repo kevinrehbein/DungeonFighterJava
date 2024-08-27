@@ -15,6 +15,7 @@ public class Barbaro extends Heroi{
     public Barbaro() {
         super("Barbaro", 6, 4, 10);
     }
+    
 
     @Override
     public void usarHabilidadeEspecial() {
