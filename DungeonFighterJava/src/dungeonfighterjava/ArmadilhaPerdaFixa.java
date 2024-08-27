@@ -8,7 +8,7 @@ package dungeonfighterjava;
  *
  * @author kevin
  */
-public class ArmadilhaPerdaFixa extends Armadilha implements Cloneable {
+public class ArmadilhaPerdaFixa extends Armadilha {
     private final int dano;
     
     public ArmadilhaPerdaFixa() {
@@ -20,8 +20,4 @@ public class ArmadilhaPerdaFixa extends Armadilha implements Cloneable {
         return dano;
     }
     
-    @Override
-    public ArmadilhaPerdaFixa clone() throws CloneNotSupportedException {
-        return (ArmadilhaPerdaFixa) super.clone();
-    }
 }

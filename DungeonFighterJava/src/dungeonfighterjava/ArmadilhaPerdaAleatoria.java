@@ -9,20 +9,11 @@ package dungeonfighterjava;
  * @author kevin
  */
 
-public class ArmadilhaPerdaAleatoria extends Armadilha implements Cloneable {
-    private final int danoMaximo;
+public class ArmadilhaPerdaAleatoria extends Armadilha {
+
 
     public ArmadilhaPerdaAleatoria() {
         super("ArmadilhaPA");
-        this.danoMaximo = 10;
-    }
-
-    public int getDanoMaximo(){
-        return danoMaximo;
     }
     
-    @Override
-    public ArmadilhaPerdaAleatoria clone() throws CloneNotSupportedException {
-        return (ArmadilhaPerdaAleatoria) super.clone();
-    }
 }

@@ -8,12 +8,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -128,6 +124,7 @@ public class TabuleiroFrame extends JFrame {
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1920, 720);
+        this.setLocationRelativeTo(null); // Centraliza a janela
 
         gridPanel = new JPanel();
         gridPanel.setLayout(new GridLayout(5, 10));
@@ -576,7 +573,7 @@ public class TabuleiroFrame extends JFrame {
         int dano;
         Random geradorAleatorio = new Random();
         
-        dano = geradorAleatorio.nextInt(armadilha.getDanoMaximo());
+        dano = geradorAleatorio.nextInt(w);
         heroi.setSaude(heroi.getSaude() - dano);
         
         JOptionPane.showMessageDialog(null, "Você pisou em uma armadilha de dano aleatório! Dano recebido: " + dano);
@@ -621,7 +618,7 @@ public class TabuleiroFrame extends JFrame {
         
         this.setVisible(false);
         
-        combatFrame = new JFrame();
+        combatFrame = new JFrame("Combate");
         combatFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         combatFrame.setSize(800, 500);
         
@@ -883,9 +880,9 @@ public class TabuleiroFrame extends JFrame {
             player.setSaude(player.getSaude() + resultado);
         }
 
-        System.out.println(ataque);
-        System.out.println(defesa);
-        System.out.println(resultado);
+        //System.out.println(ataque);
+        //System.out.println(defesa);
+        //System.out.println(resultado);
         exibirResultados(ataque, defesa, resultado);
         
         finalizarTurno();
@@ -912,12 +909,11 @@ public class TabuleiroFrame extends JFrame {
             inimigo.setSaude(inimigo.getSaude() + resultado);
         }
         
-        System.out.println(ataque);
-        System.out.println(defesa);
-        System.out.println(resultado);
+        //System.out.println(ataque);
+        //System.out.println(defesa);
+        //System.out.println(resultado);
         
         rounds--;
-        finalizarBatalha();
     }
     
     private void continuar(ActionEvent e) {
@@ -928,6 +924,7 @@ public class TabuleiroFrame extends JFrame {
             defender();
             turno = true;
             exibirResultados2(ataque, defesa, resultado);
+            finalizarBatalha();
         }
         
         if (flagContinuarButton){
@@ -1040,17 +1037,9 @@ public class TabuleiroFrame extends JFrame {
                 defesa += defesa / 2;  // Postura Defensiva - aumenta a defesa em 50%
                 habilidadeAtivaGuerreiro--;
                 break;
-            case "Paladino":
-                player.setSaude(player.getSaude() + (player.getVidaMaxima() / 2));  // Recuperação - recupera 50% da saúde
-                habilidadeAtiva--;
-                break;
         }
     }
 
-    private void removerBonusDefesaGuerreiro() {
-        // Remove o bônus de defesa do Guerreiro
-        tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().setDefesa(tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getDefesaOriginal());
-    }
 
     private void exibirResultados(int ataque, int defesa, int resultado) {
         resultadosAtaque = "Seu ataque: " + ataque;
@@ -1123,10 +1112,11 @@ public class TabuleiroFrame extends JFrame {
             break;
         case "Paladino":
             if (tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().isFlagHabilidade()) {
-                JOptionPane.showMessageDialog(null, "Recuperação - Recupera 50% dos seus pontos de vida totais");
+                JOptionPane.showMessageDialog(null, "Recuperação - Recupera 50% dos seus pontos de vida máxima");
+                player.setSaude(player.getSaude() + (player.getVidaMaxima() / 2));
+                atualizaLabelsCombat();
                 tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().setFlagHabilidade(false);
             } else JOptionPane.showMessageDialog(null, "Você já usou a habilidade Especial nessa batalha!");
-            habilidadeAtiva = 1;
             break;
         }    
     }
