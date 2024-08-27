@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="dungeonfighterjava">
+  <ClassDiagramComponents>
+    <Class name="Armadilha" package="dungeonfighterjava" visibility="public" isAbstract="true" xPosition="408.0" yPosition="246.0">
+      <Fields>
+        <Field name="nome" type="String" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nome"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNome" returnType="String" visibility="public"/>
+        <Method name="setNome" returnType="void" visibility="public">
+          <Argument type="String" name="nome"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ArmadilhaPerdaAleatoria" package="dungeonfighterjava" visibility="public" xPosition="743.0" yPosition="198.0">
+      <Fields>
+        <Field name="danoMaximo" type="int" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getDanoMaximo" returnType="int" visibility="public"/>
+        <Method name="clone" returnType="ArmadilhaPerdaAleatoria" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="ArmadilhaPerdaFixa" package="dungeonfighterjava" visibility="public" xPosition="767.0" yPosition="-3.0">
+      <Fields>
+        <Field name="dano" type="int" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getDano" returnType="int" visibility="public"/>
+        <Method name="clone" returnType="ArmadilhaPerdaFixa" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="AttributesFrame" package="dungeonfighterjava" visibility="public" xPosition="1546.0" yPosition="1416.0">
+      <Fields>
+        <Field name="pontos" type="int" visibility="private"/>
+        <Field name="ataque" type="int" visibility="public"/>
+        <Field name="tipoHeroi" type="String" visibility="private" isFinal="true"/>
+        <Field name="barbaroConfigurado" type="Barbaro" visibility="public" isStatic="true"/>
+        <Field name="guerreiroConfigurado" type="Guerreiro" visibility="public" isStatic="true"/>
+        <Field name="paladinoConfigurado" type="Paladino" visibility="public" isStatic="true"/>
+        <Field name="heroesLabel" type="JLabel" visibility="private" isFinal="true"/>
+        <Field name="dungeonFighterStart" type="DungeonFighterJava" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="name"/>
+          <Argument type="String" name="tipoHeroi"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="aumentaAtaque" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="actionEvent"/>
+        </Method>
+        <Method name="diminuiAtaque" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="actionEvent"/>
+        </Method>
+        <Method name="aumentaDefesa" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="actionEvent"/>
+        </Method>
+        <Method name="diminuiDefesa" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="actionEvent"/>
+        </Method>
+        <Method name="aumentaSaude" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="actionEvent"/>
+        </Method>
+        <Method name="diminuiSaude" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="actionEvent"/>
+        </Method>
+        <Method name="atualizaLabelPontos" returnType="void" visibility="private"/>
+        <Method name="confirmarAtributos" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="actionEvent"/>
+        </Method>
+        <Method name="iniciarJogo" returnType="void" visibility="private">
+          <Argument type="Barbaro" name="heroi"/>
+        </Method>
+        <Method name="iniciarJogo" returnType="void" visibility="private">
+          <Argument type="Guerreiro" name="heroi"/>
+        </Method>
+        <Method name="iniciarJogo" returnType="void" visibility="private">
+          <Argument type="Paladino" name="heroi"/>
+        </Method>
+        <Method name="getDungeonFighterStart" returnType="DungeonFighterJava" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Barbaro" package="dungeonfighterjava" visibility="public" xPosition="1729.0" yPosition="642.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="usarHabilidadeEspecial" returnType="void" visibility="public"/>
+        <Method name="clone" returnType="Barbaro" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Celula" package="dungeonfighterjava" visibility="public" xPosition="1113.0" yPosition="-3.0">
+      <Fields>
+        <Field name="armadilha" type="Armadilha" visibility="private"/>
+        <Field name="armadilhaPF" type="ArmadilhaPerdaFixa" visibility="private"/>
+        <Field name="armadilhaPA" type="ArmadilhaPerdaAleatoria" visibility="private"/>
+        <Field name="personagem" type="Personagem" visibility="private"/>
+        <Field name="heroi" type="Heroi" visibility="private"/>
+        <Field name="barbaro" type="Barbaro" visibility="private"/>
+        <Field name="paladino" type="Paladino" visibility="private"/>
+        <Field name="guerreiro" type="Guerreiro" visibility="private"/>
+        <Field name="monstroMenor" type="MonstroMenor" visibility="private"/>
+        <Field name="chefao" type="Chefao" visibility="private"/>
+        <Field name="posX" type="int" visibility="private"/>
+        <Field name="empty" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="isElixir" returnType="boolean" visibility="public"/>
+        <Method name="setElixir" returnType="void" visibility="public"/>
+        <Method name="removerElixir" returnType="void" visibility="public"/>
+        <Method name="isEmpty" returnType="boolean" visibility="public"/>
+        <Method name="setEmpty" returnType="void" visibility="public">
+          <Argument type="boolean" name="status"/>
+        </Method>
+        <Method name="getPosX" returnType="int" visibility="public"/>
+        <Method name="getPosY" returnType="int" visibility="public"/>
+        <Method name="removerPersonagem" returnType="void" visibility="public"/>
+        <Method name="setPersonagem" returnType="void" visibility="public">
+          <Argument type="Barbaro" name="personagem"/>
+        </Method>
+        <Method name="setPersonagem" returnType="void" visibility="public">
+          <Argument type="Guerreiro" name="personagem"/>
+        </Method>
+        <Method name="setPersonagem" returnType="void" visibility="public">
+          <Argument type="Paladino" name="personagem"/>
+        </Method>
+        <Method name="setPersonagem" returnType="void" visibility="public">
+          <Argument type="MonstroMenor" name="personagem"/>
+        </Method>
+        <Method name="setPersonagem" returnType="void" visibility="public">
+          <Argument type="Chefao" name="personagem"/>
+        </Method>
+        <Method name="getPersonagem" returnType="Personagem" visibility="public"/>
+        <Method name="getBarbaro" returnType="Barbaro" visibility="public"/>
+        <Method name="getPaladino" returnType="Paladino" visibility="public"/>
+        <Method name="getGuerreiro" returnType="Guerreiro" visibility="public"/>
+        <Method name="getHeroi" returnType="Heroi" visibility="public"/>
+        <Method name="getMonstroMenor" returnType="MonstroMenor" visibility="public"/>
+        <Method name="getChefao" returnType="Chefao" visibility="public"/>
+        <Method name="setArmadilha" returnType="void" visibility="public">
+          <Argument type="ArmadilhaPerdaFixa" name="armadilha"/>
+        </Method>
+        <Method name="setArmadilha" returnType="void" visibility="public">
+          <Argument type="ArmadilhaPerdaAleatoria" name="armadilha"/>
+        </Method>
+        <Method name="removerArmadilha" returnType="void" visibility="public"/>
+        <Method name="getArmadilha" returnType="Armadilha" visibility="public"/>
+        <Method name="getArmadilhaPF" returnType="ArmadilhaPerdaFixa" visibility="public"/>
+        <Method name="getArmadilhaPA" returnType="ArmadilhaPerdaAleatoria" visibility="public"/>
+        <Method name="clone" returnType="Celula" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Chefao" package="dungeonfighterjava" visibility="public" xPosition="1931.0" yPosition="316.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="clone" returnType="Chefao" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="DungeonFighterJava" package="dungeonfighterjava" visibility="public" xPosition="2176.0" yPosition="1304.0">
+      <Fields>
+        <Field name="linhas" type="int" visibility="private" isFinal="true"/>
+        <Field name="colunas" type="int" visibility="private" isFinal="true"/>
+        <Field name="numeroMonstros" type="int" visibility="private" isFinal="true"/>
+        <Field name="numeroPerdaFixa" type="int" visibility="private" isFinal="true"/>
+        <Field name="numeroPerdaAleatoria" type="int" visibility="private" isFinal="true"/>
+        <Field name="numeroDicas" type="int" visibility="private" isFinal="true"/>
+        <Field name="numeroElixires" type="int" visibility="private" isFinal="true"/>
+        <Field name="t1" type="Tabuleiro" visibility="private"/>
+        <Field name="tabuleiroScreen" type="TabuleiroFrame" visibility="private"/>
+        <Field name="geradorAleatorio" type="Random" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Barbaro" name="heroi"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Guerreiro" name="heroi"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Paladino" name="heroi"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="iniciarJogo" returnType="void" visibility="public"/>
+        <Method name="getTabuleiroScreen" returnType="TabuleiroFrame" visibility="public"/>
+        <Method name="setTabuleiroScreen" returnType="void" visibility="public">
+          <Argument type="TabuleiroFrame" name="tabuleiroScreen"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="FinalFrame" package="dungeonfighterjava" visibility="public" xPosition="544.0" yPosition="552.0">
+      <Fields>
+        <Field name="tabuleiroAnterior" type="Tabuleiro" visibility="private" isFinal="true"/>
+        <Field name="img" type="ImageIcon" visibility="package"/>
+        <Field name="foto" type="JLabel" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Tabuleiro" name="tabuleiroOriginal"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="initializeUI" returnType="void" visibility="private"/>
+        <Method name="createButton" returnType="JButton" visibility="private">
+          <Argument type="String" name="text"/>
+          <Argument type="ActionListener" name="actionListener"/>
+        </Method>
+        <Method name="reiniciarJogo" returnType="void" visibility="private"/>
+        <Method name="novoJogo" returnType="void" visibility="private"/>
+        <Method name="setWindowsVisible" returnType="void" visibility="public"/>
+        <Method name="closeWindows" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Guerreiro" package="dungeonfighterjava" visibility="public" xPosition="1357.0" yPosition="912.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="usarHabilidadeEspecial" returnType="void" visibility="public"/>
+        <Method name="clone" returnType="Guerreiro" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="HeroesFrame" package="dungeonfighterjava" visibility="public" xPosition="1068.0" yPosition="1482.0">
+      <Fields>
+        <Field name="tipoHeroi" type="String" visibility="private"/>
+        <Field name="attributesScreen" type="AttributesFrame" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="name"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="initializeUI" returnType="void" visibility="private"/>
+        <Method name="heroSelected" returnType="void" visibility="private">
+          <Argument type="String" name="heroi"/>
+        </Method>
+        <Method name="getAttributesScreen" returnType="AttributesFrame" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Heroi" package="dungeonfighterjava" visibility="public" isAbstract="true" xPosition="2089.0" yPosition="524.0">
+      <Fields>
+        <Field name="elixires" type="int" visibility="private"/>
+        <Field name="CAPACIDADE_MAX_ELIXIRES" type="int" visibility="private" isFinal="true"/>
+        <Field name="pontosElixir" type="int" visibility="private" isFinal="true"/>
+        <Field name="flagHabilidade" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nome"/>
+          <Argument type="int" name="ataque"/>
+          <Argument type="int" name="defesa"/>
+          <Argument type="int" name="saude"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="adicionarElixir" returnType="int" visibility="public"/>
+        <Method name="usarElixir" returnType="void" visibility="public"/>
+        <Method name="getElixires" returnType="int" visibility="public"/>
+        <Method name="usarHabilidadeEspecial" returnType="void" visibility="public" isAbstract="true"/>
+        <Method name="isFlagHabilidade" returnType="boolean" visibility="public"/>
+        <Method name="setFlagHabilidade" returnType="void" visibility="public">
+          <Argument type="boolean" name="flagHabilidade"/>
+        </Method>
+        <Method name="clone" returnType="Heroi" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="MainFrame" package="dungeonfighterjava" visibility="public" xPosition="586.0" yPosition="1452.0">
+      <Fields>
+        <Field name="openWindows" type="List&lt;JFrame&gt;" visibility="public" isStatic="true"/>
+        <Field name="img" type="ImageIcon" visibility="package"/>
+        <Field name="foto" type="JLabel" visibility="package"/>
+        <Field name="heroesScreen" type="HeroesFrame" visibility="public" isStatic="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="title"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="initializeUI" returnType="void" visibility="private"/>
+        <Method name="createButton" returnType="JButton" visibility="private">
+          <Argument type="String" name="text"/>
+          <Argument type="ActionListener" name="actionListener"/>
+        </Method>
+        <Method name="jogar" returnType="void" visibility="private"/>
+        <Method name="debug" returnType="void" visibility="private"/>
+        <Method name="sair" returnType="void" visibility="private"/>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Monstro" package="dungeonfighterjava" visibility="public" isAbstract="true" xPosition="2274.0" yPosition="284.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nome"/>
+          <Argument type="int" name="ataque"/>
+          <Argument type="int" name="defesa"/>
+          <Argument type="int" name="saude"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="clone" returnType="Monstro" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="MonstroMenor" package="dungeonfighterjava" visibility="public" xPosition="1918.0" yPosition="20.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="clone" returnType="MonstroMenor" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Paladino" package="dungeonfighterjava" visibility="public" xPosition="2132.0" yPosition="944.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="usarHabilidadeEspecial" returnType="void" visibility="public"/>
+        <Method name="clone" returnType="Paladino" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Personagem" package="dungeonfighterjava" visibility="public" isAbstract="true" xPosition="2685.0" yPosition="34.0">
+      <Fields>
+        <Field name="nome" type="String" visibility="private"/>
+        <Field name="ataque" type="int" visibility="private"/>
+        <Field name="defesa" type="int" visibility="private"/>
+        <Field name="saude" type="int" visibility="private"/>
+        <Field name="vidaMaxima" type="int" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nome"/>
+          <Argument type="int" name="ataque"/>
+          <Argument type="int" name="defesa"/>
+          <Argument type="int" name="saude"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNome" returnType="String" visibility="public"/>
+        <Method name="getAtaque" returnType="int" visibility="public"/>
+        <Method name="setAtaque" returnType="void" visibility="public">
+          <Argument type="int" name="ataque"/>
+        </Method>
+        <Method name="getDefesa" returnType="int" visibility="public"/>
+        <Method name="setDefesa" returnType="void" visibility="public">
+          <Argument type="int" name="defesa"/>
+        </Method>
+        <Method name="getSaude" returnType="int" visibility="public"/>
+        <Method name="setSaude" returnType="void" visibility="public">
+          <Argument type="int" name="saude"/>
+        </Method>
+        <Method name="getVidaMaxima" returnType="int" visibility="public"/>
+        <Method name="getAtaqueOriginal" returnType="int" visibility="public"/>
+        <Method name="getDefesaOriginal" returnType="int" visibility="public"/>
+        <Method name="receberDano" returnType="void" visibility="public">
+          <Argument type="int" name="dano"/>
+        </Method>
+        <Method name="isAlive" returnType="boolean" visibility="public"/>
+        <Method name="clone" returnType="Personagem" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Tabuleiro" package="dungeonfighterjava" visibility="public" xPosition="731.0" yPosition="917.0">
+      <Fields>
+        <Field name="linhas" type="int" visibility="private" isFinal="true"/>
+        <Field name="colunas" type="int" visibility="private" isFinal="true"/>
+        <Field name="tabuleiro" type="Celula[][]" visibility="private" isFinal="true"/>
+        <Field name="i" type="int" visibility="private"/>
+        <Field name="numDicas" type="int" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="linhas"/>
+          <Argument type="int" name="colunas"/>
+          <Argument type="int" name="numDicas"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="criarTabuleiro" returnType="void" visibility="private"/>
+        <Method name="moverHeroi" returnType="void" visibility="public">
+          <Argument type="Paladino" name="heroi"/>
+          <Argument type="int" name="origemX"/>
+          <Argument type="int" name="origemY"/>
+          <Argument type="int" name="destinoX"/>
+          <Argument type="int" name="destinoY"/>
+        </Method>
+        <Method name="moverHeroi" returnType="void" visibility="public">
+          <Argument type="Guerreiro" name="heroi"/>
+          <Argument type="int" name="origemX"/>
+          <Argument type="int" name="origemY"/>
+          <Argument type="int" name="destinoX"/>
+          <Argument type="int" name="destinoY"/>
+        </Method>
+        <Method name="moverHeroi" returnType="void" visibility="public">
+          <Argument type="Barbaro" name="heroi"/>
+          <Argument type="int" name="origemX"/>
+          <Argument type="int" name="origemY"/>
+          <Argument type="int" name="destinoX"/>
+          <Argument type="int" name="destinoY"/>
+        </Method>
+        <Method name="getCelula" returnType="Celula" visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+        </Method>
+        <Method name="getLinhas" returnType="int" visibility="public"/>
+        <Method name="getColunas" returnType="int" visibility="public"/>
+        <Method name="getNumDicas" returnType="int" visibility="public"/>
+        <Method name="printTabuleiro" returnType="void" visibility="public"/>
+        <Method name="clone" returnType="Tabuleiro" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="TabuleiroFrame" package="dungeonfighterjava" visibility="public" xPosition="2685.0" yPosition="677.0">
+      <Fields>
+        <Field name="tabuleiro" type="Tabuleiro" visibility="private"/>
+        <Field name="x" type="int" visibility="private"/>
+        <Field name="visible" type="boolean" visibility="private"/>
+        <Field name="b" type="JButton[][]" visibility="private"/>
+        <Field name="gridPanel" type="JPanel" visibility="private"/>
+        <Field name="l1" type="JLabel" visibility="private"/>
+        <Field name="buttonDica" type="JButton" visibility="private"/>
+        <Field name="player" type="Personagem" visibility="private"/>
+        <Field name="w" type="int" visibility="private"/>
+        <Field name="combatFrame" type="JFrame" visibility="package"/>
+        <Field name="habilidadeAtiva" type="int" visibility="private"/>
+        <Field name="resultadosAtaque" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="name"/>
+          <Argument type="Tabuleiro" name="tabuleiro"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="criaTabuleiroCopia" returnType="void" visibility="public">
+          <Argument type="Tabuleiro" name="tabuleiro"/>
+        </Method>
+        <Method name="getX" returnType="int" visibility="public"/>
+        <Method name="getY" returnType="int" visibility="public"/>
+        <Method name="criaTabuleiroFrame" returnType="void" visibility="private"/>
+        <Method name="atualizaTabuleiroFrame" returnType="void" visibility="public"/>
+        <Method name="paintButtons" returnType="void" visibility="public"/>
+        <Method name="atualizaLabels" returnType="void" visibility="public"/>
+        <Method name="gridPressed" returnType="void" visibility="public">
+          <Argument type="ActionEvent" name="gridEvent"/>
+        </Method>
+        <Method name="dicaPressed" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="dicaEvent"/>
+        </Method>
+        <Method name="sairPressed" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="sairEvent"/>
+        </Method>
+        <Method name="acionarArmadilha" returnType="void" visibility="private">
+          <Argument type="Heroi" name="heroi"/>
+          <Argument type="ArmadilhaPerdaFixa" name="armadilha"/>
+        </Method>
+        <Method name="acionarArmadilha" returnType="void" visibility="private">
+          <Argument type="Heroi" name="heroi"/>
+          <Argument type="ArmadilhaPerdaAleatoria" name="armadilha"/>
+        </Method>
+        <Method name="combat" returnType="void" visibility="private">
+          <Argument type="Heroi" name="heroi"/>
+          <Argument type="Monstro" name="monstro"/>
+        </Method>
+        <Method name="criaCombatFrame" returnType="void" visibility="private"/>
+        <Method name="atualizaLabelsCombat" returnType="void" visibility="private"/>
+        <Method name="atacar" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="atacarEvent"/>
+        </Method>
+        <Method name="atacar" returnType="void" visibility="private"/>
+        <Method name="defender" returnType="void" visibility="private"/>
+        <Method name="continuar" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="e"/>
+        </Method>
+        <Method name="finalizarBatalha" returnType="void" visibility="private"/>
+        <Method name="calcularAtaque" returnType="int" visibility="private">
+          <Argument type="int" name="aleatorio1"/>
+        </Method>
+        <Method name="calcularAtaque" returnType="int" visibility="private">
+          <Argument type="int" name="aleatorio1"/>
+          <Argument type="Personagem" name="inimigo"/>
+        </Method>
+        <Method name="calcularDefesa" returnType="int" visibility="private">
+          <Argument type="int" name="aleatorio2"/>
+        </Method>
+        <Method name="calcularDefesa" returnType="int" visibility="private">
+          <Argument type="int" name="aleatorio2"/>
+          <Argument type="Personagem" name="inimigo"/>
+        </Method>
+        <Method name="aplicarHabilidadeEspecial" returnType="void" visibility="private"/>
+        <Method name="removerBonusDefesaGuerreiro" returnType="void" visibility="private"/>
+        <Method name="exibirResultados" returnType="void" visibility="private">
+          <Argument type="int" name="ataque"/>
+          <Argument type="int" name="defesa"/>
+          <Argument type="int" name="resultado"/>
+        </Method>
+        <Method name="exibirResultados2" returnType="void" visibility="private">
+          <Argument type="int" name="ataque"/>
+          <Argument type="int" name="defesa"/>
+          <Argument type="int" name="resultado"/>
+        </Method>
+        <Method name="finalizarTurno" returnType="void" visibility="private"/>
+        <Method name="moverHeroi" returnType="void" visibility="private"/>
+        <Method name="habilidadeEspecial" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="habilidadeEvent"/>
+        </Method>
+        <Method name="elixirPressed" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="elixirEvent"/>
+        </Method>
+        <Method name="setTabuleiroVisible" returnType="void" visibility="public">
+          <Argument type="boolean" name="visible"/>
+        </Method>
+        <Method name="isTabuleiroVisible" returnType="boolean" visibility="public"/>
+        <Method name="closeWindows" returnType="void" visibility="public"/>
+        <Method name="setWindowsInvisible" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="dungeonFighterStart" source="dungeonfighterjava.AttributesFrame" target="dungeonfighterjava.DungeonFighterJava" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="player" source="dungeonfighterjava.TabuleiroFrame" target="dungeonfighterjava.Personagem" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.ArmadilhaPerdaAleatoria" target="dungeonfighterjava.ArmadilhaPerdaAleatoria" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="tabuleiroScreen" source="dungeonfighterjava.DungeonFighterJava" target="dungeonfighterjava.TabuleiroFrame" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Paladino" target="dungeonfighterjava.Paladino" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="armadilhaPA" source="dungeonfighterjava.Celula" target="dungeonfighterjava.ArmadilhaPerdaAleatoria" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.TabuleiroFrame" target="dungeonfighterjava.Personagem" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Guerreiro" target="dungeonfighterjava.Guerreiro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.AttributesFrame" target="dungeonfighterjava.Guerreiro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="heroi" source="dungeonfighterjava.Celula" target="dungeonfighterjava.Heroi" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Monstro" target="dungeonfighterjava.Monstro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.Paladino" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="barbaro" source="dungeonfighterjava.Celula" target="dungeonfighterjava.Barbaro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="paladinoConfigurado" source="dungeonfighterjava.AttributesFrame" target="dungeonfighterjava.Paladino" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Tabuleiro" target="dungeonfighterjava.Paladino" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.MonstroMenor" target="dungeonfighterjava.MonstroMenor" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Tabuleiro" target="dungeonfighterjava.Celula" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="t1" source="dungeonfighterjava.DungeonFighterJava" target="dungeonfighterjava.Tabuleiro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.AttributesFrame" target="dungeonfighterjava.DungeonFighterJava" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Personagem" target="dungeonfighterjava.Personagem" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="dungeonfighterjava.ArmadilhaPerdaFixa" target="dungeonfighterjava.Armadilha"/>
+    <IsRelation name="is" source="dungeonfighterjava.ArmadilhaPerdaAleatoria" target="dungeonfighterjava.Armadilha"/>
+    <IsRelation name="is" source="dungeonfighterjava.Paladino" target="dungeonfighterjava.Heroi"/>
+    <IsRelation name="is" source="dungeonfighterjava.Barbaro" target="dungeonfighterjava.Heroi"/>
+    <IsRelation name="is" source="dungeonfighterjava.Heroi" target="dungeonfighterjava.Personagem"/>
+    <UseRelation source="dungeonfighterjava.Tabuleiro" target="dungeonfighterjava.Barbaro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="armadilhaPF" source="dungeonfighterjava.Celula" target="dungeonfighterjava.ArmadilhaPerdaFixa" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.TabuleiroFrame" target="dungeonfighterjava.Monstro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.ArmadilhaPerdaFixa" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.ArmadilhaPerdaAleatoria" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Heroi" target="dungeonfighterjava.Heroi" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.AttributesFrame" target="dungeonfighterjava.Paladino" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="armadilha" source="dungeonfighterjava.Celula" target="dungeonfighterjava.Armadilha" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="attributesScreen" source="dungeonfighterjava.HeroesFrame" target="dungeonfighterjava.AttributesFrame" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.Personagem" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="guerreiroConfigurado" source="dungeonfighterjava.AttributesFrame" target="dungeonfighterjava.Guerreiro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Chefao" target="dungeonfighterjava.Chefao" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.Guerreiro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.Armadilha" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="chefao" source="dungeonfighterjava.Celula" target="dungeonfighterjava.Chefao" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="guerreiro" source="dungeonfighterjava.Celula" target="dungeonfighterjava.Guerreiro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.TabuleiroFrame" target="dungeonfighterjava.Heroi" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="dungeonfighterjava.Chefao" target="dungeonfighterjava.Monstro"/>
+    <HasRelation name="barbaroConfigurado" source="dungeonfighterjava.AttributesFrame" target="dungeonfighterjava.Barbaro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Barbaro" target="dungeonfighterjava.Barbaro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="tabuleiro" source="dungeonfighterjava.TabuleiroFrame" target="dungeonfighterjava.Tabuleiro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Tabuleiro" target="dungeonfighterjava.Tabuleiro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.ArmadilhaPerdaFixa" target="dungeonfighterjava.ArmadilhaPerdaFixa" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="dungeonfighterjava.MonstroMenor" target="dungeonfighterjava.Monstro"/>
+    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.Heroi" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="monstroMenor" source="dungeonfighterjava.Celula" target="dungeonfighterjava.MonstroMenor" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.HeroesFrame" target="dungeonfighterjava.AttributesFrame" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="dungeonfighterjava.Guerreiro" target="dungeonfighterjava.Heroi"/>
+    <HasRelation name="paladino" source="dungeonfighterjava.Celula" target="dungeonfighterjava.Paladino" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.DungeonFighterJava" target="dungeonfighterjava.TabuleiroFrame" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.Chefao" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.Barbaro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="dungeonfighterjava.Monstro" target="dungeonfighterjava.Personagem"/>
+    <UseRelation source="dungeonfighterjava.AttributesFrame" target="dungeonfighterjava.Barbaro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="personagem" source="dungeonfighterjava.Celula" target="dungeonfighterjava.Personagem" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.Celula" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="heroesScreen" source="dungeonfighterjava.MainFrame" target="dungeonfighterjava.HeroesFrame" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Celula" target="dungeonfighterjava.MonstroMenor" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.TabuleiroFrame" target="dungeonfighterjava.Tabuleiro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="dungeonfighterjava.Tabuleiro" target="dungeonfighterjava.Guerreiro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="tabuleiroAnterior" source="dungeonfighterjava.FinalFrame" target="dungeonfighterjava.Tabuleiro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
