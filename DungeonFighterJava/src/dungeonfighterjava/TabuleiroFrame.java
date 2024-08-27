@@ -24,7 +24,7 @@ public class TabuleiroFrame extends JFrame {
     
     private Tabuleiro tabuleiro, tabuleiroCopia;
     private int x, y, posHeroiX, posHeroiY, countDicas, ataqueCopia, defesaCopia, saudeCopia;
-    private boolean visible, flagDica=false, flagContinuarButton = true;
+    private boolean visible, flagDica=false, flagContinuarButton = true, turno;
     private JButton[][] b;
     private JPanel gridPanel, attributesPanel;
     private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16, l17, l18, l19, l20, l21, l22;
@@ -33,8 +33,8 @@ public class TabuleiroFrame extends JFrame {
     private Personagem player, inimigo;
     private int w = 10;
     JFrame combatFrame;
-    private int habilidadeAtiva;
-    String resultadosAtaque, resultadosDefesa, resultadosTotal;
+    private int habilidadeAtiva, habilidadeAtivaGuerreiro, ataque, defesa, resultado , aleatorio1, aleatorio2, rounds;
+    private String resultadosAtaque, resultadosDefesa, resultadosTotal;
     
     public TabuleiroFrame(String name, Tabuleiro tabuleiro){
         super(name);
@@ -606,7 +606,7 @@ public class TabuleiroFrame extends JFrame {
             JOptionPane.showMessageDialog(null, "GAME OVER");
             tabuleiroCopia.printTabuleiro();
             JFrame finalScreen = new FinalFrame(tabuleiroCopia);
-            setWindowsInvible();
+            setWindowsInvisible();
         }    
     }
     
@@ -846,326 +846,260 @@ public class TabuleiroFrame extends JFrame {
         
     }
     
-    private void atacar(ActionEvent atacarEvent){
-        
-        int ataque = 0, defesa = 0, resultado = 0, rounds = 2, aleatorio1, aleatorio2;
-        boolean turno = true;
-        
+    private void atacar(ActionEvent atacarEvent) {
+        rounds = 2;
+        turno = true;
         Random geradorAleatorio = new Random();
+
+        aleatorio1 = 1 + geradorAleatorio.nextInt(w);
+        aleatorio2 = 1 + geradorAleatorio.nextInt(w);
         
-        aleatorio1 = geradorAleatorio.nextInt(w);
-        aleatorio2 = geradorAleatorio.nextInt(w);
-        
-        
-        while (inimigo.isAlive() && player.isAlive() && rounds > 0) {
-                
-            if (turno){ 
-                //atacando     
-                if (habilidadeAtiva > 0) {                    
-                    //habilidade especial ativa
-                    switch (inimigo.getNome()){
-                        case ("MonstroMenor"):
+        ataque = 0;
+        defesa = 0;
 
-                            switch (player.getNome()){
-                                case "Barbaro":
-                                    //Golpe Furioso - Desfere um ataque que causa 50% a mais de dano
-                                    tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().usarHabilidadeEspecial();
-                                    ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getAtaque();
-                                    defesa = aleatorio2 + tabuleiro.getCelula(x, y).getMonstroMenor().getDefesa();
-                                    ataque = ataque + ataque/2;
-                                    resultado = ataque - defesa;
-                                    resultadosAtaque = "Seu ataque: ( " + aleatorio1 + " + " + player.getAtaque() + " } * 1.5 = " + ataque;
-                                    resultadosDefesa = "Defesa do inimigo: " + aleatorio2 + " + " + inimigo.getDefesa() + " = " + defesa;
-                                    resultadosTotal = "Dano total: " + resultado;
-                                    //reverte efeito da habilidade
-                                    tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().setAtaque(tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getAtaqueOriginal());
-                                    habilidadeAtiva--; 
-                                    break;
-                                case "Guerreiro":
-                                    ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getAtaque();
-                                    defesa = aleatorio2 + tabuleiro.getCelula(x, y).getMonstroMenor().getDefesa();
-                                    resultado = ataque - defesa;
-                                    resultadosAtaque = "Seu ataque: " + aleatorio1 + " + " + player.getAtaque() + " = " + ataque;
-                                    resultadosDefesa = "Defesa do inimigo: " + aleatorio2 + " + " + inimigo.getDefesa() + " = " + defesa;
-                                    resultadosTotal = "Dano total: " + resultado;
-                                    break;
-                            }
-                            break;
-
-                        case "Chefao":
-
-                            switch (player.getNome()){
-                                case "Barbaro":
-                                     //Golpe Furioso - Desfere um ataque que causa 50% a mais de dano
-                                    tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().usarHabilidadeEspecial();
-                                    ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getAtaque();
-                                    ataque = ataque + ataque/2;
-                                    defesa = aleatorio2 + tabuleiro.getCelula(x, y).getChefao().getDefesa();
-                                    resultado = ataque - defesa;
-                                    //reverte efeito da habilidade
-                                    tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().setAtaque(tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getAtaqueOriginal());
-                                    habilidadeAtiva--; 
-                                    break;
-                                case "Guerreiro":
-                                    ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getAtaque();
-                                    defesa = aleatorio2 + tabuleiro.getCelula(x, y).getChefao().getDefesa();
-                                    resultado = ataque - defesa;
-                                    resultadosAtaque = "Seu ataque: " + aleatorio1 + " + " + player.getAtaque() + " = " + ataque;
-                                    resultadosDefesa = "Defesa do inimigo: " + aleatorio2 + " + " + inimigo.getDefesa() + " = " + defesa;
-                                    resultadosTotal = "Dano total: " + resultado;
-                                    break;
-                                }
-                            break; 
-                        
-                    }
-                    
-                } else {
-                    //habilidade especial inativada
-                    switch (inimigo.getNome()){
-                        case ("MonstroMenor"):
-
-                            switch (player.getNome()){
-                                case "Barbaro":
-                                     ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getAtaque();
-                                     defesa = aleatorio2 + tabuleiro.getCelula(x, y).getMonstroMenor().getDefesa();
-                                     resultado = ataque - defesa;
-                                     resultadosAtaque = "Seu ataque: " + aleatorio1 + " + " + player.getAtaque() + " = " + ataque;
-                                    resultadosDefesa = "Defesa do inimigo: " + aleatorio2 + " + " + inimigo.getDefesa() + " = " + defesa;
-                                    resultadosTotal = "Dano total: " + resultado;
-                                     break;
-                                case "Guerreiro":
-                                     ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getAtaque();
-                                     defesa = aleatorio2 + tabuleiro.getCelula(x, y).getMonstroMenor().getDefesa();
-                                     resultado = ataque - defesa;
-                                     resultadosAtaque = "Seu ataque: " + aleatorio1 + " + " + player.getAtaque() + " = " + ataque;
-                                    resultadosDefesa = "Defesa do inimigo: " + aleatorio2 + " + " + inimigo.getDefesa() + " = " + defesa;
-                                    resultadosTotal = "Dano total: " + resultado;
-                                     break;
-                                case "Paladino":
-                                     ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().getAtaque();
-                                     defesa = aleatorio2 + tabuleiro.getCelula(x, y).getMonstroMenor().getDefesa();
-                                     resultado = ataque - defesa;
-                                     resultadosAtaque = "Seu ataque: " + aleatorio1 + " + " + player.getAtaque() + " = " + ataque;
-                                    resultadosDefesa = "Defesa do inimigo: " + aleatorio2 + " + " + inimigo.getDefesa() + " = " + defesa;
-                                    resultadosTotal = "Dano total: " + resultado;
-                                     break;
-                                }
-                            break;
-
-                        case "Chefao":
-
-                            switch (player.getNome()){
-                                case "Barbaro":
-                                     ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getAtaque();
-                                     defesa = aleatorio2 + tabuleiro.getCelula(x, y).getChefao().getDefesa();
-                                     resultado = ataque - defesa;
-                                     resultadosAtaque = "Seu ataque: " + aleatorio1 + " + " + player.getAtaque() + " = " + ataque;
-                                    resultadosDefesa = "Defesa do inimigo: " + aleatorio2 + " + " + inimigo.getDefesa() + " = " + defesa;
-                                    resultadosTotal = "Dano total: " + resultado;
-                                     break;
-                                case "Guerreiro":
-                                     ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getAtaque();
-                                     defesa = aleatorio2 + tabuleiro.getCelula(x, y).getChefao().getDefesa();
-                                     resultado = ataque - defesa;
-                                     resultadosAtaque = "Seu ataque: " + aleatorio1 + " + " + player.getAtaque() + " = " + ataque;
-                                    resultadosDefesa = "Defesa do inimigo: " + aleatorio2 + " + " + inimigo.getDefesa() + " = " + defesa;
-                                    resultadosTotal = "Dano total: " + resultado;
-                                     break;
-                                case "Paladino":
-                                     ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().getAtaque();
-                                     defesa = aleatorio2 + tabuleiro.getCelula(x, y).getChefao().getDefesa();
-                                     resultado = ataque - defesa;
-                                     resultadosAtaque = "Seu ataque: " + aleatorio1 + " + " + player.getAtaque() + " = " + ataque;
-                                    resultadosDefesa = "Defesa do inimigo: " + aleatorio2 + " + " + inimigo.getDefesa() + " = " + defesa;
-                                    resultadosTotal = "Dano total: " + resultado;
-                                     break;
-                            }
-
-                            break;      
-                    }
-                        
-                }
-
-                if (resultado > 0){
-                    inimigo.setSaude(inimigo.getSaude() - resultado);                
-                } else player.setSaude(player.getSaude() + resultado);
-                
-                //resultadosAtaque = "Seu ataque: " + aleatorio1 + " + " + tabuleiro.getCelula(posHeroiX, posHeroiY).getHeroi().getAtaque() + " = " + ataque;
-                //resultadosDefesa = "Defesa do inimigo: " + aleatorio2 + " + " + tabuleiro.getCelula(posHeroiX, posHeroiY).getHeroi().getDefesa() + " = " + defesa;
-                //resultadosTotal = "Dano total: " + resultado;
-                        
-                l20.setText(resultadosAtaque);
-                l21.setText(resultadosDefesa);
-                l22.setText(resultadosTotal);
-                
-                l19.setVisible(false);
-                buttonElixir2.setVisible(false);
-                atacarButton.setVisible(false);
-                habilidadeButton.setVisible(false);
-                continuarButton.setVisible(true);
-                //JOptionPane.showMessageDialog(null, "Seu ataque: " + aleatorio1 + " + " + (ataque - aleatorio1) + " = " + ataque + " | Sua Defesa: " + aleatorio2 + " + " + (defesa - aleatorio2) + " = " + defesa + " | Dano total: " + resultado);
-                turno = false;
-                rounds--;
-                
-                atualizaLabelsCombat();
-
-            } else {
-                //defendendo
-                if (habilidadeAtiva > 0){
-                    
-                    switch(inimigo.getNome()){
-                        
-                        case "MonstroMenos":
-                            // Postura Defensiva - aumenta defesa em 50% por dois turnos 
-                            tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().usarHabilidadeEspecial();
-                            ataque = aleatorio1 + tabuleiro.getCelula(x, y).getMonstroMenor().getAtaque();
-                            defesa = aleatorio2 + player.getDefesa();
-                            resultado = ataque - defesa;
-                            resultadosAtaque = "Ataque do inimigo: " + aleatorio1 + " + " + inimigo.getAtaque() + " = " + ataque;
-                            resultadosDefesa = "Sua Defesa: " + aleatorio2 + " + " + player.getDefesa() + " = " + defesa;
-                            resultadosTotal = "Dano total: " + resultado;
-                            //reverte o efeito da habilidade
-                            tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().setDefesa(tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getDefesaOriginal());
-                            habilidadeAtiva--;
-                            break;
-                        case "Chefao":
-                            // Postura Defensiva - aumenta defesa em 50% por dois turnos 
-                            tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().usarHabilidadeEspecial();
-                            ataque = aleatorio1 + tabuleiro.getCelula(x, y).getChefao().getAtaque();
-                            defesa = aleatorio2 + player.getDefesa();
-                            resultado = ataque - defesa;
-                            resultadosAtaque = "Ataque do inimigo: " + aleatorio1 + " + " + inimigo.getAtaque() + " = " + ataque;
-                            resultadosDefesa = "Sua Defesa: " + aleatorio2 + " + " + player.getDefesa() + " = " + defesa;
-                            resultadosTotal = "Dano total: " + resultado;
-                            //reverte o efeito da habilidade
-                            tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().setDefesa(tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getDefesaOriginal());
-                            habilidadeAtiva--;
-                            break;
-                    }
-                    
-                } else {
-                    
-                    switch (inimigo.getNome()){
-                    case "MonstroMenor":
-
-                        switch (player.getNome()){
-                            case "Barbaro":
-                                ataque = aleatorio1 + tabuleiro.getCelula(x, y).getMonstroMenor().getAtaque();
-                                defesa = aleatorio2 + tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getDefesa();
-                                resultado = ataque - defesa;
-                                resultadosAtaque = "Ataque do inimigo: " + aleatorio1 + " + " + inimigo.getAtaque() + " = " + ataque;
-                                resultadosDefesa = "Sua Defesa: " + aleatorio2 + " + " + player.getDefesa() + " = " + defesa;
-                                resultadosTotal = "Dano total: " + resultado;
-                                break;
-                            case "Guerreiro":
-                                ataque = aleatorio1 + tabuleiro.getCelula(x, y).getMonstroMenor().getAtaque();
-                                defesa = aleatorio2 + tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getDefesa();
-                                resultado = ataque - defesa;
-                                resultadosAtaque = "Ataque do inimigo: " + aleatorio1 + " + " + inimigo.getAtaque() + " = " + ataque;
-                                resultadosDefesa = "Sua Defesa: " + aleatorio2 + " + " + player.getDefesa() + " = " + defesa;
-                                resultadosTotal = "Dano total: " + resultado;
-                                break;
-                            case "Paladino":
-                                ataque = aleatorio1 + tabuleiro.getCelula(x, y).getMonstroMenor().getAtaque();
-                                defesa = aleatorio2 + tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().getDefesa();
-                                resultado = ataque - defesa;
-                                resultadosAtaque = "Ataque do inimigo: " + aleatorio1 + " + " + inimigo.getAtaque() + " = " + ataque;
-                                resultadosDefesa = "Sua Defesa: " + aleatorio2 + " + " + player.getDefesa() + " = " + defesa;
-                                resultadosTotal = "Dano total: " + resultado;
-                                break;
-                            }
-                        break;
-
-                    case "Chefao":
-                        
-                        switch (player.getNome()){
-                            case "Barbaro":
-                                 ataque = aleatorio1 + tabuleiro.getCelula(x, y).getChefao().getAtaque();
-                                 defesa = aleatorio2 + tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getDefesa();
-                                 resultado = ataque - defesa;
-                                 resultadosAtaque = "Ataque do inimigo: " + aleatorio1 + " + " + inimigo.getAtaque() + " = " + ataque;
-                                 resultadosDefesa = "Sua Defesa: " + aleatorio2 + " + " + player.getDefesa() + " = " + defesa;
-                                 resultadosTotal = "Dano total: " + resultado;
-                                 break;
-                            case "Guerreiro":
-                                ataque = aleatorio1 + tabuleiro.getCelula(x, y).getChefao().getAtaque();
-                                defesa = aleatorio2 + tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getDefesa();
-                                resultado = ataque - defesa;
-                                resultadosAtaque = "Ataque do inimigo: " + aleatorio1 + " + " + inimigo.getAtaque() + " = " + ataque;
-                                resultadosDefesa = "Sua Defesa: " + aleatorio2 + " + " + player.getDefesa() + " = " + defesa;
-                                resultadosTotal = "Dano total: " + resultado;
-                                break;
-                            case "Paladino":
-                                 ataque = aleatorio1 + tabuleiro.getCelula(x, y).getChefao().getAtaque();
-                                 defesa = aleatorio2 + tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().getDefesa();
-                                 resultado = ataque - defesa;
-                                 resultadosAtaque = "Ataque do inimigo: " + aleatorio1 + " + " + inimigo.getAtaque() + " = " + ataque;
-                                resultadosDefesa = "Sua Defesa: " + aleatorio2 + " + " + player.getDefesa() + " = " + defesa;
-                                resultadosTotal = "Dano total: " + resultado;
-                                 break;
-                            }
-                        break;      
-                    }
-                }
-                
-                
-
-                if (resultado > 0){
-                    player.setSaude(player.getSaude() - resultado);                
-                } else inimigo.setSaude(inimigo.getSaude() + resultado);
-                
-                //l20.setText(resultadosAtaque);
-                //l21.setText(resultadosDefesa);
-                //l22.setText(resultadosTotal);
-                
-                turno = true;
-                rounds--;
+        if (inimigo.isAlive() && player.isAlive() && rounds > 0) {
+            if (turno) { 
+                atacar();
             }
+        }   
+    }
+    
+    private void atacar(){
+        // Atacando
+        ataque = calcularAtaque(aleatorio1);
+        defesa = calcularDefesa(aleatorio2, inimigo);
+
+        if (habilidadeAtiva > 0) {
+            aplicarHabilidadeEspecial();
+        }
+
+        resultado = ataque - defesa;
+
+        exibirResultados(ataque, defesa, resultado);
+
+        if (resultado > 0) {
+            inimigo.setSaude(inimigo.getSaude() - resultado);                
+        } else {
+            player.setSaude(player.getSaude() + resultado);
+        }
+
+        System.out.println(ataque);
+        System.out.println(defesa);
+        System.out.println(resultado);
+        exibirResultados(ataque, defesa, resultado);
+        
+        finalizarTurno();
+
+        turno = false;
+        rounds--;
+
+        finalizarBatalha();
+    }
+    
+    private void defender(){
+        ataque = calcularAtaque(aleatorio1, inimigo);
+        defesa = calcularDefesa(aleatorio2);
+
+        if (habilidadeAtivaGuerreiro > 0) {
+            aplicarHabilidadeEspecial();
+        }
+
+        resultado = ataque - defesa;
+
+        if (resultado > 0) {
+            player.setSaude(player.getSaude() - resultado);                
+        } else {
+            inimigo.setSaude(inimigo.getSaude() + resultado);
         }
         
-        //fim da batalha
-        if (player.isAlive() == false || inimigo.isAlive() == false){
+        System.out.println(ataque);
+        System.out.println(defesa);
+        System.out.println(resultado);
+        
+        rounds--;
+        finalizarBatalha();
+    }
+    
+    private void continuar(ActionEvent e) {
+        
+        atualizaLabelsCombat();
+
+        if (!turno) {
+            defender();
+            turno = true;
+            exibirResultados2(ataque, defesa, resultado);
+        }
+        
+        if (flagContinuarButton){
+            flagContinuarButton = false;      
+        } else {
             
-            if (player.isAlive() && inimigo.getNome().equals("MonstroMenor")){
+            l7.setText("Seu turno");
+            l20.setText("");
+            l21.setText("");
+            l22.setText("");
+            
+            flagContinuarButton = true;
+            turno = true;
+            
+            continuarButton.setVisible(false);
+            atacarButton.setVisible(true);
+            habilidadeButton.setVisible(true);
+            l19.setVisible(true);
+            buttonElixir2.setVisible(true);
+        }
+    }
+    
+    private void finalizarBatalha() {
+    if (!player.isAlive() || !inimigo.isAlive()) {
+        if (player.isAlive()) {
+            if (inimigo.getNome().equals("MonstroMenor")) {
                 JOptionPane.showMessageDialog(null, "Você Derrotou o inimigo");
-                
-                switch (tabuleiro.getCelula(posHeroiX, posHeroiY).getPersonagem().getNome()){
-                    case "Paladino":
-                        tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().setFlagHabilidade(true);
-                        tabuleiro.moverHeroi(tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino(), posHeroiX, posHeroiY, x, y);
-                        break;
-                    case "Guerreiro":
-                        tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().setFlagHabilidade(true);
-                        tabuleiro.moverHeroi(tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro(), posHeroiX, posHeroiY, x, y);
-                        break;
-                    case "Barbaro":
-                        tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().setFlagHabilidade(true);
-                        tabuleiro.moverHeroi(tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro(), posHeroiX, posHeroiY, x, y);
-                        break;
-                }
-                posHeroiX = x;
-                posHeroiY = y;
-                
-                atualizaTabuleiroFrame();
-                atualizaLabels();
-                this.setVisible(true);
-                combatFrame.dispose();
-            }
-            
-            if (player.isAlive() && inimigo.getNome().equals("Chefao")){
+                moverHeroi();
+            } else if (inimigo.getNome().equals("Chefao")) {
                 JOptionPane.showMessageDialog(null, "Parabéns! Você derrotou o Chefao e venceu o jogo!");
                 JFrame finalScreen = new FinalFrame(tabuleiroCopia);
                 combatFrame.dispose();
                 closeWindows();
             }
-            
-            if (inimigo.isAlive()){
-                JOptionPane.showMessageDialog(null, "GAME OVER");
-                JFrame finalScreen = new FinalFrame(tabuleiroCopia);
-                setWindowsInvible();
-                combatFrame.dispose();
-            }
+        } else {
+            JOptionPane.showMessageDialog(null, "GAME OVER");
+            JFrame finalScreen = new FinalFrame(tabuleiroCopia);
+            setWindowsInvisible();
+            combatFrame.dispose();
         }
+    }
+}
+
+
+    private int calcularAtaque(int aleatorio1) {
+        int ataque = 0;
+        switch (player.getNome()) {
+            case "Barbaro":
+                ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getAtaque();
+                break;
+            case "Guerreiro":
+                ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getAtaque();
+                break;
+            case "Paladino":
+                ataque = aleatorio1 + tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().getAtaque();
+                break;
+        }
+        return ataque;
+    }
+    
+    private int calcularAtaque(int aleatorio1, Personagem inimigo) {
+        int ataque = 0;
+        switch (inimigo.getNome()) {
+            case "MonstroMenor":
+                ataque = aleatorio1 + tabuleiro.getCelula(x, y).getMonstroMenor().getAtaque();
+                break;
+            case "Chefao":
+                ataque = aleatorio1 + tabuleiro.getCelula(x, y).getChefao().getAtaque();
+                break;
+        }
+        return ataque;
+    }
+    
+    private int calcularDefesa(int aleatorio2) {
+        int defesa = 0;
+        switch (player.getNome()) {
+            case "Barbaro":
+                defesa = aleatorio2 + tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().getDefesa();
+                break;
+            case "Guerreiro":
+                defesa = aleatorio2 + tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getDefesa();
+                break;
+            case "Paladino":
+                defesa = aleatorio2 + tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().getDefesa();
+                break;
+        }
+        return defesa;
+    }
+
+    private int calcularDefesa(int aleatorio2, Personagem inimigo) {
+        int defesa = 0;
+        switch (inimigo.getNome()) {
+            case "MonstroMenor":
+                defesa = aleatorio2 + tabuleiro.getCelula(x, y).getMonstroMenor().getDefesa();
+                break;
+            case "Chefao":
+                defesa = aleatorio2 + tabuleiro.getCelula(x, y).getChefao().getDefesa();
+                break;
+        }
+        return defesa;
+    }
+
+    private void aplicarHabilidadeEspecial() {
+        switch (player.getNome()) {
+            case "Barbaro":
+                ataque += ataque / 2;  // Golpe Furioso - aumenta o ataque em 50%
+                habilidadeAtiva--;
+                break;
+            case "Guerreiro":
+                defesa += defesa / 2;  // Postura Defensiva - aumenta a defesa em 50%
+                habilidadeAtivaGuerreiro--;
+                break;
+            case "Paladino":
+                player.setSaude(player.getSaude() + (player.getVidaMaxima() / 2));  // Recuperação - recupera 50% da saúde
+                habilidadeAtiva--;
+                break;
+        }
+    }
+
+    private void removerBonusDefesaGuerreiro() {
+        // Remove o bônus de defesa do Guerreiro
+        tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().setDefesa(tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().getDefesaOriginal());
+    }
+
+    private void exibirResultados(int ataque, int defesa, int resultado) {
+        resultadosAtaque = "Seu ataque: " + ataque;
+        resultadosDefesa = "Defesa do inimigo: " + defesa;
+        resultadosTotal = "Dano total: " + resultado;
+        l20.setText(resultadosAtaque);
+        l21.setText(resultadosDefesa);
+        l22.setText(resultadosTotal);
+    }
+    
+    private void exibirResultados2(int ataque, int defesa, int resultado) {
+        resultadosAtaque = "Ataque do inimigo: " + ataque;
+        resultadosDefesa = "Sua defesa: " + defesa;
+        resultadosTotal = "Dano total: " + resultado;
+        l7.setText("Turno do inimigo");
+        l20.setText(resultadosAtaque);
+        l21.setText(resultadosDefesa);
+        l22.setText(resultadosTotal);
+    }
+
+    private void finalizarTurno() {
+        l19.setVisible(false);
+        buttonElixir2.setVisible(false);
+        atacarButton.setVisible(false);
+        habilidadeButton.setVisible(false);
+        continuarButton.setVisible(true);
+    }
+
+    private void moverHeroi() {
+        switch (player.getNome()) {
+            case "Paladino":
+                tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().setFlagHabilidade(true);
+                tabuleiro.moverHeroi(tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino(), posHeroiX, posHeroiY, x, y);
+                break;
+            case "Guerreiro":
+                tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().setFlagHabilidade(true);
+                tabuleiro.moverHeroi(tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro(), posHeroiX, posHeroiY, x, y);
+                break;
+            case "Barbaro":
+                tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().setFlagHabilidade(true);
+                tabuleiro.moverHeroi(tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro(), posHeroiX, posHeroiY, x, y);
+                break;
+        }
+        posHeroiX = x;
+        posHeroiY = y;
+        atualizaTabuleiroFrame();
+        atualizaLabels();
+        this.setVisible(true);
+        combatFrame.dispose();
     }
     
     private void habilidadeEspecial(ActionEvent habilidadeEvent){
@@ -1174,6 +1108,7 @@ public class TabuleiroFrame extends JFrame {
         case "Barbaro":
             if (tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().isFlagHabilidade()) {
                 JOptionPane.showMessageDialog(null, "Golpe Furioso - Seu próximo ataque causa 50% a mais de dano");
+                tabuleiro.getCelula(posHeroiX, posHeroiY).getBarbaro().setFlagHabilidade(false);
             } else JOptionPane.showMessageDialog(null, "Você já usou a habilidade Especial nessa batalha!");
             //numero de rounds
             habilidadeAtiva = 1;
@@ -1181,15 +1116,17 @@ public class TabuleiroFrame extends JFrame {
         case "Guerreiro":
             if (tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().isFlagHabilidade()){
                 JOptionPane.showMessageDialog(null, "Postura Defensiva - aumenta defesa em 50% por dois turnos");
+                tabuleiro.getCelula(posHeroiX, posHeroiY).getGuerreiro().setFlagHabilidade(false);
             } else JOptionPane.showMessageDialog(null, "Você já usou a habilidade Especial nessa batalha!");
             //numero de rounds
-            habilidadeAtiva = 2;
+            habilidadeAtivaGuerreiro = 2;
             break;
         case "Paladino":
             if (tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().isFlagHabilidade()) {
                 JOptionPane.showMessageDialog(null, "Recuperação - Recupera 50% dos seus pontos de vida totais");
+                tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().setFlagHabilidade(false);
             } else JOptionPane.showMessageDialog(null, "Você já usou a habilidade Especial nessa batalha!");
-            tabuleiro.getCelula(posHeroiX, posHeroiY).getPaladino().usarHabilidadeEspecial();
+            habilidadeAtiva = 1;
             break;
         }    
     }
@@ -1198,34 +1135,6 @@ public class TabuleiroFrame extends JFrame {
         tabuleiro.getCelula(posHeroiX, posHeroiY).getHeroi().usarElixir();
         this.atualizaLabels();
         atualizaLabelsCombat();
-    }
-
-    private void continuar(ActionEvent e) {
-        
-        atualizaLabelsCombat();
-        
-        if (flagContinuarButton){
-            
-            l7.setText("Turno do inimigo");
-            l20.setText(resultadosAtaque);
-            l21.setText(resultadosDefesa);
-            l22.setText(resultadosTotal);;
-            flagContinuarButton = false;
-        } else {
-            
-            l7.setText("Seu turno");
-            l20.setText("");
-            l21.setText("");
-            l22.setText("");
-            flagContinuarButton = true;
-            continuarButton.setVisible(false);
-            atacarButton.setVisible(true);
-            habilidadeButton.setVisible(true);
-            
-            l19.setVisible(true);
-            buttonElixir2.setVisible(true);
-        }
-        
     }
 
     public void setTabuleiroVisible(boolean visible) {
@@ -1245,7 +1154,7 @@ public class TabuleiroFrame extends JFrame {
         dispose();
     }
     
-    public void setWindowsInvible() {
+    public void setWindowsInvisible() {
         for(JFrame frame : MainFrame.openWindows){
             frame.setVisible(false);
         }
