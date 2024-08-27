@@ -8,14 +8,10 @@ package dungeonfighterjava;
  *
  * @author kevin
  */
-public abstract class Monstro extends Personagem implements Cloneable {
+public abstract class Monstro extends Personagem {
     public Monstro(String nome, int ataque, int defesa, int saude) {
         super(nome, ataque, defesa, saude);
     }
-    
-    @Override
-    public Monstro clone() throws CloneNotSupportedException {
-        return (Monstro) super.clone();
-    }
+
 }
 

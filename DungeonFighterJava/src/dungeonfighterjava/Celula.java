@@ -12,7 +12,7 @@ import javax.swing.*;
  *
  * @author kevin
  */
-public class Celula implements Cloneable {
+public class Celula {
     
     private Armadilha armadilha;
     private ArmadilhaPerdaFixa armadilhaPF;
@@ -191,9 +191,5 @@ public class Celula implements Cloneable {
         return armadilhaPA;
     }
     
-    @Override
-    public Celula clone() throws CloneNotSupportedException {
-        return (Celula) super.clone();
-    }
 }
 

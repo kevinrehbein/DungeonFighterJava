@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
  *
  * @author kevin
  */
-public class Barbaro extends Heroi implements Cloneable {
+public class Barbaro extends Heroi{
     
     public Barbaro() {
         super("Barbaro", 6, 4, 10);
@@ -24,9 +24,5 @@ public class Barbaro extends Heroi implements Cloneable {
             this.setFlagHabilidade(false);    
         }
     }
-    
-    @Override
-    public Barbaro clone() throws CloneNotSupportedException {
-        return (Barbaro) super.clone();
-    }
+
 }

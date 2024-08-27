@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
  *
  * @author kevin
  */
-public abstract class Heroi extends Personagem implements Cloneable{
+public abstract class Heroi extends Personagem {
         
     private int elixires;
     private final int CAPACIDADE_MAX_ELIXIRES = 3;
@@ -55,8 +55,4 @@ public abstract class Heroi extends Personagem implements Cloneable{
         this.flagHabilidade = flagHabilidade;
     }
     
-    @Override
-    public Heroi clone() throws CloneNotSupportedException {
-        return (Heroi) super.clone();
-    }
 }

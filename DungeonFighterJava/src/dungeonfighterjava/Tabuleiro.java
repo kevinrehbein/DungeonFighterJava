@@ -8,7 +8,7 @@ package dungeonfighterjava;
  *
  * @author kevin
  */
-public class Tabuleiro implements Cloneable {
+public class Tabuleiro {
         
     private final int linhas;
     private final int colunas;
@@ -100,9 +100,4 @@ public class Tabuleiro implements Cloneable {
         }
     }
     
-    @Override
-    public Tabuleiro clone() throws CloneNotSupportedException {
-        return (Tabuleiro) super.clone();
-    }
-
 }

@@ -8,7 +8,7 @@ package dungeonfighterjava;
  *
  * @author kevin
  */
-public abstract class Personagem implements Cloneable {
+public abstract class Personagem {
     private String nome;
     private int ataque;
     private int defesa;
@@ -71,10 +71,6 @@ public abstract class Personagem implements Cloneable {
         return saude > 0;
     }
     
-    @Override
-    public Personagem clone() throws CloneNotSupportedException {
-        return (Personagem) super.clone();
-    }
 }
 
 

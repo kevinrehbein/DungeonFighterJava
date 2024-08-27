@@ -8,14 +8,10 @@ package dungeonfighterjava;
  *
  * @author kevin
  */
-public class Chefao extends Monstro implements Cloneable {
+public class Chefao extends Monstro {
     
     public Chefao() {
         super("Chefao", 8, 8, 20);
     }
-    
-    @Override
-    public Chefao clone() throws CloneNotSupportedException {
-        return (Chefao) super.clone();
-    }
+
 }
